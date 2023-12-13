@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    background-color: #e0f0e0;
+    color: #000000;
+}
+
+main {
+    padding-inline: 1em;
+}
+
+footer {
+    /* https://css-tricks.com/a-clever-sticky-footer-technique/ */
+    position: sticky;
+    top: 100vh;
+
+    background-color: #c0e0c0;
+    padding: 1em;
+}
+
+.sidebox {
+    float: right;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    box-shadow: inset 5px 0 5px -5px #29627e;
+}
+
+.status {
+    width: fit-content;
+    padding: 0.5em;
+}
+
+.todo {
+    background-color: #ff8000;
+    color: #000000;
+}
+
+/* @media (prefers-color-scheme: dark) {
+    body {
+        background-color: #101810;
+        color: #c0e0c0;
+    }
+} */

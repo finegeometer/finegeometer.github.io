@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" />
+    <title>Black Hole Rendering</title>
+</head>
+
+<body>
+    <main>
+        <h1>Black Hole Rendering</h1>
+
+        <section>
+            <p>Suppose we want to render a black hole. For simplicity, let's assume the black hole isn't spinning.</p>
+
+            <p>For each pixel, we need to trace a light ray back in time, until we reach a light source. For now, assume
+                the only light source is a starfield at infinity.</p>
+
+            <p>Then to trace this ray, we need to answer just two questions:</p>
+            <ul>
+                <li>Did the light ray come from infinity or the event horizon?</li>
+                <li>If the former, what angle has it traversed around the black hole since it did so?</li>
+            </ul>
+            <p>Given this data, we can pinpoint the relevant point on the starfield.</p>
+
+            <p>Now the symmetry of the situation comes into play. The answers to these questions depend on only two
+                quantities:</p>
+            <ul>
+                <li>The distance between the camera and the black hole.</li>
+                <li>The angle between the light ray and the line directly towards the black hole. (As measured by an
+                    observer whose time direction matches the Schwarzschild <var>t</var> coordinate.)</li>
+            </ul>
+
+            <p>So we can store this information in a two-dimensional texture!</p>
+
+            <p>Thus the shader doesn't need to know <em>anything</em> about Schwarzschild geometry. It can just look up
+                the answers it needs.</p>
+
+            <p>(This also means that if we want to render a <em>charged</em> black hole, we can simply swap out the
+                texture.)</p>
+        </section>
+
+
+        <!-- <section>
+            <h2>Brightness and Redshift</h2>
+            <p>I've been ... After all, once we know what part of the sky we're looking at, finding the pixel color is
+                trivial. Right?</p>
+
+            <p>Wrong.</p>
+            TODO: brightness depends on how much sky is squished into our field of view.
+            TODO: redshift. (Store star colors as color temperatures?)
+        </section>
+
+        <section>
+            <h2>Accretion</h2>
+            TODO: Accretion disk via three-parameter function: "If I travel this angle, at what r coordinate do I end up?"
+        </section>
+
+        <section>
+            <h2>Spin</h2>
+            TODO: Kerr black hole needs four parameters. Too much for a texture.
+        </section> -->
+
+        <!-- TODO: What is the formula? Do I need to hardcode it, or is it quickly computable by the shader? -->
+    </main>
+</body>
+
+</html>

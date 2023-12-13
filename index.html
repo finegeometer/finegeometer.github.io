@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet" />
+    <title>finegeometer</title>
+</head>
+
+<body>
+    <main>
+        <h1>finegeometer</h1>
+        <p>This is my website!</p>
+
+        <section>
+            <h2>Things I'm proud of.</h2>
+
+            <section>
+                <h3><a href="https://finegeometer.github.io/curved-spacetime/">Curved Spacetime Raytracer</a></h3>
+                <div class="sidebox">
+                    Requirements:
+                    <ul>
+                        <li>JS</li>
+                        <li>WebGL</li>
+                        <li>Keyboard + Mouse</li>
+                    </ul>
+                </div class="sidebox">
+
+                <div class="sidebox">
+                    Controls:
+                    <ul>
+                        <li>Click to unpause</li>
+                        <li>WASD, Space, Shift to move</li>
+                        <li>Mouse to look around</li>
+                    </ul>
+                </div class="sidebox">
+
+                <p>You've probably heard that Einstein said gravity comes from the curvature of spacetime. But what
+                    does
+                    that
+                    actually <em>mean</em>?</p>
+                <p>In this project, I render the curved spacetime around a planet, so you can get a visual
+                    understanding
+                    of
+                    how curved spacetime creates gravity. (Hint: Gravity happens when the <em>time</em> dimension
+                    gets
+                    bent
+                    toward the planet!)</p>
+                <p>A more detailed description is included in the project.</p>
+
+                <p class="status" style="background-color: #80ff80;">Status: Complete.</p>
+            </section>
+
+            <section>
+                <h3><a href="https://finegeometer.github.io/proof-game/">Proof Game</a></h3>
+                <div class="sidebox">
+                    Requirements:
+                    <ul>
+                        <li>JS</li>
+                        <li>WASM</li>
+                        <li>Keyboard + Mouse</li>
+                    </ul>
+                </div class="sidebox">
+
+                <p>Can mathematical proof be made into a puzzle game? I gave it my best shot.</p>
+
+                <div class="status" style="background-color: #c0e080;">
+                    Status: Post-MVP.
+                    <ul>
+                        <li>Functionality is there.</li>
+                        <li>Levels have been created.</li>
+                        <li>Needs polish.</li>
+                    </ul>
+                </div>
+            </section>
+        </section>
+
+        <section>
+            <h2>Other projects</h2>
+
+            <section>
+                <h3>Formalization of Dragster</h3>
+
+                <p>When speedrunning <i>Dragster</i>, for the Atari 2600, it is believed that the optimal time is 5.57
+                    seconds. This is certainly an upper bound, as a time of 5.57 seconds has been achieved by dozens of
+                    players. I wish to formally prove that is is a lower bound.</p>
+
+                <div class="status" style="background-color: #e0c080;">
+                    Status: Incomplete.
+                    <ul>
+                        <li>Project is not yet on Github. (If you think you see it, that's an outdated version.)</li>
+                        <li>Atari specification is complete. While it would be nice to tie the spec to something like
+                            the <a href="http://www.visual6502.org/">Visual6502</a> netlist, I consider this to be
+                            optional. </li>
+                        <li>Atari specification is in the process of being connected to the
+                            <a href="https://iris-project.org/">Iris specification logic</a>.
+                            Once this is done, it will be possible to start proving things about Dragster's code.
+                        </li>
+                        <li>Documentation is nonexistent. This needs to be corrected. I'll probably use
+                            <a href="https://github.com/cpitclaudel/alectryon/">Alectryon</a>,
+                            so I can turn the proof into a nice webpage.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h3><a href="https://finegeometer.github.io/knotted-portal/">Knotted Portal</a></h3>
+                <div class="sidebox">
+                    Requirements:
+                    <ul>
+                        <li>JS</li>
+                        <li>WebGL</li>
+                        <li>Keyboard + Mouse</li>
+                    </ul>
+                </div class="sidebox">
+
+                <div class="sidebox">
+                    Controls:
+                    <ul>
+                        <li>Click to start </li>
+                        <li>WASD, Space, Shift to move</li>
+                        <li>Mouse to look around</li>
+                    </ul>
+                </div class="sidebox">
+
+                <p>A portal, whose portal frame passes through the portal!</p>
+
+                <p class="status" style="background-color: #80ff80;">Status: Complete.</p>
+            </section>
+
+            <section>
+                <h3>4D Rendering</h3>
+
+                <p>Just as we render a three-dimensional world to a two-dimensional screen, it should be possible to
+                    render a four-dimensional world to a three-dimensional screen.</p>
+
+                <p>A good example, created by someone else, is <a href="https://www.urticator.net/maze/">this maze
+                        game</a>. But I want more than just line-art rendering.</p>
+
+                <div class="status" style="background-color: #ff8080;">
+                    Status: Failure.
+                    <ul>
+                        <li>Rendering to a voxel grid is impractical. At 1k resolution, there'd be a billion voxels.
+                        </li>
+                        <li>Other approaches typically require polygon and/or polyhedron clipping. This seems to be too
+                            difficult to implement correctly, either for me or for library authors. I no longer trust
+                            anything that doesn't have a formal proof attached. </li>
+                        <li>If I restrict to the 4D version of an isometric projection, the problem becomes tractable.
+                            <a href="https://github.com/finegeometer/isometric-4d-prototype">Here's a crude
+                                prototype.</a>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+        </section>
+
+        <section>
+            <h2>Scratchpad</h2>
+            <p>Explorations of ideas, which I have not (yet?) turned into projects.</p>
+
+            <section>
+                <h3><a href="black_hole_rendering.html">Black Hole Rendering</a></h3>
+            </section>
+        </section>
+
+        <section>
+            <h2>Useful Links</h2>
+            Things other people made, that I find useful.
+
+            <section>
+                <h3><a href="https://q.uiver.app/">Quiver</a></h3>
+                <p>Web app for drawing commutative diagrams, for use in your LaTeX documents.</p>
+            </section>
+        </section>
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>
