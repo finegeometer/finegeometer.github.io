@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Hole Rendering</title>
+    <link href="../style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a class="active" href="/thoughts.html">Thoughts</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Thoughts on Black Hole Rendering</h1>
+        <p>To render a (non-rotating) black hole, it should suffice to know the relationship between the following four
+            quantities:</p>
+        <ul>
+            <li>Your distance from the black hole.</li>
+            <li>How far the trajectory of the incoming light ray angles toward or away from the black hole.</li>
+            <li>How far the ray has been deflected from its direction at t=-∞.</li>
+            <li>How far the ray was offset from pointing directly at the black hole at t=-∞.</li>
+        </ul>
+
+        <p>Given two of these quantities, it should be possible to compute the other two. And while the computation
+            might be
+            annoying,
+            the results could be precomputed and stored in a texture.</p>
+
+        <p>How do you use this to render? First, you figure out where your ray came from. Then, once you know that, you
+            back-calculate what might have intercepted the light ray.</p>
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>

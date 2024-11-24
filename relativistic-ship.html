@@ -1,0 +1,159 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relativistic Spaceship?</title>
+    <link href="style.css" rel="stylesheet" />
+    <style type="text/css" media="screen">
+        body {
+            margin: 0
+        }
+
+        svg {
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            height: 100%;
+        }
+
+        :root {
+            --ship-color: blue;
+            --exhaust-color: #808080;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --ship-color: cyan;
+                --exhaust-color: #a0a0a0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="-5 -5 10 10">
+        <!-- Grid -->
+        <g stroke=var(--bg-stroke) stroke-width="0.03">
+            <line x1="-5" y1="-5" x2="5" y2="-5"></line>
+            <line x1="-5" y1="-4" x2="5" y2="-4"></line>
+            <line x1="-5" y1="-3" x2="5" y2="-3"></line>
+            <line x1="-5" y1="-2" x2="5" y2="-2"></line>
+            <line x1="-5" y1="-1" x2="5" y2="-1"></line>
+            <line x1="-5" y1="0" x2="5" y2="0"></line>
+            <line x1="-5" y1="1" x2="5" y2="1"></line>
+            <line x1="-5" y1="2" x2="5" y2="2"></line>
+            <line x1="-5" y1="3" x2="5" y2="3"></line>
+            <line x1="-5" y1="4" x2="5" y2="4"></line>
+            <line x1="-5" y1="5" x2="5" y2="5"></line>
+            <line x1="-5" y1="-5" x2="-5" y2="5"></line>
+            <line x1="-4" y1="-5" x2="-4" y2="5"></line>
+            <line x1="-3" y1="-5" x2="-3" y2="5"></line>
+            <line x1="-2" y1="-5" x2="-2" y2="5"></line>
+            <line x1="-1" y1="-5" x2="-1" y2="5"></line>
+            <line x1="0" y1="-5" x2="0" y2="5"></line>
+            <line x1="1" y1="-5" x2="1" y2="5"></line>
+            <line x1="2" y1="-5" x2="2" y2="5"></line>
+            <line x1="3" y1="-5" x2="3" y2="5"></line>
+            <line x1="4" y1="-5" x2="4" y2="5"></line>
+            <line x1="5" y1="-5" x2="5" y2="5"></line>
+        </g>
+
+        <text text-anchor="middle" font-size="0.5" x="0" y="-4.5" fill=var(--font-color)>The Problem with Relativistic
+            Travel</text>
+
+        <!-- Animation -->
+        <line x2="0" y2="-4" stroke=var(--exhaust-color) stroke-width="0.1" stroke-linecap="round">
+            <animate attributeName="x1" keytimes="0;0.125;0.25;1" values="0;0;3;3" dur="20s" repeatCount="indefinite" />
+            <animate attributeName="y1" keytimes="0;0.125;0.25;1" values="-4;-4;-1;-1" dur="20s"
+                repeatCount="indefinite" />
+        </line>
+        <text text-anchor="start" fill=var(--exhaust-color) dx="1em">
+            <animate attributeName="font-size" keytimes="0;0.125;0.25;1" values="0;0;0.24;0.24" dur="20s"
+                repeatCount="indefinite" />
+            <animate attributeName="x" keytimes="0;0.125;0.25;1" values="0;0;1.5;1.5" dur="20s"
+                repeatCount="indefinite" />
+            <animate attributeName="y" keytimes="0;0.125;0.25;1" values="-4;-4;-2.5;-2.5" dur="20s"
+                repeatCount="indefinite" />
+            Exhaust
+        </text>
+        <g>
+            <polyline points="3,-1 3,4 0,4" fill="none" stroke="orange" stroke-width="0.05" stroke-linecap="round"
+                stroke-dasharray="0.25 0.5 0.25 0">
+            </polyline>
+            <text x="3" y="2.5" font-size="0.3" text-anchor="left" fill="orange" dx="1em">
+                Speed ⅗c
+            </text>
+            <animate attributeName="visibility" keytimes="0;0.375;0.5;1" values="hidden;visible;hidden;hidden" dur="20s"
+                repeatCount="indefinite" />
+        </g>
+        <line stroke=var(--exhaust-color) stroke-width="0.1" stroke-linecap="round">
+            <animate attributeName="x1" keytimes="0;0.125;0.25;1" values="0;0;3;3" dur="20s" repeatCount="indefinite" />
+            <animate attributeName="y1" keytimes="0;0.125;0.25;1" values="-4;-4;-1;-1" dur="20s"
+                repeatCount="indefinite" />
+            <animate attributeName="x2" keytimes="0;0.125;0.25;0.5;0.625;1" values="0;0;3;3;0;0" dur="20s"
+                repeatCount="indefinite" />
+            <animate attributeName="y2" keytimes="0;0.125;0.25;0.5;0.625;1" values="-4;-4;-1;-1;2;2" dur="20s"
+                repeatCount="indefinite" />
+        </line>
+        <text text-anchor="start" fill=var(--exhaust-color) dx="1em">
+            <animate attributeName="font-size" keytimes="0;0.5;0.625;1" values="0;0;0.24;0.24" dur="20s"
+                repeatCount="indefinite" />
+            <animate attributeName="x" keytimes="0;0.5;0.625;1" values="3;3;1.5;1.5" dur="20s"
+                repeatCount="indefinite" />
+            <animate attributeName="y" keytimes="0;0.5;0.625;1" values="-1;-1;0.5;0.5" dur="20s"
+                repeatCount="indefinite" />
+            Exhaust
+        </text>
+        <line x1="0" y1="4" stroke=var(--ship-color) stroke-width="0.1" stroke-linecap="round">
+            <animate attributeName="x2" keytimes="0;0.125;0.25;0.5;0.625;1" values="0;0;3;3;0;0" dur="20s"
+                repeatCount="indefinite" />
+            <animate attributeName="y2" keytimes="0;0.125;0.25;0.5;0.625;1" values="-4;-4;-1;-1;2;2" dur="20s"
+                repeatCount="indefinite" />
+        </line>
+        <text text-anchor="start" fill=var(--ship-color) dx="1em">
+            <animate attributeName="font-size" keytimes="0;0.125;0.25;0.5;0.625;1"
+                values="0.32;0.32;0.20;0.20;0.08;0.08" dur="20s" repeatCount="indefinite" />
+            <animate attributeName="x" keytimes="0;0.125;0.25;0.5;0.625;1" values="0;0;1.5;1.5;0;0" dur="20s"
+                repeatCount="indefinite" />
+            <animate attributeName="y" keytimes="0;0.125;0.25;0.5;0.625;1" values="0;0;1.5;1.5;3;3" dur="20s"
+                repeatCount="indefinite" />
+            Energy-Momentum
+        </text>
+        <g>
+            <polyline points="-0.25,-4 -0.5,-4 -0.5,2 -0.25,2" fill="none" stroke=var(--font-color) stroke-width="0.05"
+                stroke-linecap="round" />
+            <text x="-0.5" y="-1" font-size="0.3" text-anchor="end" fill=var(--font-color) dx="-1em">
+                75% of ship is fuel!
+            </text>
+            <animate attributeName="visibility" keytimes="0;0.75;0.875;1" values="hidden;visible;hidden;hidden"
+                dur="20s" repeatCount="indefinite" />
+        </g>
+        <g>
+            <polyline points="-0.25,-3.97 -0.5,-3.97 -0.5,-1.03 -0.25,-1.03" fill="none" stroke="green"
+                stroke-width="0.05" stroke-linecap="round">
+            </polyline>
+            <text x="-0.5" y="-2.5" font-size="0.3" text-anchor="end" fill="green" dx="-1em">
+                37.5% matter
+            </text>
+            <polyline points="-0.25,-0.97 -0.5,-0.97 -0.5,1.97 -0.25,1.97" fill="none" stroke="red" stroke-width="0.05"
+                stroke-linecap="round">
+            </polyline>
+            <text x="-0.5" y="0.5" font-size="0.3" text-anchor="end" fill="red" dx="-1em">
+                37.5% antimatter
+            </text>
+            <!-- <polyline points="-0.25,2.03 -0.5,2.03 -0.5,4 -0.25,4" fill="none" stroke=var(--ship-color)
+                stroke-width="0.05" stroke-linecap="round">
+            </polyline>
+            <text x="-0.5" y="3" font-size="0.3" text-anchor="end" fill=var(--ship-color) dx="-1em">
+                25% ship
+            </text> -->
+            <animate attributeName="visibility" keytimes="0;0.875;1" values="hidden;visible;hidden" dur="20s"
+                repeatCount="indefinite" />
+        </g>
+    </svg>
+</body>
+
+</html>

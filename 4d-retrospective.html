@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../style.css" rel="stylesheet" />
+    <title>4D Retrospective</title>
+
+    <!-- KaTeX -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script> -->
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a class="active" href="/thoughts.html">Thoughts</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>4D Perspective Rendering — A Retrospective</h1>
+
+        <p>The idea of higher dimensions is naturally intriguing. To reach beyond the three dimensions our universe
+            provides, and explore a world that could exist, but doesn't.</p>
+
+        <!-- ... mathematics -->
+        <p>For really high dimensions, that's the only approach. But down in four dimensions, we want more. We want to
+            see it. Experience it. Hence, a video game.</p>
+
+        <h2>Rendering in 4D</h2>
+
+        <p>But what does that look like? How do we take a four-dimensional world, and put it on a two-dimensional
+            screen?</p>
+
+        <p>The most common approach is to <em>slice</em> the four-dimensional world, and render only a three-dimensional
+            piece of it. This is the approach taken by the games <a href="https://miegakure.com/">Miegakure</a> and <a
+                href="https://store.steampowered.com/app/2147950/4D_Golf/">4D Golf</a>.</p>
+
+        <p>This works well. I can't speak for Miegakure, but 4D Golf is surprisingly intuitive.</p>
+
+        <p>But this approach also comes with downsides. Most importantly, you can only see a small section of the 4D
+            world at once. Essentially, you have no peripheral vision. This limits your ability to fully understand the
+            space you're in.</p>
+
+        <p>So let's consider an alternative.</p>
+
+        <h2>Perspective Rendering</h2>
+
+        <p>In an ordinary, 3D game, the three-dimensional world is rendered onto a two-dimensional screen. But the math
+            involved generalizes perfectly. So a <em>four</em>-dimensional world can be rendered onto a
+            <em>three</em>-dimensional screen.
+        </p>
+
+        <p>This approach is commonly seen when you look at pictures of mathematical objects like tesseracts. But it's
+            also the approach taken by <a href="https://www.urticator.net/maze/">this maze game</a>.</p>
+
+        <p>The game certainly takes some getting used to. But once I did, it was a real revelation when I first saw four
+            mutually-perpendicular passageways at the same time.</p>
+
+        <p>But this game has problems. In particular, I really don't like the "line art" drawing style, where only the
+            edges of shapes are drawn.</p>
+
+        <h2>The Goal</h2>
+
+        <p>My goal was to make a four-dimensional game, using perspective rendering, that does not render everything as
+            line art.</p>
+
+        <p>After many tries, over a number of years, I have declared this project a failure. Let's see what went wrong.
+        </p>
+
+        <h2>Design Difficulties</h2>
+
+        <p>Rendering proceeds in two steps: projecting from 4D to 3D, then from 3D to 2D. Interestingly, it's the second
+            that causes problems.</p>
+
+        <p>Think about the result of rendering an ordinary 3D scene. The screen ends up divided into a number of colored
+            or textured regions. If you're looking down a hallway, the rendered image contains a square depicting the
+            far end of the hallway, surrounded by four trapezoids depicting the walls.</p>
+
+        <svg width="200" height="200" viewBox="-1 -1 2 2">
+            <polygon fill="#707070" points="-0.222,-0.222 -0.222,0.222 0.222,0.222 0.222,-0.222" />
+            <polygon fill="#808080" points="-0.222,-0.222 -0.222,0.222 -1,1 -1,-1" />
+            <polygon fill="#a0a060" points="-0.222,-0.222 0.222,-0.222 1,-1 -1,-1" />
+            <polygon fill="#808080" points="0.222,-0.222 0.222,0.222 1,1 1,-1" />
+            <polygon fill="#6060a0" points="-0.222,0.222 0.222,0.222 1,1 -1,1" />
+            <polyline points="-0.667,-0.667 -0.667,0.667 0.667,0.667 0.667,-0.667 -0.667,-0.667" fill="none"
+                stroke="#404040" stroke-width="0.005" />
+            <polyline points="-0.4,-0.4 -0.4,0.4 0.4,0.4 0.4,-0.4 -0.4,-0.4" fill="none" stroke="#404040"
+                stroke-width="0.005" />
+            <polyline points="-0.286,-0.286 -0.286,0.286 0.286,0.286 0.286,-0.286 -0.286,-0.286" fill="none"
+                stroke="#404040" stroke-width="0.005" />
+        </svg>
+
+        <p>So if you render a 4D scene, you end up with a 3D screen, divided into colored or textured sections. Such a
+            thing isn't exactly easy to draw.</p>
+
+        <p>First of all, the user needs to be able to see the entire 3D screen. So when we project from 3D to 2D, we
+            can't
+            make anything opaque. <em>Everything</em> should be partially transparent, either through opacity or leaving
+            holes to look through.</p>
+
+        <p>To make things worse, the colored regions are <em>volumes</em> in the 3D screen. So we need a fog effect.
+            Rendering this isn't really the problem — it's just hard to interpret the layers of fog once rendered.</p>
+
+        <p>Alternatively, we could render only the bounding faces between the volumes. But then it's not clear how to
+            color them. I tried just taking the color of the region behind, but that didn't work well. I suppose we
+            could give up on color entirely, but that doesn't seem great either.</p>
+
+        <h2>Implementation Difficulties</h2>
+
+        TODO
+
+        <!-- <p>But these design difficulties pale in comparison to the problems I had <em>implementing</em> the renderer.</p> -->
+
+        <h3>Partial Solution</h3>
+
+        TODO
+        <!-- TODO: This is fixed by restricting camera movement. E.g. isometric games, or games like FEZ. -->
+        <!-- https://github.com/finegeometer/isometric-4d-prototype -->
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>

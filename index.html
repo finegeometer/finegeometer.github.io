@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Place of Ideas</title>
+    <link href="style.css" rel="stylesheet" />
+    <style type="text/css" media="screen">
+        :root {
+            --bg-unchecked: #c0c0c0;
+            --bg-checked: #40c040;
+            --border-unchecked: #808080;
+            --border-checked: #008000;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-unchecked: #404040;
+                --bg-checked: #40c040;
+                --border-unchecked: #000000;
+                --border-checked: #000000;
+            }
+        }
+
+
+        #no-js:checked~* .content:not(.no-js),
+        #phone:checked~* .content:not(.phone),
+        #explainer:checked~* .content:not(.explainer) {
+            display: none;
+        }
+
+        input[type="checkbox"] {
+            display: none;
+        }
+
+        input[type="checkbox"]+label {
+            background-color: var(--bg-unchecked);
+            border: 2px solid var(--border-unchecked);
+            padding: 0.5em;
+            border-radius: 1em;
+        }
+
+        input[type="checkbox"]:checked+label {
+            background-color: var(--bg-checked);
+            border: 2px solid var(--border-checked);
+            padding: 0.5em;
+            border-radius: 1em;
+        }
+
+        label {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a class="active" href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a href="/thoughts.html">Thoughts</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Things I Made</h1>
+
+        <input id="no-js" type="checkbox" />
+        <label for="no-js">No JS</label>
+        <input id="explainer" type="checkbox" />
+        <label for="explainer">Explainer</label>
+        <input id="phone" type="checkbox" />
+        <label for="phone">Works on Phone</label>
+
+        <h2>My Best Work</h2>
+
+        <ul>
+            <li class="content explainer">
+                <a href="https://finegeometer.github.io/curved-spacetime/">Curved Spacetime Visualization</a>
+                <ul>
+                    <li>You've probably heard that Einstein said gravity comes from the curvature of spacetime. But what
+                        does that actually <em>mean</em>?</li>
+                </ul>
+            <li class="content">
+                <a href="https://finegeometer.github.io/proof-game/">Proof Game</a>
+                <ul>
+                    <li>Can mathematical proof be made into a puzzle game? I gave it my best shot.</li>
+                </ul>
+        </ul>
+
+        <h2>Quick Explainers</h2>
+
+        <ul>
+            <li class="content explainer no-js"><a href="relativistic-ship.html">The Problem with Relativistic
+                    Travel</a></li>
+        </ul>
+
+
+        <h2>Other Stuff</h2>
+
+        <ul>
+            <li class="content">
+                <a href="https://finegeometer.github.io/knotted-portal/">Knotted Portal</a>
+                <ul>
+                    <li>A portal, whose portal frame passes through the portal!</li>
+                </ul>
+            </li>
+            <li class="content">
+                <a href="https://github.com/finegeometer/cubic-surface">Grapher for Cubic Surfaces</a>
+                <ul>
+                    <li>Infinite render distance.</li>
+                </ul>
+            </li>
+            <li class="content">
+                <a href="https://github.com/finegeometer/cubic-curve">Cubic Curve through Nine Points</a>
+            </li>
+        </ul>
+
+        <h2>Things that didn't work out.</h2>
+
+        <ul>
+            <li><a href="/4d-retrospective.html">4D Perspective Rendering</a></li>
+        </ul>
+
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>

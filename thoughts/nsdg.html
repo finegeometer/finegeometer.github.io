@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../style.css" rel="stylesheet" />
+    <title>Noncommutative SDG</title>
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a class="active" href="/thoughts.html">Thoughts</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Thoughts on Noncommutative Synthetic Differential Geometry</h1>
+
+        <h2>What is SDG?</h2>
+
+        <p><dfn>Synthetic Differential Geometry</dfn> is the study of constructive logic augmented with, at minimum, the
+            following axioms.</p>
+
+        <ul>
+            <li>
+                <p>\(R\) is a ring.</p>
+            </li>
+            <li>
+                <p>Let \(D = \{x \in R \mid x^2=0\}\). Then the linear map \(R^2 \to (D \to R)\) given by \((a,b)
+                    \mapsto (x
+                    \mapsto a+bx)\) is
+                    invertible.</p>
+            </li>
+        </ul>
+
+        <p>These axioms make it trivial to build up many of the common concepts from calculus. For instance, the inverse
+            of
+            \((a,b) \mapsto (x \mapsto a+bx)\) acts as the function \(f \mapsto (f(0), f'(0))\). And suddenly we have
+            derivatives.</p>
+
+        <p>Other concepts are just as easy. The tangent bundle to a manifold \(M\) is simply the type \(D \to M\).
+            Literally
+            an infinitesimal curve in the manifold!</p>
+
+        <p>These ideas are explored in far more depth in <a href="https://users-math.au.dk/kock/sdg99.pdf">these</a> <a
+                href="https://tildeweb.au.dk/au76680/SGM-final.pdf">books</a> by Anders Kock.</p>
+
+        <h2>Topos Models</h2>
+
+        TODO: Introduce alternate perspective: SDG is the study of toposes similar to the classifying topos of
+        commutative
+        local rings.
+
+        <h2>A Noncommutative Version?</h2>
+
+        <p>To me, this raises an obvious question. What if we instead look at the classifying topos of
+            <em>noncommutative</em> local rings?
+        </p>
+
+        <p>Let's try it.</p>
+
+        <p>The first thing to note is that this classifying topos is a <dfn>monoidal topos</dfn>. In addition to
+            the cartesian product and coproduct, it has another, equally important monoidal structure.</p>
+
+        <p>We could try to simply axiomatize this monoidal product, but that's awkward. Better to build it into our
+            ambient logic, such as is done in <a href="https://ulrichschoepp.de/Docs/th.pdf">this thesis by Ulrich
+                Schöpp</a>.</p>
+
+        <p>But that paper is geared toward a very different topos. The Schanuel topos, which classifies infinite
+            decidable
+            objects. Does the type theory even apply here?</p>
+
+        <p>Yes. Their type theory is far more general than their paper admits. It <a href="nsdg/type-theory.pdf">turns
+                out</a> that there's a simple three-step process to model it in the classifying topos of an arbitrary
+            theory.</p>
+        <ul>
+            <li>
+                <p>(Geometrically) define a binary relation \(\sim\) between each pair of sorts of your theory.</p>
+                <ul>
+                    <li>For the Schanuel topos, that's the apartness relation.</li>
+                    <li>For the classifying topos of local rings, that's the "commutes" relation, \(x \sim y \iff xy =
+                        yx\).
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>Check that \(x \sim y \iff y \sim x\).</p>
+            </li>
+            <li>
+                <p>Fix any \(x\) in any sort of your theory. Check that, if you restrict each sort \(A\) to the subset
+                    \(\{a
+                    \in A \mid a \sim x\}\), you get a (sub)model of the same theory.</p>
+                <ul>
+                    <li>For the Schanuel topos, this says that removing one element of an infinite decidable object
+                        yields
+                        another infinite decidable object.</li>
+                    <li>For the classifying topos of local rings, this says that for any \(x\) in a local ring \(R\),
+                        the
+                        centralizer \(C_R(\{x\})\) is still a local ring.
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <p>If you can do that, you can interpret Schöpp's type theory in your topos.</p>
+
+        <i>(To be continued...)</i>
+
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>

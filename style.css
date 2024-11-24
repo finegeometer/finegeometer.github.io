@@ -1,0 +1,83 @@
+:root {
+    --bg-main: #d0f0d0;
+    --bg-stroke: #c0e0c0;
+    --bg-header: #e0ffe0;
+    --font-color: #000000;
+    --link-color: blue;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-main: #103010;
+        --bg-stroke: #204020;
+        --bg-header: #004000;
+        --font-color: #e0e0e0;
+        --link-color: cyan;
+    }
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--font-color);
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: var(--link-color);
+}
+
+main {
+    margin: 1em;
+    max-width: 80ch;
+    padding-bottom: 3em;
+}
+
+
+/* Header and Footer */
+
+header,
+footer {
+    background-color: var(--bg-header);
+    width: 100%;
+}
+
+header>div {
+    padding-top: 1em;
+    padding-left: 1em;
+}
+
+header>div>a {
+    color: var(--font-color);
+    font-size: 48px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+header>div>nav>ul {
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+}
+
+header>div>nav>ul>li {
+    float: left;
+}
+
+header>div>nav>ul>li>a {
+    display: block;
+    padding: 8px;
+    color: var(--font-color);
+    text-decoration: none;
+}
+
+header>div>nav>ul>li>a:hover,
+header>div>nav>ul>li>a.active {
+    background-color: var(--bg-main);
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    padding: 1em;
+}
