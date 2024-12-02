@@ -3,7 +3,14 @@
     --bg-stroke: #c0e0c0;
     --bg-header: #e0ffe0;
     --font-color: #000000;
-    --link-color: blue;
+    --link-color: var(--blue);
+
+
+    --red: red;
+    --orange: orange;
+    --green: green;
+    --blue: blue;
+    --gray: #808080;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,7 +19,9 @@
         --bg-stroke: #204020;
         --bg-header: #004000;
         --font-color: #e0e0e0;
-        --link-color: cyan;
+
+        --blue: cyan;
+        --gray: #a0a0a0;
     }
 }
 
