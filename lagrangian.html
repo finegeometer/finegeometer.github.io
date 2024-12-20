@@ -1,0 +1,329 @@
+<!-- <!DOCTYPE html> -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lagrangian Mechanics</title>
+    <link href="style.css" rel="stylesheet" />
+    <style>
+        .lagrangianDemo:has(#gravityDownBtn:checked) div #potentialGradient {
+            fill: url(#gravityDown);
+        }
+
+        .lagrangianDemo:has(#gravityCentralBtn:checked) div #potentialGradient {
+            fill: url(#gravityCentral);
+        }
+
+        .lagrangianDemo:has(#harmOscBtn:checked) div #potentialGradient {
+            fill: url(#harmOsc);
+        }
+
+        .actionNoscript {
+            visibility: hidden;
+        }
+
+        .lagrangianDemo:has(#gravityDownBtn:checked) div .actionNoscript.gravityDown {
+            visibility: visible;
+        }
+
+        .lagrangianDemo:has(#gravityCentralBtn:checked) div .actionNoscript.gravityCentral {
+            visibility: visible;
+        }
+
+        .lagrangianDemo:has(#harmOscBtn:checked) div .actionNoscript.harmOsc {
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a class="active" href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a href="/thoughts.html">Thoughts</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Lagrangian Mechanics</h1>
+
+        <p><dfn>Lagrangian Mechanics</dfn> is a formalism for understanding the behavior of physical systems.
+            It leads to <em>exactly</em> the same results as the more familiar Newtonian mechanics, but gets there in a
+            completely different way.</p>
+
+        <p>Newtonian mechanics is about forces. To understand how an object moves, we analyze the forces that act on it.
+            Through Newton's laws, this gives us the acceleration, which tells us how the velocity is changing over
+            time.</p>
+
+        <p>Lagrangian mechanics, on the other hand, is about a quantity called <dfn>action</dfn>.</p>
+
+        <p>Say you know where an object started and where it is now, but you want to know how it got there. You could
+            imagine all sorts of possible trajectories. Each of these trajectories has a corresponding action; the
+            correct one is the one whose action is smallest.<sup id="#fn1-return"><a href="#fn1">1</a></sup> </p>
+
+        <p>The frameworks sound completely different. But try the two on any problem, and the results are always the
+            same. Lagrangian mechanics is <em>just as correct</em> as Newtonian mechanics is; it's just a different
+            route to the same answers.</p>
+
+        <h2>Demo</h2>
+
+        <div class="lagrangianDemo">
+            <fieldset>
+                <legend>Choose a potential field.</legend>
+                <input type="radio" name="potential" id="gravityDownBtn" checked />
+                <label for="gravityDownBtn">Gravity (Down)</label>
+                <br />
+                <input type="radio" name="potential" id="gravityCentralBtn" />
+                <label for="gravityCentralBtn">Gravity (Central)</label>
+                <br />
+                <input type="radio" name="potential" id="harmOscBtn" />
+                <label for="harmOscBtn">Harmonic Oscillator</label>
+            </fieldset>
+            <br />
+            <div
+                title="A pair of pictures, side by side.
+On the left is a plot of the potential field selected above. It is rendered as a gradient, from dark blues at low potential up through pinks and whites at high potential. In the foreground is a Bezier curve representing a sample trajectory of a particle through this potential field.
+On the right, two functions are graphed: the kinetic energy on top, and the potential energy on the bottom. The region between these is highlighted; it corresponds to the action of the selected trajectory.">
+                <div style="display: inline-block; width: 50%;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="-1 -1 2 2">
+                        <!--noformat-->
+                    <style>
+                        .stop0 { stop-color: hsl(240 100%    1%); }
+                        .stop1 { stop-color: hsl(240 100%    8%); }
+                        .stop2 { stop-color: hsl(240 100%   15%); }
+                        .stop3 { stop-color: hsl(240 100%   22%); }
+                        .stop4 { stop-color: hsl(240 100%   29%); }
+                        .stop5 { stop-color: hsl(260 96.5%  36%); }
+                        .stop6 { stop-color: hsl(280 86.6%  43%); }
+                        .stop7 { stop-color: hsl(300 70.7%  50%); }
+                        .stop8 { stop-color: hsl(320 86.6%  57%); }
+                        .stop9 { stop-color: hsl(340 96.5%  64%); }
+                        .stopA { stop-color: hsl(360 100%   71%); }
+                        .stopB { stop-color: hsl(360 100%   78%); }
+                        .stopC { stop-color: hsl(360 100%   85%); }
+                        .stopD { stop-color: hsl(360 100%   92%); }
+                        .stopE { stop-color: hsl(360 100%   99%); }
+                    </style>
+                    <!--noformat-->
+
+                        <linearGradient id="gravityDown" x1="0" x2="0" y1="1" y2="-1" gradientUnits="userSpaceOnUse">
+                            <stop class="stop0" offset="  1%" />
+                            <stop class="stop1" offset="  8%" />
+                            <stop class="stop2" offset=" 15%" />
+                            <stop class="stop3" offset=" 22%" />
+                            <stop class="stop4" offset=" 29%" />
+                            <stop class="stop5" offset=" 36%" />
+                            <stop class="stop6" offset=" 43%" />
+                            <stop class="stop7" offset=" 50%" />
+                            <stop class="stop8" offset=" 57%" />
+                            <stop class="stop9" offset=" 64%" />
+                            <stop class="stopA" offset=" 71%" />
+                            <stop class="stopB" offset=" 78%" />
+                            <stop class="stopC" offset=" 85%" />
+                            <stop class="stopD" offset=" 92%" />
+                            <stop class="stopE" offset=" 99%" />
+                        </linearGradient>
+                        <radialGradient id="harmOsc" cx="0" cy="0" r="1.42" gradientUnits="userSpaceOnUse">
+                            <stop class="stop4" offset="  0%" />
+                            <stop class="stop5" offset=" 35%" />
+                            <stop class="stop6" offset=" 50%" />
+                            <stop class="stop7" offset=" 61%" />
+                            <stop class="stop8" offset=" 71%" />
+                            <stop class="stop9" offset=" 79%" />
+                            <stop class="stopA" offset=" 87%" />
+                            <stop class="stopB" offset=" 94%" />
+                            <stop class="stopC" offset="100%" />
+                        </radialGradient>
+                        <radialGradient id="gravityCentral" cx="0" cy="0" r="1.42" gradientUnits="userSpaceOnUse">
+                            <stop class="stop0" offset="  4.8%" />
+                            <stop class="stop1" offset="  5.3%" />
+                            <stop class="stop2" offset="  5.9%" />
+                            <stop class="stop3" offset="  6.6%" />
+                            <stop class="stop4" offset="  7.7%" />
+                            <stop class="stop5" offset="  9.1%" />
+                            <stop class="stop6" offset=" 11.1%" />
+                            <stop class="stop7" offset=" 14.3%" />
+                            <stop class="stop8" offset=" 20.0%" />
+                            <stop class="stop9" offset=" 33.3%" />
+                            <stop class="stopA" offset="100.0%" />
+                        </radialGradient>
+
+                        <rect id="potentialGradient" x="-1" y="-1" width="2" height="2">
+                        </rect>
+
+                        <path id="trajectory" d="M -0.75 -0.25 C -0.25 -1, 0.25 -0.75, 0.75 0.5" fill="none"
+                            stroke="black" stroke-width="0.05" stroke-linecap="round">
+                        </path>
+                    </svg>
+                    <!--noformat-->
+                </div><div style="display: inline-block; width: 50%;">
+                    <!--noformat-->
+                    <svg id="actionDisplay" xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 1 1">
+                        <!-- Paths computed by running with Javascript enabled. -->
+                        <path class="actionNoscript gravityDown" fill="var(--green)" stroke="black" stroke-width="0.01"
+                            stroke-linecap="round"
+                            d="M 1 0.5 L 1 0.0921875 L 0.99 0.10334750000000001 L 0.98 0.1143275 L 0.97 0.1251275 L 0.96 0.13574750000000005 L 0.95 0.14618750000000005 L 0.94 0.15644750000000007 L 0.9299999999999999 0.16652750000000008 L 0.92 0.17642749999999988 L 0.91 0.18614750000000008 L 0.9 0.1956875000000001 L 0.89 0.20504749999999988 L 0.88 0.21422749999999996 L 0.87 0.22322750000000005 L 0.86 0.23204750000000005 L 0.85 0.2406875 L 0.84 0.2491475 L 0.83 0.25742750000000003 L 0.8200000000000001 0.26552749999999997 L 0.81 0.27344749999999995 L 0.8 0.2811875 L 0.79 0.2887475 L 0.78 0.2961275 L 0.77 0.30332749999999997 L 0.76 0.3103475 L 0.75 0.3171875 L 0.74 0.3238475 L 0.73 0.3303275 L 0.72 0.33662749999999997 L 0.71 0.34274750000000004 L 0.7 0.34868750000000004 L 0.69 0.3544475 L 0.6799999999999999 0.36002750000000006 L 0.6699999999999999 0.3654275 L 0.6599999999999999 0.3706475 L 0.65 0.3756875 L 0.64 0.3805475 L 0.63 0.3852275 L 0.62 0.3897275 L 0.61 0.3940475 L 0.6 0.3981875 L 0.5900000000000001 0.4021475 L 0.5800000000000001 0.40592749999999994 L 0.5700000000000001 0.4095275 L 0.56 0.4129474999999999 L 0.55 0.41618750000000004 L 0.54 0.4192475 L 0.53 0.42212750000000004 L 0.52 0.42482749999999997 L 0.51 0.42734749999999994 L 0.5 0.4296875 L 0.49 0.43184750000000005 L 0.48 0.43382750000000003 L 0.47 0.4356275 L 0.45999999999999996 0.43724749999999996 L 0.44999999999999996 0.4386875 L 0.43999999999999995 0.4399475 L 0.43000000000000005 0.4410275 L 0.42000000000000004 0.4419275 L 0.41000000000000003 0.44264749999999997 L 0.4 0.44318749999999996 L 0.39 0.44354750000000004 L 0.38 0.44372749999999994 L 0.37 0.44372749999999994 L 0.36 0.44354750000000004 L 0.35 0.44318749999999996 L 0.33999999999999997 0.44264749999999997 L 0.32999999999999996 0.4419275 L 0.31999999999999995 0.4410275 L 0.31000000000000005 0.4399475 L 0.30000000000000004 0.4386875 L 0.29000000000000004 0.43724749999999996 L 0.28 0.4356275 L 0.27 0.43382750000000003 L 0.26 0.43184750000000005 L 0.25 0.4296875 L 0.24 0.42734749999999994 L 0.22999999999999998 0.42482749999999997 L 0.21999999999999997 0.42212750000000004 L 0.20999999999999996 0.4192475 L 0.19999999999999996 0.41618750000000004 L 0.18999999999999995 0.4129474999999999 L 0.18000000000000005 0.4095275 L 0.17000000000000004 0.40592750000000005 L 0.16000000000000003 0.40214750000000005 L 0.15000000000000002 0.3981875 L 0.14 0.3940475 L 0.13 0.3897275 L 0.12 0.3852275 L 0.10999999999999999 0.3805475 L 0.09999999999999998 0.3756875 L 0.08999999999999997 0.37064749999999996 L 0.07999999999999996 0.36542749999999996 L 0.06999999999999995 0.3600275 L 0.06000000000000005 0.3544475 L 0.050000000000000044 0.34868750000000004 L 0.040000000000000036 0.34274750000000004 L 0.030000000000000027 0.33662749999999997 L 0.020000000000000018 0.3303275 L 0.010000000000000009 0.3238475 L 0 0.3171875  L 0 0.6875 L 0.01 0.68195 L 0.02 0.67655 L 0.03 0.6713 L 0.04 0.6662 L 0.05 0.66125 L 0.06 0.6564500000000001 L 0.07 0.6517999999999999 L 0.08 0.6473 L 0.09 0.64295 L 0.1 0.6387499999999999 L 0.11 0.6346999999999999 L 0.12 0.6308 L 0.13 0.62705 L 0.14 0.6234500000000001 L 0.15 0.62 L 0.16 0.6167 L 0.17 0.61355 L 0.18 0.6105499999999999 L 0.19 0.6077 L 0.2 0.605 L 0.21 0.6024499999999999 L 0.22 0.60005 L 0.23 0.5978 L 0.24 0.5957 L 0.25 0.59375 L 0.26 0.59195 L 0.27 0.5902999999999999 L 0.28 0.5888 L 0.29 0.58745 L 0.3 0.58625 L 0.31 0.5852 L 0.32 0.5843 L 0.33 0.58355 L 0.34 0.5829500000000001 L 0.35 0.5825 L 0.36 0.5822 L 0.37 0.58205 L 0.38 0.58205 L 0.39 0.5822 L 0.4 0.5825 L 0.41 0.58295 L 0.42 0.58355 L 0.43 0.5843 L 0.44 0.5851999999999999 L 0.45 0.5862499999999999 L 0.46 0.5874499999999999 L 0.47 0.5888 L 0.48 0.5902999999999999 L 0.49 0.59195 L 0.5 0.59375 L 0.51 0.5957 L 0.52 0.5978 L 0.53 0.60005 L 0.54 0.6024499999999999 L 0.55 0.605 L 0.56 0.6077 L 0.57 0.6105499999999999 L 0.58 0.61355 L 0.59 0.6167 L 0.6 0.6199999999999999 L 0.61 0.6234500000000001 L 0.62 0.62705 L 0.63 0.6308 L 0.64 0.6346999999999999 L 0.65 0.63875 L 0.66 0.64295 L 0.67 0.6473 L 0.68 0.6518 L 0.69 0.65645 L 0.7 0.66125 L 0.71 0.6661999999999999 L 0.72 0.6713 L 0.73 0.67655 L 0.74 0.68195 L 0.75 0.6875 L 0.76 0.6932 L 0.77 0.69905 L 0.78 0.70505 L 0.79 0.7112 L 0.8 0.7175 L 0.81 0.7239500000000001 L 0.82 0.73055 L 0.83 0.7373 L 0.84 0.7442 L 0.85 0.75125 L 0.86 0.7584500000000001 L 0.87 0.7657999999999999 L 0.88 0.7733 L 0.89 0.78095 L 0.9 0.7887500000000001 L 0.91 0.7967000000000001 L 0.92 0.8048 L 0.93 0.8130500000000002 L 0.94 0.8214499999999999 L 0.95 0.8300000000000001 L 0.96 0.8387 L 0.97 0.84755 L 0.98 0.85655 L 0.99 0.8657 L 1 0.875 Z">
+                        </path>
+                        <path class="actionNoscript gravityCentral" fill="var(--green)" stroke="black"
+                            stroke-width="0.01" stroke-linecap="round"
+                            d="M 1 0.5 L 1 0.0921875 L 0.99 0.10334750000000001 L 0.98 0.1143275 L 0.97 0.1251275 L 0.96 0.13574750000000005 L 0.95 0.14618750000000005 L 0.94 0.15644750000000007 L 0.9299999999999999 0.16652750000000008 L 0.92 0.17642749999999988 L 0.91 0.18614750000000008 L 0.9 0.1956875000000001 L 0.89 0.20504749999999988 L 0.88 0.21422749999999996 L 0.87 0.22322750000000005 L 0.86 0.23204750000000005 L 0.85 0.2406875 L 0.84 0.2491475 L 0.83 0.25742750000000003 L 0.8200000000000001 0.26552749999999997 L 0.81 0.27344749999999995 L 0.8 0.2811875 L 0.79 0.2887475 L 0.78 0.2961275 L 0.77 0.30332749999999997 L 0.76 0.3103475 L 0.75 0.3171875 L 0.74 0.3238475 L 0.73 0.3303275 L 0.72 0.33662749999999997 L 0.71 0.34274750000000004 L 0.7 0.34868750000000004 L 0.69 0.3544475 L 0.6799999999999999 0.36002750000000006 L 0.6699999999999999 0.3654275 L 0.6599999999999999 0.3706475 L 0.65 0.3756875 L 0.64 0.3805475 L 0.63 0.3852275 L 0.62 0.3897275 L 0.61 0.3940475 L 0.6 0.3981875 L 0.5900000000000001 0.4021475 L 0.5800000000000001 0.40592749999999994 L 0.5700000000000001 0.4095275 L 0.56 0.4129474999999999 L 0.55 0.41618750000000004 L 0.54 0.4192475 L 0.53 0.42212750000000004 L 0.52 0.42482749999999997 L 0.51 0.42734749999999994 L 0.5 0.4296875 L 0.49 0.43184750000000005 L 0.48 0.43382750000000003 L 0.47 0.4356275 L 0.45999999999999996 0.43724749999999996 L 0.44999999999999996 0.4386875 L 0.43999999999999995 0.4399475 L 0.43000000000000005 0.4410275 L 0.42000000000000004 0.4419275 L 0.41000000000000003 0.44264749999999997 L 0.4 0.44318749999999996 L 0.39 0.44354750000000004 L 0.38 0.44372749999999994 L 0.37 0.44372749999999994 L 0.36 0.44354750000000004 L 0.35 0.44318749999999996 L 0.33999999999999997 0.44264749999999997 L 0.32999999999999996 0.4419275 L 0.31999999999999995 0.4410275 L 0.31000000000000005 0.4399475 L 0.30000000000000004 0.4386875 L 0.29000000000000004 0.43724749999999996 L 0.28 0.4356275 L 0.27 0.43382750000000003 L 0.26 0.43184750000000005 L 0.25 0.4296875 L 0.24 0.42734749999999994 L 0.22999999999999998 0.42482749999999997 L 0.21999999999999997 0.42212750000000004 L 0.20999999999999996 0.4192475 L 0.19999999999999996 0.41618750000000004 L 0.18999999999999995 0.4129474999999999 L 0.18000000000000005 0.4095275 L 0.17000000000000004 0.40592750000000005 L 0.16000000000000003 0.40214750000000005 L 0.15000000000000002 0.3981875 L 0.14 0.3940475 L 0.13 0.3897275 L 0.12 0.3852275 L 0.10999999999999999 0.3805475 L 0.09999999999999998 0.3756875 L 0.08999999999999997 0.37064749999999996 L 0.07999999999999996 0.36542749999999996 L 0.06999999999999995 0.3600275 L 0.06000000000000005 0.3544475 L 0.050000000000000044 0.34868750000000004 L 0.040000000000000036 0.34274750000000004 L 0.030000000000000027 0.33662749999999997 L 0.020000000000000018 0.3303275 L 0.010000000000000009 0.3238475 L 0 0.3171875  L 0 0.5632455532033676 L 0.01 0.5637930608578884 L 0.02 0.5642973980270228 L 0.03 0.5647592314977361 L 0.04 0.5651796291079922 L 0.05 0.5655600291684502 L 0.06 0.5659022039957167 L 0.07 0.5662082191709296 L 0.08 0.5664803901633826 L 0.09 0.5667212378953338 L 0.1 0.5669334446868793 L 0.11 0.5671198118280787 L 0.12 0.5672832197997593 L 0.13 0.5674265919240307 L 0.14 0.5675528619873961 L 0.15 0.5676649461569176 L 0.16 0.5677657193127588 L 0.17 0.567857995754418 L 0.18 0.5679445141055428 L 0.19 0.5680279261430919 L 0.2 0.5681107892085098 L 0.21 0.56819556181782 L 0.22 0.5682846020697777 L 0.23 0.5683801684518048 L 0.24 0.5684844226579058 L 0.25 0.5685994340570035 L 0.26 0.5687271854805813 L 0.27 0.5688695800321732 L 0.28 0.5690284486557047 L 0.29 0.5692055582330678 L 0.3 0.56940262001224 L 0.31 0.5696212981946677 L 0.32 0.5698632185338492 L 0.33 0.5701299768155186 L 0.34 0.5704231471032025 L 0.35 0.5707442896408674 L 0.36 0.5710949583065759 L 0.37 0.5714767075071665 L 0.38 0.571891098393478 L 0.39 0.5723397042579003 L 0.4 0.5728241149502413 L 0.41 0.5733459401129289 L 0.42 0.5739068109910705 L 0.43 0.5745083805151469 L 0.44 0.5751523212820644 L 0.45 0.5758403209714789 L 0.46 0.5765740746259064 L 0.47 0.5773552730920009 L 0.48 0.5781855867631294 L 0.49 0.579066643576635 L 0.5 0.58 L 0.51 0.580987103486567 L 0.52 0.5820292445937285 L 0.53 0.5831274966383299 L 0.54 0.5842826404252112 L 0.55 0.5854950712443443 L 0.56 0.5867646850228041 L 0.57 0.5880907402928697 L 0.58 0.5894716925779456 L 0.59 0.5909049980224756 L 0.6 0.5923868837673937 L 0.61 0.5939120839230777 L 0.62 0.5954735423028292 L 0.63 0.5970620866907111 L 0.64 0.5986660846896836 L 0.65 0.6002710984441141 L 0.66 0.6018595648970353 L 0.67 0.6034105394989884 L 0.68 0.604899553563589 L 0.69 0.6062986469479821 L 0.7 0.6075766454077964 L 0.71 0.608699751608577 L 0.72 0.60963250541176 L 0.73 0.6103391382323263 L 0.74 0.6107852960610637 L 0.75 0.6109400392450459 L 0.76 0.6107779543556363 L 0.77 0.6102811513111426 L 0.78 0.6094408876439392 L 0.79 0.6082585783875555 L 0.8 0.6067460203156825 L 0.81 0.6049247726962582 L 0.82 0.6028247676975965 L 0.83 0.6004823394614935 L 0.84 0.597937933735982 L 0.85 0.5952337763439026 L 0.86 0.5924117426831089 L 0.87 0.5895115993564968 L 0.88 0.5865697055218917 L 0.89 0.5836181853856879 L 0.9 0.5806845266392997 L 0.91 0.5777915264649519 L 0.92 0.5749574946614002 L 0.93 0.5721966268337024 L 0.94 0.569519473162825 L 0.95 0.5669334446868793 L 0.96 0.5644433155576521 L 0.97 0.5620516942402624 L 0.98 0.5597594481933293 L 0.99 0.5575660751059257 L 1 0.555470019622523 Z">
+                        </path>
+                        <path class="actionNoscript harmOsc" fill="var(--green)" stroke="black" stroke-width="0.01"
+                            stroke-linecap="round"
+                            d="M 1 0.5 L 1 0.0921875 L 0.99 0.10334750000000001 L 0.98 0.1143275 L 0.97 0.1251275 L 0.96 0.13574750000000005 L 0.95 0.14618750000000005 L 0.94 0.15644750000000007 L 0.9299999999999999 0.16652750000000008 L 0.92 0.17642749999999988 L 0.91 0.18614750000000008 L 0.9 0.1956875000000001 L 0.89 0.20504749999999988 L 0.88 0.21422749999999996 L 0.87 0.22322750000000005 L 0.86 0.23204750000000005 L 0.85 0.2406875 L 0.84 0.2491475 L 0.83 0.25742750000000003 L 0.8200000000000001 0.26552749999999997 L 0.81 0.27344749999999995 L 0.8 0.2811875 L 0.79 0.2887475 L 0.78 0.2961275 L 0.77 0.30332749999999997 L 0.76 0.3103475 L 0.75 0.3171875 L 0.74 0.3238475 L 0.73 0.3303275 L 0.72 0.33662749999999997 L 0.71 0.34274750000000004 L 0.7 0.34868750000000004 L 0.69 0.3544475 L 0.6799999999999999 0.36002750000000006 L 0.6699999999999999 0.3654275 L 0.6599999999999999 0.3706475 L 0.65 0.3756875 L 0.64 0.3805475 L 0.63 0.3852275 L 0.62 0.3897275 L 0.61 0.3940475 L 0.6 0.3981875 L 0.5900000000000001 0.4021475 L 0.5800000000000001 0.40592749999999994 L 0.5700000000000001 0.4095275 L 0.56 0.4129474999999999 L 0.55 0.41618750000000004 L 0.54 0.4192475 L 0.53 0.42212750000000004 L 0.52 0.42482749999999997 L 0.51 0.42734749999999994 L 0.5 0.4296875 L 0.49 0.43184750000000005 L 0.48 0.43382750000000003 L 0.47 0.4356275 L 0.45999999999999996 0.43724749999999996 L 0.44999999999999996 0.4386875 L 0.43999999999999995 0.4399475 L 0.43000000000000005 0.4410275 L 0.42000000000000004 0.4419275 L 0.41000000000000003 0.44264749999999997 L 0.4 0.44318749999999996 L 0.39 0.44354750000000004 L 0.38 0.44372749999999994 L 0.37 0.44372749999999994 L 0.36 0.44354750000000004 L 0.35 0.44318749999999996 L 0.33999999999999997 0.44264749999999997 L 0.32999999999999996 0.4419275 L 0.31999999999999995 0.4410275 L 0.31000000000000005 0.4399475 L 0.30000000000000004 0.4386875 L 0.29000000000000004 0.43724749999999996 L 0.28 0.4356275 L 0.27 0.43382750000000003 L 0.26 0.43184750000000005 L 0.25 0.4296875 L 0.24 0.42734749999999994 L 0.22999999999999998 0.42482749999999997 L 0.21999999999999997 0.42212750000000004 L 0.20999999999999996 0.4192475 L 0.19999999999999996 0.41618750000000004 L 0.18999999999999995 0.4129474999999999 L 0.18000000000000005 0.4095275 L 0.17000000000000004 0.40592750000000005 L 0.16000000000000003 0.40214750000000005 L 0.15000000000000002 0.3981875 L 0.14 0.3940475 L 0.13 0.3897275 L 0.12 0.3852275 L 0.10999999999999999 0.3805475 L 0.09999999999999998 0.3756875 L 0.08999999999999997 0.37064749999999996 L 0.07999999999999996 0.36542749999999996 L 0.06999999999999995 0.3600275 L 0.06000000000000005 0.3544475 L 0.050000000000000044 0.34868750000000004 L 0.040000000000000036 0.34274750000000004 L 0.030000000000000027 0.33662749999999997 L 0.020000000000000018 0.3303275 L 0.010000000000000009 0.3238475 L 0 0.3171875  L 0 0.84375 L 0.01 0.8464205400000001 L 0.02 0.84882039 L 0.03 0.8509689899999999 L 0.04 0.85288524 L 0.05 0.8545875 L 0.06 0.8560935900000001 L 0.07 0.8574207900000002 L 0.08 0.8585858399999999 L 0.09 0.85960494 L 0.1 0.8604937499999998 L 0.11 0.8612673900000001 L 0.12 0.86194044 L 0.13 0.8625269400000001 L 0.14 0.8630403900000001 L 0.15 0.86349375 L 0.16 0.8638994400000002 L 0.17 0.8642693400000001 L 0.18 0.8646147899999999 L 0.19 0.86494659 L 0.2 0.8652749999999999 L 0.21 0.86560974 L 0.22 0.86595999 L 0.23 0.8663343900000001 L 0.24 0.86674104 L 0.25 0.8671875 L 0.26 0.86768079 L 0.27 0.86822739 L 0.28 0.8688332400000001 L 0.29 0.8695037400000001 L 0.3 0.87024375 L 0.31 0.87105759 L 0.32 0.8719490400000002 L 0.33 0.8729213400000001 L 0.34 0.8739771900000001 L 0.35 0.8751187500000001 L 0.36 0.87634764 L 0.37 0.8776649400000001 L 0.38 0.87907119 L 0.39 0.8805663899999999 L 0.4 0.88215 L 0.41 0.88382094 L 0.42 0.8855775899999999 L 0.43 0.88741779 L 0.44 0.88933884 L 0.45 0.8913374999999999 L 0.46 0.89340999 L 0.47 0.8955519899999999 L 0.48 0.8977586399999999 L 0.49 0.9000245400000001 L 0.5 0.90234375 L 0.51 0.9047097900000001 L 0.52 0.90711564 L 0.53 0.90955374 L 0.54 0.9120159900000001 L 0.55 0.9144937500000001 L 0.56 0.91697784 L 0.57 0.9194585399999999 L 0.58 0.9219255900000001 L 0.59 0.92436819 L 0.6 0.9267749999999999 L 0.61 0.92913414 L 0.62 0.9314331899999999 L 0.63 0.93365919 L 0.64 0.93579864 L 0.65 0.9378375 L 0.66 0.9397611900000001 L 0.67 0.94155459 L 0.68 0.9432020399999999 L 0.69 0.94468734 L 0.7 0.9459937500000001 L 0.71 0.9471039900000001 L 0.72 0.94800024 L 0.73 0.94866414 L 0.74 0.94907679 L 0.75 0.94921875 L 0.76 0.94907004 L 0.77 0.9486101399999999 L 0.78 0.9478179900000001 L 0.79 0.9466719900000001 L 0.8 0.9451499999999999 L 0.81 0.9432293399999999 L 0.82 0.9408867900000001 L 0.83 0.9380985899999998 L 0.84 0.93484044 L 0.85 0.9310875 L 0.86 0.92681439 L 0.87 0.92199519 L 0.88 0.91660344 L 0.89 0.9106121399999999 L 0.9 0.9039937499999999 L 0.91 0.8967201899999999 L 0.92 0.88876284 L 0.93 0.88009254 L 0.94 0.87067959 L 0.95 0.8604937500000002 L 0.96 0.8495042400000001 L 0.97 0.8376797400000001 L 0.98 0.82498839 L 0.99 0.81139779 L 1 0.796875 Z">
+                        </path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const xmlns = "http://www.w3.org/2000/svg";
+            const graph = function (f) {
+                const y_min = -10;
+                const y_max = 10;
+
+                let out = "";
+                for (let i = 0; i <= 100; i++) {
+                    const [input, output] = f(i / 100);
+                    out += " L " + input + " " + (y_max - output) / (y_max - y_min);
+                }
+                return out;
+            }
+            const lerp = function (a, b, t) {
+                return (1 - t) * a + t * b;
+            }
+            const quadratic_bezier = function (a, b, c, t) {
+                return lerp(lerp(a, b, t), lerp(b, c, t), t);
+            }
+            const cubic_bezier = function (a, b, c, d, t) {
+                return quadratic_bezier(lerp(a, b, t), lerp(b, c, t), lerp(c, d, t), t);
+            }
+
+            let drag = null;
+
+
+
+            let trajectory = document.getElementById("trajectory");
+
+            let action = document.createElementNS(xmlns, "path");
+            document.getElementById("actionDisplay").replaceChildren(action);
+            action.setAttributeNS(null, "fill", "var(--green)");
+            action.setAttributeNS(null, "stroke", "black");
+            action.setAttributeNS(null, "stroke-width", "0.01");
+            action.setAttributeNS(null, "stroke-linecap", "round");
+
+            let control_positions = [[-0.75, -0.25], [-0.25, -1], [0.25, -0.75], [0.75, 0.5]];
+            let control_points = Array.from([0, 1, 2, 3], function (i) {
+                let circle = document.createElementNS(xmlns, "circle");
+                trajectory.parentElement.appendChild(circle);
+                circle.setAttributeNS(null, "r", "0.05");
+                circle.setAttributeNS(null, "fill", (i == 0 || i == 3) ? "gray" : "white");
+                circle.setAttributeNS(null, "stroke", "black");
+                circle.setAttributeNS(null, "stroke-width", "0.01");
+                return circle;
+            })
+            const redraw = function () {
+                for (let [i, circle] of control_points.entries()) {
+                    circle.setAttributeNS(null, "cx", control_positions[i][0]);
+                    circle.setAttributeNS(null, "cy", control_positions[i][1]);
+                    circle.setAttributeNS(null, "cursor", drag == i ? "grabbing" : "grab");
+                }
+                trajectory.setAttributeNS(null, "d",
+                    "M " + control_positions[0][0] + " " + control_positions[0][1] +
+                    " C " + control_positions[1][0] + " " + control_positions[1][1] +
+                    ", " + control_positions[2][0] + " " + control_positions[2][1] +
+                    ", " + control_positions[3][0] + " " + control_positions[3][1]);
+
+                action.setAttributeNS(null, "d", "M 1 0.5" + graph(function (t) {
+                    let x_velocity = 3 * quadratic_bezier(
+                        control_positions[1][0] - control_positions[0][0],
+                        control_positions[2][0] - control_positions[1][0],
+                        control_positions[3][0] - control_positions[2][0],
+                        1 - t);
+                    let y_velocity = 3 * quadratic_bezier(
+                        control_positions[1][1] - control_positions[0][1],
+                        control_positions[2][1] - control_positions[1][1],
+                        control_positions[3][1] - control_positions[2][1],
+                        1 - t);
+                    return [1 - t, 0.5 * (x_velocity * x_velocity + y_velocity * y_velocity)];
+                }) + " " + graph(function (t) {
+                    let x = cubic_bezier(control_positions[0][0], control_positions[1][0], control_positions[2][0], control_positions[3][0], t);
+                    let y = cubic_bezier(control_positions[0][1], control_positions[1][1], control_positions[2][1], control_positions[3][1], t);
+                    switch (document.querySelector('input[name="potential"]:checked').id) {
+                        case 'gravityDownBtn':
+                            return [t, (-1 - y) * 5];
+                        case 'gravityCentralBtn':
+                            return [t, -1 / Math.sqrt(x * x + y * y)];
+                        case 'harmOscBtn':
+                            return [t, (x * x + y * y) * 5 - 10];
+                    }
+                }) + " Z");
+            };
+            redraw();
+
+            document.getElementById("gravityDownBtn").addEventListener("click", function (evt) { redraw() });
+            document.getElementById("gravityCentralBtn").addEventListener("click", function (evt) { redraw() });
+            document.getElementById("harmOscBtn").addEventListener("click", function (evt) { redraw() });
+
+            // https://www.petercollingridge.co.uk/tutorials/svg/interactive/dragging/
+            for (let [i, circle] of control_points.entries()) {
+                circle.addEventListener("mousedown", function (evt) {
+                    drag = i;
+                });
+            }
+            trajectory.parentElement.addEventListener("mousemove", function (evt) {
+                if (drag !== null) {
+                    evt.preventDefault();
+                    let CTM = trajectory.parentElement.getScreenCTM();
+                    control_positions[drag][0] = (evt.clientX - CTM.e) / CTM.a;
+                    control_positions[drag][1] = (evt.clientY - CTM.f) / CTM.d;
+                    redraw();
+                }
+            });
+            trajectory.parentElement.addEventListener("mouseup", function (evt) {
+                drag = null;
+            });
+        </script>
+        </div>
+
+        <p>On the left you have a possible particle trajectory, drawn on a background that describes a potential field.
+            On the right you have plots of the kinetic and potential energy. The distance between these plots is the
+            <dfn>Lagrangian</dfn>, defined as <var>L</var> = <var>T</var> - <var>V</var>. Integrating that over time
+            gives you the <dfn>action</dfn>, which is the area of the (highlighted) region between the plots.
+        </p>
+
+        <p>Lagrangian mechanics says that if you find a trajectory that makes the action as small as it can get without
+            changing the endpoints, then that trajectory you've found is a physically realistic one.</p>
+
+        <p>If your browser has Javascript enabled (the default), you can try this out for yourself! Drag the control
+            points to try out various trajectories. Look for the ones with small action, and check that they make sense.
+        </p>
+
+
+        <hr>
+
+        <ul>
+            <li>
+                <p><sup id="#fn1"><a href="#fn1-return">1</a></sup> Technically, the action only has to be <dfn>
+                        stationary</dfn> — small changes to the trajectory have essentially no effect on the action.
+                    This happens when the action is minimal, but can also happen if it's a <em>local</em> minimum, or
+                    even a saddle point.</p>
+            </li>
+        </ul>
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>
