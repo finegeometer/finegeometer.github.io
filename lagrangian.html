@@ -93,76 +93,78 @@
 On the left is a plot of the potential field selected above. It is rendered as a gradient, from dark blues at low potential up through pinks and whites at high potential. In the foreground is a Bezier curve representing a sample trajectory of a particle through this potential field.
 On the right, two functions are graphed: the kinetic energy on top, and the potential energy on the bottom. The region between these is highlighted; it corresponds to the action of the selected trajectory.">
                 <div style="display: inline-block; width: 50%;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="-1 -1 2 2">
-                        <!--noformat-->
-                    <style>
-                        .stop0 { stop-color: hsl(240 100%    1%); }
-                        .stop1 { stop-color: hsl(240 100%    8%); }
-                        .stop2 { stop-color: hsl(240 100%   15%); }
-                        .stop3 { stop-color: hsl(240 100%   22%); }
-                        .stop4 { stop-color: hsl(240 100%   29%); }
-                        .stop5 { stop-color: hsl(260 96.5%  36%); }
-                        .stop6 { stop-color: hsl(280 86.6%  43%); }
-                        .stop7 { stop-color: hsl(300 70.7%  50%); }
-                        .stop8 { stop-color: hsl(320 86.6%  57%); }
-                        .stop9 { stop-color: hsl(340 96.5%  64%); }
-                        .stopA { stop-color: hsl(360 100%   71%); }
-                        .stopB { stop-color: hsl(360 100%   78%); }
-                        .stopC { stop-color: hsl(360 100%   85%); }
-                        .stopD { stop-color: hsl(360 100%   92%); }
-                        .stopE { stop-color: hsl(360 100%   99%); }
-                    </style>
-                    <!--noformat-->
+                    <div title=""><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="-1 -1 2 2">
+                            <!--noformat-->
+                            <style>
+                                .stop0 { stop-color: hsl(240 100%    1%); }
+                                .stop1 { stop-color: hsl(240 100%    8%); }
+                                .stop2 { stop-color: hsl(240 100%   15%); }
+                                .stop3 { stop-color: hsl(240 100%   22%); }
+                                .stop4 { stop-color: hsl(240 100%   29%); }
+                                .stop5 { stop-color: hsl(260 96.5%  36%); }
+                                .stop6 { stop-color: hsl(280 86.6%  43%); }
+                                .stop7 { stop-color: hsl(300 70.7%  50%); }
+                                .stop8 { stop-color: hsl(320 86.6%  57%); }
+                                .stop9 { stop-color: hsl(340 96.5%  64%); }
+                                .stopA { stop-color: hsl(360 100%   71%); }
+                                .stopB { stop-color: hsl(360 100%   78%); }
+                                .stopC { stop-color: hsl(360 100%   85%); }
+                                .stopD { stop-color: hsl(360 100%   92%); }
+                                .stopE { stop-color: hsl(360 100%   99%); }
+                            </style>
+                            <!--noformat-->
 
-                        <linearGradient id="gravityDown" x1="0" x2="0" y1="1" y2="-1" gradientUnits="userSpaceOnUse">
-                            <stop class="stop0" offset="  1%" />
-                            <stop class="stop1" offset="  8%" />
-                            <stop class="stop2" offset=" 15%" />
-                            <stop class="stop3" offset=" 22%" />
-                            <stop class="stop4" offset=" 29%" />
-                            <stop class="stop5" offset=" 36%" />
-                            <stop class="stop6" offset=" 43%" />
-                            <stop class="stop7" offset=" 50%" />
-                            <stop class="stop8" offset=" 57%" />
-                            <stop class="stop9" offset=" 64%" />
-                            <stop class="stopA" offset=" 71%" />
-                            <stop class="stopB" offset=" 78%" />
-                            <stop class="stopC" offset=" 85%" />
-                            <stop class="stopD" offset=" 92%" />
-                            <stop class="stopE" offset=" 99%" />
-                        </linearGradient>
-                        <radialGradient id="harmOsc" cx="0" cy="0" r="1.42" gradientUnits="userSpaceOnUse">
-                            <stop class="stop4" offset="  0%" />
-                            <stop class="stop5" offset=" 35%" />
-                            <stop class="stop6" offset=" 50%" />
-                            <stop class="stop7" offset=" 61%" />
-                            <stop class="stop8" offset=" 71%" />
-                            <stop class="stop9" offset=" 79%" />
-                            <stop class="stopA" offset=" 87%" />
-                            <stop class="stopB" offset=" 94%" />
-                            <stop class="stopC" offset="100%" />
-                        </radialGradient>
-                        <radialGradient id="gravityCentral" cx="0" cy="0" r="1.42" gradientUnits="userSpaceOnUse">
-                            <stop class="stop0" offset="  4.8%" />
-                            <stop class="stop1" offset="  5.3%" />
-                            <stop class="stop2" offset="  5.9%" />
-                            <stop class="stop3" offset="  6.6%" />
-                            <stop class="stop4" offset="  7.7%" />
-                            <stop class="stop5" offset="  9.1%" />
-                            <stop class="stop6" offset=" 11.1%" />
-                            <stop class="stop7" offset=" 14.3%" />
-                            <stop class="stop8" offset=" 20.0%" />
-                            <stop class="stop9" offset=" 33.3%" />
-                            <stop class="stopA" offset="100.0%" />
-                        </radialGradient>
+                            <linearGradient id="gravityDown" x1="0" x2="0" y1="1" y2="-1"
+                                gradientUnits="userSpaceOnUse">
+                                <stop class="stop0" offset="  1%" />
+                                <stop class="stop1" offset="  8%" />
+                                <stop class="stop2" offset=" 15%" />
+                                <stop class="stop3" offset=" 22%" />
+                                <stop class="stop4" offset=" 29%" />
+                                <stop class="stop5" offset=" 36%" />
+                                <stop class="stop6" offset=" 43%" />
+                                <stop class="stop7" offset=" 50%" />
+                                <stop class="stop8" offset=" 57%" />
+                                <stop class="stop9" offset=" 64%" />
+                                <stop class="stopA" offset=" 71%" />
+                                <stop class="stopB" offset=" 78%" />
+                                <stop class="stopC" offset=" 85%" />
+                                <stop class="stopD" offset=" 92%" />
+                                <stop class="stopE" offset=" 99%" />
+                            </linearGradient>
+                            <radialGradient id="harmOsc" cx="0" cy="0" r="1.42" gradientUnits="userSpaceOnUse">
+                                <stop class="stop4" offset="  0%" />
+                                <stop class="stop5" offset=" 35%" />
+                                <stop class="stop6" offset=" 50%" />
+                                <stop class="stop7" offset=" 61%" />
+                                <stop class="stop8" offset=" 71%" />
+                                <stop class="stop9" offset=" 79%" />
+                                <stop class="stopA" offset=" 87%" />
+                                <stop class="stopB" offset=" 94%" />
+                                <stop class="stopC" offset="100%" />
+                            </radialGradient>
+                            <radialGradient id="gravityCentral" cx="0" cy="0" r="1.42" gradientUnits="userSpaceOnUse">
+                                <stop class="stop0" offset="  4.8%" />
+                                <stop class="stop1" offset="  5.3%" />
+                                <stop class="stop2" offset="  5.9%" />
+                                <stop class="stop3" offset="  6.6%" />
+                                <stop class="stop4" offset="  7.7%" />
+                                <stop class="stop5" offset="  9.1%" />
+                                <stop class="stop6" offset=" 11.1%" />
+                                <stop class="stop7" offset=" 14.3%" />
+                                <stop class="stop8" offset=" 20.0%" />
+                                <stop class="stop9" offset=" 33.3%" />
+                                <stop class="stopA" offset="100.0%" />
+                            </radialGradient>
 
-                        <rect id="potentialGradient" x="-1" y="-1" width="2" height="2">
-                        </rect>
+                            <rect id="potentialGradient" x="-1" y="-1" width="2" height="2">
+                            </rect>
 
-                        <path id="trajectory" d="M -0.75 -0.25 C -0.25 -1, 0.25 -0.75, 0.75 0.5" fill="none"
-                            stroke="black" stroke-width="0.05" stroke-linecap="round">
-                        </path>
-                    </svg>
+                            <!-- Path computed by running with Javascript enabled. -->
+                            <path id="trajectory"
+                                d=" M -0.75 -0.25 C -0.7327586206896551 -0.27586206896551724, -0.7155172413793105 -0.30053507728894174, -0.6982758620689656 -0.3240190249702735 M -0.6465517241379309 -0.3909036860879905 C -0.6293103448275861 -0.41200951248513673, -0.6120689655172414 -0.43192627824019025, -0.5948275862068966 -0.45065398335315104 M -0.543103448275862 -0.5032699167657549 C -0.5258620689655171 -0.5196195005945302, -0.5086206896551724 -0.5347800237812127, -0.49137931034482757 -0.5487514863258025 M -0.43965517241379315 -0.5870986920332938 C -0.42241379310344834 -0.598692033293698, -0.4051724137931033 -0.6090963139120095, -0.3879310344827585 -0.6183115338882282 M -0.33620689655172414 -0.6423900118906064 C -0.31896551724137934 -0.6492271105826397, -0.30172413793103453 -0.6548751486325805, -0.2844827586206897 -0.6593341260404283 M -0.23275862068965514 -0.6691438763376931 C -0.2155172413793103 -0.6712247324613554, -0.19827586206896558 -0.672116527942925, -0.18103448275862075 -0.6718192627824018 M -0.12931034482758624 -0.6673602853745543 C -0.11206896551724141 -0.6646848989298456, -0.09482758620689655 -0.6608204518430439, -0.07758620689655173 -0.6557669441141498 M -0.025862068965517182 -0.6370392390011889 C -0.008620689655172355 -0.6296076099881092, 0.008620689655172521 -0.620986920332937, 0.02586206896551735 -0.6111771700356718 M 0.07758620689655173 -0.5781807372175981 C 0.09482758620689655 -0.5659928656361475, 0.1120689655172413 -0.552615933412604, 0.12931034482758613 -0.5380499405469679 M 0.18103448275862075 -0.4907847800237812 C 0.19827586206896558 -0.4738406658739595, 0.2155172413793103 -0.4557074910820452, 0.23275862068965514 -0.4363852556480381 M 0.2844827586206897 -0.37485136741973835 C 0.30172413793103453 -0.3531510107015457, 0.31896551724137934 -0.33026159334126043, 0.33620689655172414 -0.3061831153388823 M 0.3879310344827585 -0.23038049940546973 C 0.4051724137931033 -0.20392390011890613, 0.42241379310344834 -0.17627824019024962, 0.43965517241379315 -0.1474435196195005 M 0.49137931034482757 -0.057372175980975076 C 0.5086206896551724 -0.026159334126040473, 0.5258620689655171 0.006242568370986787, 0.543103448275862 0.03983353151010688 M 0.5948275862068966 0.1441736028537456 C 0.6120689655172414 0.1801426872770512, 0.6293103448275861 0.21730083234244935, 0.6465517241379309 0.2556480380499404 M 0.6982758620689655 0.37425683709869223 C 0.7155172413793104 0.4149821640903688, 0.7327586206896551 0.4568965517241379, 0.75 0.5"
+                                fill="none" stroke="black" stroke-width="0.05" stroke-linecap="round" />
+                        </svg></div>
                     <!--noformat-->
                 </div><div style="display: inline-block; width: 50%;">
                     <!--noformat-->
@@ -237,27 +239,50 @@ On the right, two functions are graphed: the kinetic energy on top, and the pote
                     circle.setAttributeNS(null, "cy", control_positions[i][1]);
                     circle.setAttributeNS(null, "cursor", drag == i ? "grabbing" : "grab");
                 }
-                trajectory.setAttributeNS(null, "d",
-                    "M " + control_positions[0][0] + " " + control_positions[0][1] +
-                    " C " + control_positions[1][0] + " " + control_positions[1][1] +
-                    ", " + control_positions[2][0] + " " + control_positions[2][1] +
-                    ", " + control_positions[3][0] + " " + control_positions[3][1]);
+
+                const bez = function (t) {
+                    return [
+                        cubic_bezier(control_positions[0][0], control_positions[1][0], control_positions[2][0], control_positions[3][0], t),
+                        cubic_bezier(control_positions[0][1], control_positions[1][1], control_positions[2][1], control_positions[3][1], t)
+                    ];
+                }
+                const bez_prime = function (t) {
+                    return [
+                        3 * quadratic_bezier(
+                            control_positions[1][0] - control_positions[0][0],
+                            control_positions[2][0] - control_positions[1][0],
+                            control_positions[3][0] - control_positions[2][0],
+                            t),
+                        3 * quadratic_bezier(
+                            control_positions[1][1] - control_positions[0][1],
+                            control_positions[2][1] - control_positions[1][1],
+                            control_positions[3][1] - control_positions[2][1],
+                            t)
+                    ];
+                }
+
+                trajectoryPath = "";
+                let numSegments = 29
+                for (let i = 0; i < numSegments; i += 2) {
+                    let t1 = i / numSegments
+                    let t2 = (i + 1) / numSegments;
+                    let [x1, y1] = bez(t1);
+                    let [x2, y2] = bez(t2);
+                    let [vx1, vy1] = bez_prime(t1);
+                    let [vx2, vy2] = bez_prime(t2);
+                    trajectoryPath +=
+                        " M " + x1 + " " + y1 +
+                        " C " + (x1 + vx1 / (3 * numSegments)) + " " + (y1 + vy1 / (3 * numSegments)) +
+                        ", " + (x2 - vx2 / (3 * numSegments)) + " " + (y2 - vy2 / (3 * numSegments)) +
+                        ", " + x2 + " " + y2
+                }
+                trajectory.setAttributeNS(null, "d", trajectoryPath);
 
                 action.setAttributeNS(null, "d", "M 1 0.5" + graph(function (t) {
-                    let x_velocity = 3 * quadratic_bezier(
-                        control_positions[1][0] - control_positions[0][0],
-                        control_positions[2][0] - control_positions[1][0],
-                        control_positions[3][0] - control_positions[2][0],
-                        1 - t);
-                    let y_velocity = 3 * quadratic_bezier(
-                        control_positions[1][1] - control_positions[0][1],
-                        control_positions[2][1] - control_positions[1][1],
-                        control_positions[3][1] - control_positions[2][1],
-                        1 - t);
+                    let [x_velocity, y_velocity] = bez_prime(1 - t);
                     return [1 - t, 0.5 * (x_velocity * x_velocity + y_velocity * y_velocity)];
                 }) + " " + graph(function (t) {
-                    let x = cubic_bezier(control_positions[0][0], control_positions[1][0], control_positions[2][0], control_positions[3][0], t);
-                    let y = cubic_bezier(control_positions[0][1], control_positions[1][1], control_positions[2][1], control_positions[3][1], t);
+                    let [x, y] = bez(t);
                     switch (document.querySelector('input[name="potential"]:checked').id) {
                         case 'gravityDownBtn':
                             return [t, (-1 - y) * 5];
