@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../style.css" rel="stylesheet" />
+    <title>Derivatives of Feynman Diagrams</title>
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a class="active" href="/thoughts.html">Thoughts</a></li>
+                    <li><a href="/reference.html">General Reference</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Thoughts on Feynman Diagrams</h1>
+
+        <p>I'll readily admit I don't know much about quantum field theory. I plan to learn it sometime, but that time
+            has not yet come. But despite that, I think I've noticed something interesting.</p>
+
+        <h2>Recap</h2>
+
+        <p>To my understanding, Feynman diagrams are a description of a complicated infinite series, whose sum somehow
+            describes something physical.</p>
+
+        <p>We begin with some input and output edges, each labeled with a momentum. We connect these edges into networks
+            in all possible ways; each network becoming a term in the sum.</p>
+
+        <p>For example, for a three-particle interaction with two external wires, both labelled \(p\), the first few
+            diagrams might look like this.</p>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 8" stroke="var(--blue)" stroke-width="0.02"
+            stroke-linecap="round" fill="none">
+            <path d="M 0 1 L 10 1"></path>
+            <path d="M 0 3 L 3 3 Q 5 2, 7 3 M 3 3 Q 5 4, 7 3 L 10 3"></path>
+            <path d="M 0 5 Q 5 3.8, 10 5 M 3 5.2 Q 5 4.2, 7 5.2 Q 5 5.2, 3 5.2 Q 5 6.2, 7 5.2"></path>
+            <path d="M 0 7 L 3 7 C 5 6, 5 8, 3 7 M 10 7 L 7 7 C 5 6, 5 8, 7 7"></path>
+        </svg>
+
+        <p>To compute these terms, we do the following:</p>
+        <ul>
+            <li>Assign each internal edge a momentum variable.</li>
+            <li>For each edge, with label \(p\), include the propagator \(\frac{1}{p^2 - m^2}\) as a factor.</li>
+            <li>For each vertex, include a factor proportional to a coupling constant, and a factor that is the Dirac
+                delta of the sum of the incoming momenta.</li>
+            <li>Integrate over the momentum variables.</li>
+            <li>Divide by the number of symmetries of the diagram.</li>
+        </ul>
+        <p>It's probably a bit more complicated for particles with spin, but I don't know the details.</p>
+
+        <p>So, in the above example, labelling the external edges \(p\) and \(q\) and using coupling constant
+            \(\lambda\), the example diagrams become the following terms. (I may be missing some constant factors.)</p>
+
+        <p>\[\begin{align*}
+            & \frac{\delta(q-p)}{p^2 - m^2}
+            \\ &\frac{1}{2} \int \int \frac
+            {\lambda^2 \delta(r+s-p) \delta(q-r-s) d^4 r d^4 s}
+            {(p^2 - m^2)(q^2 - m^2)(r^2 - m^2)(s^2 - m^2)}
+            \\ &\frac{1}{6} \int \int \int \frac
+            {\lambda^2 \delta(q-p) \delta(r+s+t) \delta(-r-s-t) d^4 r d^4 s d^4 t}
+            {(p^2 - m^2)(r^2 - m^2)(s^2 - m^2)(t^2 - m^2)}
+            \\ &\frac{1}{4} \int \int \frac
+            {\lambda^2 \delta(r+(-r)-p) \delta(q-s-(-s)) d^4 r d^4 s}
+            {(p^2 - m^2)(q^2 - m^2)(r^2 - m^2)(s^2 - m^2)}
+            \end{align*}\]</p>
+
+        <p>Simplifying, these are \(\delta(q-p)\) times:</p>
+
+        <p>\[\begin{align*}
+            & \frac{1}{p^2 - m^2}
+            \\ &\frac{\lambda^2}{2(p^2 - m^2)^2} \int \frac
+            {d^4 r}
+            {(r^2 - m^2)((p-r)^2 - m^2)}
+            \\ &\frac{\delta(0)\lambda^2}{6(p^2 - m^2)} \int \int \frac
+            {d^4 r d^4 s}
+            {(r^2 - m^2)(s^2 - m^2)((-r-s)^2 - m^2)}
+            \\ &\frac{\delta(p)\lambda^2}{4m^4}
+            \left(\int \frac{d^4 r}{(r^2 - m^2)}\right)^2
+            \end{align*}\]</p>
+
+        <p>A lot of these are just infinity, but supposedly there are ways to deal with that.</p>
+
+        <h2>Abstracting the Problem</h2>
+
+        <p>This setup reminded me of something. Tensor networks, a graphical alternative to tensor index notation.</p>
+
+        <p>So think of these momenta as <em>indices</em>. This makes our vector space something like
+            \(V = \mathbb{R}^{\mathbb{R}^4}\).</p>
+
+        <p>Looking at the Feynman calculation, the propagator becomes an element of \((V^*)^{\otimes 2}\).
+            The vertex contribution becomes a tensor in \(V^{\otimes (\text{vertex degree})}\). And the integrals just
+            become tensor contraction!
+        </p>
+
+        <p>So let's forget the integrals, and think purely in terms of abstract tensors!</p>
+
+        <p>Let \((A^{-1}) \in (V^*)^{\otimes 2}\) be the propagator, and \(\lambda \in V^{\otimes 3}\) be the vertex
+            contribution. (Why \(A\) <em>inverse</em>? You'll see soon.) Then the sum from before is:</p>
+
+        <p>\[\begin{align*}
+            & (A^{-1})_{ij}
+            \\ &+ \tfrac{1}{2} \lambda^{klm} \lambda^{nop} (A^{-1})_{ik} (A^{-1})_{ln} (A^{-1})_{mo} (A^{-1})_{pj}
+            \\ &+ \tfrac{1}{6} \lambda^{klm} \lambda^{nop} (A^{-1})_{ij} (A^{-1})_{kn} (A^{-1})_{lo} (A^{-1})_{mp}
+            \\ &+ \tfrac{1}{4} \lambda^{klm} \lambda^{nop} (A^{-1})_{ik} (A^{-1})_{lm} (A^{-1})_{no} (A^{-1})_{pj}
+            \\ &+ \text{terms of order \(\lambda^4\) and higher}
+            \end{align*}\]</p>
+
+        <p>Most of the infinities in the sum have disappeared. But I figure they aren't truly gone; just hiding in the
+            infinite dimensionality of \(V\).</p>
+
+        <p>One more thing. The above formulation is limited to three-particle interactions. Let's generalize to
+            \(n\)-particle interactions.</p>
+
+        <p>To do this, we simply replace \(\lambda \in V^{\otimes 3}\) with the sequence \(\lambda_n \in V^{\otimes
+            n}\).</p>
+
+        <h2>Derivatives</h2>
+
+        <p>Here's the fun part. Let \(\Sigma_n \in (V^*)^{\otimes n}\) be the sum over Feynman diagrams for \(n\)
+            external wires. Then:</p>
+        <p>\[\begin{align*}
+            \Sigma_{n+k} &= \frac{\partial}{\partial\lambda_k} \Sigma_n
+            \\ \Sigma_{n+2} &= \left(2\frac{\partial}{\partial A} + A^{-1}\right) \Sigma_n
+            \end{align*}\]</p>
+        <p><em>The derivative of a Feynman sum is another Feynman sum!</em></p>
+
+        <p>In particular, \(\Sigma_n = \frac{\partial^n}{\partial^n\lambda_1}\). So we can simplify:</p>
+        <p>\[\begin{align*}
+            \frac{\partial^k}{\partial^k\lambda_1} \Sigma_0 &= \frac{\partial}{\partial\lambda_k} \Sigma_0
+            \\ \frac{\partial^2}{\partial^2\lambda_1} \Sigma_0 &= \left(2\frac{\partial}{\partial A} + A^{-1}\right)
+            \Sigma_0
+            \end{align*}\]</p>
+        <p>And rearrange:</p>
+        <p>\[\begin{align*}
+            \frac{\partial\Sigma_0}{\partial\lambda_k} &= \frac{\partial^k\Sigma_0}{\partial^k\lambda_1}
+            \\ 2\frac{\partial\Sigma_0}{\partial A} &= \frac{\partial^2\Sigma_0}{\partial^2\lambda_1} - A^{-1}\Sigma_0
+            \end{align*}\]</p>
+        <p>We now have formulas for all the derivatives of \(\Sigma_0\), in terms of the \(\lambda_1\)-derivatives.</p>
+
+        <h2>Symmetry</h2>
+
+        <p>We can extract one more equation from a symmetry of the system. If in \(\Sigma_0\), we multiply \(\lambda_n\)
+            by \(t^n\) and \(A\) by \(t^2\), all the \(t\)s cancel. So:</p>
+
+        <p>\[\begin{align*}
+            \Sigma_0(\lambda,A) &= \Sigma_0((t^n\lambda_n)_{n\in\mathbb{N}},t^2A)
+            \\ 0 &= \left(\frac{\mathrm{d}}{\mathrm{d}t} \Sigma_0((t^n\lambda_n)_{n\in\mathbb{N}},t^2A) \right)_{t=1}
+            \\ &= \frac{\partial\Sigma_0}{\partial A^{ij}} 2A^{ij}
+            + \sum_n \frac{\partial\Sigma_0}{\partial(\lambda_n)^{i_1 \dots i_n}} n(\lambda_n)^{i_1 \dots i_n}
+            \\ &= \frac{\partial^2\Sigma_0}{\partial (\lambda_1)^i \partial (\lambda_1)^j} A^{ij}
+            - \Sigma_0\dim V
+            + \sum_n n \frac{\partial^n\Sigma_0}{\partial(\lambda_1)^{i_1} \dots \partial(\lambda_1)^{i_n}}
+            (\lambda_n)^{i_1 \dots i_n}
+            \end{align*}\]
+        </p>
+
+        <p>And that's a differential equation for \(\Sigma_0\)! Specifically, it's a homogeneous linear differential
+            equation, whose order is the maximum number of particles that can be involved in a single interaction.</p>
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>
