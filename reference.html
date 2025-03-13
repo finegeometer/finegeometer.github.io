@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Place of Ideas</title>
     <link href="style.css" rel="stylesheet" />
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
 </head>
 
 <body>
@@ -27,7 +37,76 @@
     <main>
         <h1>General Reference</h1>
 
+        Useful notes on anything and everything.
+
         <h2>Useful Resources</h2>
+
+        <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Main_Page">Wikipedia</a></li>
+            <li><a href="https://ncatlab.org/nlab/show/HomePage">nLab</a></li>
+        </ul>
+
+        <h2>Mathematics</h2>
+
+        <h3>Toposes and Theories</h3>
+
+        <p>Consider a geometric theory, \(\mathbb{T}\). We construct the syntactic category as follows:</p>
+        <ul>
+            <li>
+                <p>The objects are pairs of a context \(x_1 : X_1 \dots x_n : X_n\)
+                    and a formula \(\phi(x_1 \dots x_n)\). Intuitively, this represents the type
+                    \(\{\vec{x} \in \prod_{i=1}^n X_i \mid \phi(\vec{x})\}\).</p>
+            </li>
+            <li>
+                <p>The morphisms \((\vec{x},\phi) \to (\vec{y},\psi)\) are, not <em>functions</em>, but
+                    \(\mathrm{T}\)-provably functional <em>relations</em>.
+                    Specifically, they're formulas \(\theta(\vec{x},\vec{y})\) such that the following are provable.</p>
+                <p>\[\begin{align*}
+                    \phi(\vec{x}) &\vdash \exists \vec{y}, \theta(\vec{x},\vec{y})
+                    \\ \theta(\vec{x},\vec{y}) &\vdash \phi(\vec{x}) \land \psi(\vec{y})
+                    \\ \theta(\vec{x},\vec{y}) \land \theta(\vec{x},\vec{z}) &\vdash \vec{y} = \vec{z}
+                    \end{align*}\]</p>
+                <p>By using functional relations instead of functions, we work around the need for a unique choice
+                    principle.</p>
+            </li>
+            <li>
+                <p>Morphisms \(\theta_1\) and \(\theta_2\) are equivalent when
+                    \(\theta_1(\vec{x},\vec{y}) \dashv\vdash \theta_2(\vec{x},\vec{y})\).</p>
+            </li>
+        </ul>
+
+        <p>TODO: Explain the Grothendieck topology. Explain what happens with morphisms.</p>
+
+        <p><a
+                href=https://www.oliviacaramello.com/Unification/ToposTheoreticPreliminariesOliviaCaramello.pdf">Source</a>
+        </p>
+
+        <h2>Physics</h2>
+
+        <h3>Transistor Equation</h3>
+
+        <p>Consider an ideal MOSFET, with threshhold voltage \(\tau\), gate voltage \(g\), and terminal voltages \(v_1\)
+            and \(v_2\). Then the current <em>out</em> of terminal 1 is proportional to the following.</p>
+        <p>\[\max(0,g-v_1-\tau)^2 - \max(0,g-v_2-\tau)^2\]</p>
+
+        <details>
+            <summary>Source</summary>
+
+            <p>For a source, see <a
+                    href="https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electronics/Introduction_to_Physical_Electronics_(Wilson)/03%3A_FETs/3.04%3A_MOS_Transistor">this
+                    book</a>. But the book expresses it in a more complicated form.</p>
+
+            <p>The book implicitly assumes \(g-v_1-\tau\) is nonnegative. Equation 3.5.4 describes what happens when
+                \(g-v_2-\tau\) is also nonnegative, while Equation 3.5.8 describes what happens when it isn't. For the
+                cases where \(g-v_1-\tau\) is negative, we can still deduce the behavior; if \(g-v_2-\tau\) is also
+                negative, the transistor is simply deactivated; if not, then we use the fact that the transistor is
+                symmetric. With some algebra, we confirm that the equations match mine in all four cases.</p>
+
+        </details>
+
+        <h3>Rigid Body in \(n\) Dimensions</h3>
+
+        <p><a href="/writeups/rigid-body.pdf">Here's a writeup.</a></p>
 
     </main>
 
