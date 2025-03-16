@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reference</title>
+    <title>Transistors</title>
     <link href="/style.css" rel="stylesheet" />
 
     <!-- KaTeX -->
@@ -35,32 +35,26 @@
     </header>
 
     <main>
-        <h1>General Reference</h1>
+        <h1>Reference: Transistors</h1>
 
-        Useful notes on anything and everything.
+        <p>Consider an ideal MOSFET, with threshhold voltage \(\tau\), gate voltage \(g\), and terminal voltages \(v_1\)
+            and \(v_2\). Then the current <em>out</em> of terminal 1 is proportional to the following.</p>
+        <p>\[\max(0,g-v_1-\tau)^2 - \max(0,g-v_2-\tau)^2\]</p>
 
-        <h2>Useful Resources</h2>
+        <details>
+            <summary>Source</summary>
 
-        <ul>
-            <li><a href="https://en.wikipedia.org/wiki/Main_Page">Wikipedia</a></li>
-            <li><a href="https://ncatlab.org/nlab/show/HomePage">nLab</a></li>
-        </ul>
+            <p>For a source, see <a
+                    href="https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electronics/Introduction_to_Physical_Electronics_(Wilson)/03%3A_FETs/3.04%3A_MOS_Transistor">this
+                    book</a>. But the book expresses it in a more complicated form.</p>
 
-        <h2>Mathematics</h2>
+            <p>The book implicitly assumes \(g-v_1-\tau\) is nonnegative. Equation 3.5.4 describes what happens when
+                \(g-v_2-\tau\) is also nonnegative, while Equation 3.5.8 describes what happens when it isn't. For the
+                cases where \(g-v_1-\tau\) is negative, we can still deduce the behavior; if \(g-v_2-\tau\) is also
+                negative, the transistor is simply deactivated; if not, then we use the fact that the transistor is
+                symmetric. With some algebra, we confirm that the book's equations match mine in all four cases.</p>
 
-        <ul>
-            <li><a href="/reference/elliptic.html">Elliptic Functions</a></li>
-            <li><a href="/reference/syntactic-toposes.html">Toposes and Theories</a></li>
-        </ul>
-
-        <h2>Physics</h2>
-
-        <ul>
-            <li><a href="/reference/transistors.html">Transistors</a></li>
-            <li><a href="/writeups/rigid-body.pdf">Rigid Body in \(n\) Dimensions</a></li>
-        </ul>
-
-
+        </details>
     </main>
 
     <footer>

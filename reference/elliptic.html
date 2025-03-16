@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elliptic Functions</title>
+    <link href="/style.css" rel="stylesheet" />
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a href="/thoughts.html">Thoughts</a></li>
+                    <li><a class="active" href="/reference.html">General Reference</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Reference: Elliptic Functions</h1>
+
+        <p>Doubly-periodic functions on the complex plane.</p>
+
+        <h2>Jacobi</h2>
+
+        <p>16 functions: \(pq(u,k^2) = pq(u;k)\), as \(p\), \(q\) range over \(\{c,s,d,n\}\).
+            Related by the equations \(pp = 1\) and \(pq \cdot qr = pr\).
+        </p>
+
+        <p>Also, elliptic integrals:
+            \[\begin{align*}
+            F(x;k) &= \int_0^x \sqrt{\frac{1}{(1-t^2)(1-k^2t^2)}} \mathrm{d}t &\qquad K(k) &= F(1;k)
+            \\ E(x;k) &= \int_0^x \sqrt{\frac{1-k^2t^2}{1-t^2}} \mathrm{d}t &\qquad E(k) &= E(1;k)
+            \end{align*}\]
+        </p>
+
+        <p>\[\begin{align*}
+            F &= \mathrm{sn}^{-1}
+            \end{align*}\]</p>
+
+        <p>\[\begin{align*}
+            \mathrm{sn}^2 + \mathrm{cn}^2 &= \mathrm{nn}^2 \\
+            m\mathrm{sn}^2 + \mathrm{dn}^2 &= \mathrm{nn}^2
+            \end{align*}\]</p>
+
+        <p>\[\begin{align*}
+            \mathrm{sn}(u;0) &= \sin u &
+            \mathrm{sn}(u;1) &= \tanh u \\
+            \mathrm{cn}(u;0) &= \cos u &
+            \mathrm{cn}(u;1) &= \mathrm{sech} u \\
+            \mathrm{dn}(u;0) &= 1 &
+            \mathrm{dn}(u;1) &= \mathrm{sech} u
+            \end{align*}\]</p>
+
+        <!--noformat-->
+        <p>\[\begin{align*}
+            \mathrm{nn}' &=                            & 0 \quad| &&
+            \mathrm{sn}' &=       & \mathrm{cn}\mathrm{dn} \quad| &&
+            \mathrm{cn}' &=     - & \mathrm{sn}\mathrm{dn} \quad| &&
+            \mathrm{dn}' &=    -m & \mathrm{sn}\mathrm{cn} &\\
+            \mathrm{ns}' &=     - & \mathrm{cs}\mathrm{ds} \quad| &&
+            \mathrm{ss}' &=                            & 0 \quad| &&
+            \mathrm{cs}' &=     - & \mathrm{ns}\mathrm{ds} \quad| &&
+            \mathrm{ds}' &=     - & \mathrm{cs}\mathrm{ns} &\\
+            \mathrm{nc}' &=       & \mathrm{dc}\mathrm{sc} \quad| &&
+            \mathrm{sc}' &=       & \mathrm{dc}\mathrm{nc} \quad| &&
+            \mathrm{cc}' &=                            & 0 \quad| &&
+            \mathrm{dc}' &= (1-m) & \mathrm{nc}\mathrm{sc} &\\
+            \mathrm{nd}' &=     m & \mathrm{cd}\mathrm{sd} \quad| &&
+            \mathrm{sd}' &=       & \mathrm{cd}\mathrm{nd} \quad| &&
+            \mathrm{cd}' &= (m-1) & \mathrm{nd}\mathrm{sd} \quad| &&
+            \mathrm{dd}' &=                            & 0
+            \end{align*}\]</p>
+        <!--noformat-->
+
+        <h2>Weierstrass ℘</h2>
+
+        <p>(The "℘" character is unicode 2118.)</p>
+
+        <p>\(\wp(z)\), depends on either lattice \(\Lambda\), lattice generators \(\omega_1,\omega_2\), invariants
+            \(g_2\) and \(g_3\), or half-periods \(e_1,e_2,e_3\).</p>
+
+        <!--noformat-->
+        <p>\[\begin{align*}
+            \wp(z) &= e_3 + (e_1 - e_3) \mathrm{ns}^2\left(z\sqrt{e_1 - e_3}; \sqrt{\frac{e_2 - e_3}{e_1 - e_3}}\right)
+            \\     &= e_2 + (e_1 - e_3) \mathrm{ds}^2\left(z\sqrt{e_1 - e_3}; \sqrt{\frac{e_2 - e_3}{e_1 - e_3}}\right)
+            \\     &= e_1 + (e_1 - e_3) \mathrm{cs}^2\left(z\sqrt{e_1 - e_3}; \sqrt{\frac{e_2 - e_3}{e_1 - e_3}}\right)
+            \end{align*}\]</p>
+        <!--noformat-->
+
+        TODO
+
+        <h2>Arithmetic-Geometric Mean</h2>
+
+        TODO
+
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>
