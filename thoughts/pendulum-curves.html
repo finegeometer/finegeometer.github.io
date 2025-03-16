@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pretty Curves</title>
+    <link href="../style.css" rel="stylesheet" />
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a class="active" href="/thoughts.html">Thoughts</a></li>
+                    <li><a href="/reference.html">General Reference</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Thoughts on Pretty Curves</h1>
+
+        <p>You have a starting position and direction, and an ending position and direction. You want to connect them
+            with a nice curve. How do you do it?</p>
+
+        <p>In practice, you probably use a Bezier curve, because the available tools make it easy. And it's a decent
+            choice. But can we do better? Out of all possible curves, what's the best choice?</p>
+
+        <hr>
+
+        <p>What does "best" mean, anyway? It's subjective. But intuitively, the path shouldn't curve more than it has
+            to.</p>
+
+        <p>It's common to measure "badness" by the mean squared error. Since we're considering too much curvature to be
+            bad, let's define "best" to mean the path of minimum mean-squared curvature.</p>
+
+        <p>Let's express this mathematically. For simplicity, let's require the curve to have a fixed length, \(\ell\).
+            (We can always search for the best \(t\) later.) Then we can describe our curve by stating, for each
+            position \(t \in [0,\ell]\) along the curve, which angle \(\theta\) the curve is pointing at that position.
+        </p>
+
+        <p>\[\theta : [0,\ell] \to \mathbb{R}\]</p>
+
+        <p>We have a few constraints. First, the starting and ending direction must be correct. This fixes the values of
+            \(\theta(0)\) and \(\theta(\ell)\). But we also need the starting and ending <em>positions</em> to be
+            correct. We can start the curve wherever we want, but then the \(x\) and \(y\) displacements to the end of
+            the curve are given by \(\int_0^\ell \cos(\theta(t)) dt\) and \(\int_0^\ell \sin(\theta(t)) dt\).
+        </p>
+
+        <hr>
+
+        <p>In summary, we have the following problem.</p>
+
+        <p>Find:</p>
+        <p>\[\theta : [0,\ell] \to \mathbb{R}\]</p>
+        <p>Minimizing:</p>
+        <p>\[\int_0^\ell (\dot{\theta}(t))^2 dt\]</p>
+        <p>For fixed values of:</p>
+        <p>\[\theta(0)\]</p>
+        <p>\[\theta(\ell)\]</p>
+        <p>\[\int_0^\ell \cos(\theta(t)) dt\]</p>
+        <p>\[\int_0^\ell \sin(\theta(t)) dt\]</p>
+
+        <hr>
+
+        <p>Let's solve.</p>
+
+        <p>We can solve this with techniques familiar to Lagrangian Mechanics. First, we can remove the integral
+            constraints, by replacing the expression to be minimized with
+            \(\int_0^\ell (\dot{\theta}(t))^2 dt
+            - \lambda_1 \int_0^\ell \cos(\theta(t)) dt
+            - \lambda_2 \int_0^\ell \sin(\theta(t)) dt
+            \) for an arbitrary fixed \(\lambda_1\) and \(\lambda_2\). Rewriting that, we're minimizing
+            \(\int_0^\ell \left((\dot{\theta}(t))^2 - \cos(\theta(t)) - \sin(\theta(t))\right) dt\).</p>
+
+        <p>But this minimization problem is familiar. It's just the principle of least action, for a system with
+            Lagrangian \(\mathcal{L} = (\dot{\theta}(t))^2 - \cos(\theta(t)) - \sin(\theta(t))\). And that
+            <em>Lagrangian</em> is familiar! It simply describes a pendulum, of mass two, under a constant
+            gravitational acceleration \((-\lambda_1 / 2, -\lambda_2 / 2)\).
+        </p>
+
+        <p>So the solution is simple. To minimize mean-squared curvature, We should pick \(\theta(t)\) to be a function
+            that also describes the behavior of a pendulum under some constant gravitational field. The path is then
+            given by \(x(t) = x_0 + \int_0^t \cos(\theta(t)) dt\), \(y(t) = y_0 + \int_0^t \sin(\theta(t)) dt\).
+        </p>
+
+        <hr>
+
+        <p>TODO: Demo</p>
+
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>
