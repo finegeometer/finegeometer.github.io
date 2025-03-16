@@ -129,7 +129,7 @@
         <p>Our path is given by integrating \(\cos\theta\) and \(\sin\theta\).</p>
         <p>\[\begin{align*}
             y &= \int 2\mathrm{sn}\mathrm{cn} dt
-            \\ &= -2m\mathrm{dn}
+            \\ &= -\tfrac{2}{m}\mathrm{dn}
             \\ x &= \int (\mathrm{cn}^2 - \mathrm{sn}^2) dt
             \\ &= \int (1 - 2\mathrm{sn}^2) dt
             \\ &= \int (1 - \tfrac{2}{m}(1 - \mathrm{dn}^2)) dt
@@ -140,10 +140,13 @@
 
         <p>In conclusion, the general path of locally-mininal mean-squared curvature is a shifted, rotated, and scaled
             copy of the following.</p>
-        <p>\[\begin{bmatrix} \tfrac{2}{m}\mathcal{E}(t,m) + (1 - \tfrac{2}{m})t \\ -2m\mathrm{dn}(t,m)\end{bmatrix}\]
+        <p>\[\begin{bmatrix}
+            \tfrac{2}{m}\mathcal{E}(t,m) + (1 - \tfrac{2}{m})t \\
+            -\tfrac{2}{m}\mathrm{dn}(t,m)
+            \end{bmatrix}\]
         </p>
         <p>Or, scaling that:</p>
-        <p>\[\begin{bmatrix} \mathcal{E}(t,m) + (\tfrac{m}{2} - 1)t \\ -m^2\mathrm{dn}(t,m)\end{bmatrix}\]</p>
+        <p>\[\begin{bmatrix} \mathcal{E}(t,m) + (\tfrac{m}{2} - 1)t \\ -\mathrm{dn}(t,m)\end{bmatrix}\]</p>
 
         <hr>
 
