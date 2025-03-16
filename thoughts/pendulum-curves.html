@@ -103,7 +103,51 @@
 
         <hr>
 
-        <p>TODO: Demo</p>
+        <p>The pendulum equations are solved by setting \(\theta\) to twice the Jacobi amplitude of \(t\).</p>
+        <p>\[\begin{align*}
+            \theta &= 2\mathrm{am}
+            \\ \dot\theta &= 2\mathrm{dn}
+            \\ \ddot\theta &= -2k^2\mathrm{sn}\mathrm{cn}
+            \\ &= -2k^2\sin(\mathrm{am})\cos(\mathrm{am})
+            \\ &= -k^2\sin(2\mathrm{am})
+            \\ &= -k^2\sin(\theta)
+            \end{align*}\]
+        </p>
+        <p>The general solution is simply a shifted and time-scaled version of this.</p>
+
+        <p>So, taking \(\theta = 2\mathrm{am}\):</p>
+        <p>\[\begin{align*}
+            \sin\theta &= \sin(2\mathrm{am})
+            \\ &= 2\sin(\mathrm{am})\cos(\mathrm{am})
+            \\ &= 2\mathrm{sn}\mathrm{cn}
+            \\ \cos\theta &= \cos(2\mathrm{am})
+            \\ &= \cos^2(\mathrm{am}) - \sin^2(\mathrm{am})
+            \\ &= \mathrm{cn}^2 - \mathrm{sn}^2
+            \end{align*}\]
+        </p>
+
+        <p>Our path is given by integrating \(\cos\theta\) and \(\sin\theta\).</p>
+        <p>\[\begin{align*}
+            y &= \int 2\mathrm{sn}\mathrm{cn} dt
+            \\ &= -2m\mathrm{dn}
+            \\ x &= \int (\mathrm{cn}^2 - \mathrm{sn}^2) dt
+            \\ &= \int (1 - 2\mathrm{sn}^2) dt
+            \\ &= \int (1 - \tfrac{2}{m}(1 - \mathrm{dn}^2)) dt
+            \\ &= t - \tfrac{2}{m}(t - \mathcal{E})
+            \\ &= \tfrac{2}{m}\mathcal{E} + (1 - \tfrac{2}{m})t
+            \end{align*}\]
+        </p>
+
+        <p>In conclusion, the general path of locally-mininal mean-squared curvature is a shifted, rotated, and scaled
+            copy of the following.</p>
+        <p>\[\begin{bmatrix} \tfrac{2}{m}\mathcal{E}(t,m) + (1 - \tfrac{2}{m})t \\ -2m\mathrm{dn}(t,m)\end{bmatrix}\]
+        </p>
+        <p>Or, scaling that:</p>
+        <p>\[\begin{bmatrix} \mathcal{E}(t,m) + (\tfrac{m}{2} - 1)t \\ -m^2\mathrm{dn}(t,m)\end{bmatrix}\]</p>
+
+        <hr>
+
+        <p>TODO: Test this out, to find any mistakes. Then build a demo.</p>
 
     </main>
 

@@ -45,20 +45,42 @@
             Related by the equations \(pp = 1\) and \(pq \cdot qr = pr\).
         </p>
 
-        <p>Also, elliptic integrals:
+        <p>Also, Jacobi amplitude \(\mathrm{am}(u;k)\), Jacobi epsilon \(\mathcal{E}(u;k)\), and elliptic integrals:
             \[\begin{align*}
             F(x;k) &= \int_0^x \sqrt{\frac{1}{(1-t^2)(1-k^2t^2)}} \mathrm{d}t &\qquad K(k) &= F(1;k)
             \\ E(x;k) &= \int_0^x \sqrt{\frac{1-k^2t^2}{1-t^2}} \mathrm{d}t &\qquad E(k) &= E(1;k)
             \end{align*}\]
         </p>
 
+        <p>Useful properties:</p>
+
         <p>\[\begin{align*}
-            F &= \mathrm{sn}^{-1}
+            F &= \mathrm{sn}^{-1} \\
+            E(x;k) &= \mathcal{E}(F(x;k);k)
             \end{align*}\]</p>
 
         <p>\[\begin{align*}
-            \mathrm{sn}^2 + \mathrm{cn}^2 &= \mathrm{nn}^2 \\
-            m\mathrm{sn}^2 + \mathrm{dn}^2 &= \mathrm{nn}^2
+            \mathrm{sn}(u;k) &= \sin\mathrm{am}(u;k) \\
+            \mathrm{cn}(u;k) &= \cos\mathrm{am}(u;k) \\
+            \mathrm{dn}(u;k) &= \tfrac{\mathrm{d}}{\mathrm{d}u} \mathrm{am}(u;k) \\
+            \mathrm{dn}^2(u;k) &= \tfrac{\mathrm{d}}{\mathrm{d}u} \mathcal{E}(u;k)
+            \end{align*}\]</p>
+
+        <p>\[\begin{align*}
+            \mathrm{sn}^2 + \mathrm{cn}^2 &= 1 \\
+            m\mathrm{sn}^2 + \mathrm{dn}^2 &= 1
+            \end{align*}\]</p>
+
+        <p>\[\begin{align*}
+            \mathrm{sn}(u + K(k); k) &= \mathrm{cd}(u; k)
+            \\ \mathrm{cn}(u + K(k); k) &= \sqrt{1-k^2} \mathrm{sd}(u; k)
+            \\ \mathrm{dn}(u + K(k); k) &= \sqrt{1-k^2} \mathrm{nd}(u; k)
+            \end{align*}\]</p>
+
+        <p>\[\begin{align*}
+            \mathrm{sn}(u + 2K(k); k) &= -\mathrm{sn}(u; k)
+            \\ \mathrm{cn}(u + 2K(k); k) &= -\mathrm{cn}(u; k)
+            \\ \mathrm{dn}(u + 2K(k); k) &= \mathrm{dn}(u; k)
             \end{align*}\]</p>
 
         <p>\[\begin{align*}
