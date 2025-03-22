@@ -150,9 +150,57 @@
         <p>Or, scaling that:</p>
         <p>\[\begin{bmatrix} \mathcal{E}(t,m) + (\tfrac{m}{2} - 1)t \\ -\mathrm{dn}(t,m)\end{bmatrix}\]</p>
 
+        <p>When \(m > 1\), it might be better to use this equivalent form of the solution.</p>
+
+        <p>\[\begin{bmatrix}
+            \frac{(m^2+1)\mathcal{E}(kt, 1/m) - t}{2km} \\
+            -\mathrm{cn}(kt, 1/m)
+            \end{bmatrix}\]
+        </p>
+
         <hr>
 
-        <p>TODO: Test this out, to find any mistakes. Then build a demo.</p>
+        <p>Let's graph this! I'll use <a href="https://www.sagemath.org/">SageMath</a>,
+            since it has builtin elliptic functions.</p>
+
+        <pre>
+def path(m,t):
+    if m > 1:
+        return (((m^2+1) * elliptic_eu(sqrt(m)*t,1/m) - t)/(2*m*sqrt(m)), -jacobi('cn',sqrt(m)*t,1/m))
+    else:
+        return (elliptic_eu(t,m) + (m/2 - 1) * t, -jacobi('dn',t,m))
+
+t = var('t')
+
+for m in [0.8,0.9,0.95,1,1.05,1.1085,1.15,1.2,1.4,2,5]:
+    parametric_plot(path(m,t), (t, -20, 20), axes=false).show(xmin=-2, xmax=2)
+        </pre>
+
+        <img src="pendulum-curves-images/path0.8.png" alt="A path that nearly wanders in circles." />
+        <img src="pendulum-curves-images/path0.9.png"
+            alt="A path that loops in circles, but makes notable forward progress." />
+        <img src="pendulum-curves-images/path0.95.png"
+            alt="A path that occasionally loops around, always in the same direction." />
+        <img src="pendulum-curves-images/path1.0.png"
+            alt="A path with a single loop in it, but otherwise close to straight." />
+        <img src="pendulum-curves-images/path1.05.png"
+            alt="A path that occasionally loops around, in alternating directions." />
+        <img src="pendulum-curves-images/path1.1085.png" alt="A figure-eight path, connecting back to itself." />
+        <img src="pendulum-curves-images/path1.15.png"
+            alt="A path that winds strongly back and forth, crossing over itself." />
+        <img src="pendulum-curves-images/path1.2.png"
+            alt="A path that winds strongly back and forth, nearly crossing itself." />
+        <img src="pendulum-curves-images/path1.4.png"
+            alt="A path that winds back and forth, repeatedly making 180 degree turns." />
+        <img src="pendulum-curves-images/path2.0.png" alt="A path that winds back and forth." />
+        <img src="pendulum-curves-images/path5.0.png"
+            alt="A path that gently winds back and forth. Only one bend is visible." />
+
+        <p>Pretty!</p>
+
+        <p>Each of these curves is <em>locally</em> of minimal mean-squared curvature.
+            <em>Globally</em>, they have plenty of curvature, but they're still beautiful.
+        </p>
 
     </main>
 
