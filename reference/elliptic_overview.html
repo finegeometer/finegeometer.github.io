@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elliptic Functions</title>
+    <link href="/style.css" rel="stylesheet" />
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a href="/thoughts.html">Thoughts</a></li>
+                    <li><a class="active" href="/reference.html">General Reference</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Overview of Elliptic Functions</h1>
+
+        <p>This page describes the concept of elliptic functions.
+            <a href="/reference/elliptic.html">Here's a reference/formula sheet.</a>
+        </p>
+
+        <p><dfn>Elliptic functions</dfn> are a class of functions, not part of the standard curriculum,
+            that sometimes show up in the solutions to physics problems. I've seen them everywhere from
+            gravitational fields in a toroidal universe, to the paths light takes around a black hole,
+            to understanding a pendulum's motion <em>without</em> the typical small-angle approximation.
+            They also have some beautiful behavior when viewed as functions on the <em>complex</em> numbers,
+            rather than the reals.
+        </p>
+
+        <h2>Weierstrass ℘</h2>
+
+        <p>The prototypical elliptic function is the <dfn>Weierstrass ℘ function</dfn>.
+            It is a function from the complex plane to itself, parameterized by any one of the following:
+        </p>
+        <ul>
+            <li>A lattice, \(\Lambda \subset \mathbb{C}\). Think of a regular two-dimensional grid of points, sitting
+                inside the complex plane.
+            </li>
+            <li>A pair of generators, \(\omega_1\) and \(\omega_2\).</li>
+            <li>The <dfn>Weierstrass invariants</dfn>, \(g_2\) and \(g_3\).</li>
+            <li>The <dfn>half-periods</dfn>; an unordered triple \(e_1,e_2,e_3\), summing to zero.</li>
+        </ul>
+        <p>The function is typically simply written as \(\wp(z)\), suppressing these parameters.</p>
+
+        <p>The variety of parameterizations come from the two different fundamental aspects of ℘.</p>
+        <ul>
+            <li>
+                <p>It's doubly periodic. That is, \(\wp(z) = \wp(z + \lambda)\) for any \(\lambda \in \Lambda\).
+                    Equivalently, we have \(\wp(z) = \wp(z + \omega_1) = \wp(z + \omega_2)\),
+                    where \(\omega_1\) and \(\omega_2\) generate the lattice.</p>
+            </li>
+            <li>
+                <p>It solves the differential equation \(y'^2 = 4y^3 + g_2 y + g_3\).
+                    Equivalently, we can factor the cubic, yielding \(y'^2 = 4(y-e_1)(y-e_2)(y-e_3)\).</p>
+            </li>
+        </ul>
+
+        <p>We can relate these two aspects to each other. The \(e_i\) values are <em>half-periods</em>,
+            in the sense that \(\{\wp(z) \mid 2z \in \Lambda\} = \{e_1,e_2,e_3,\infty\}\).
+            Specifically, \(e_1 = \wp(\tfrac{\omega_1}{2})\), \(e_2 = \wp(\tfrac{\omega_2}{2})\),
+            \(e_3 = \wp(\tfrac{\omega_1 + \omega_2}{2})\), and \(\infty = \wp(0)\).
+        </p>
+
+        <p>If using \(\wp\) here feels too circular, we can also calculate \(g_2\) and \(g_3\) directly.
+            It turns out that \(g_2 = 60\sum\limits_{\lambda \in \Lambda \setminus \{0\}} \lambda^{-4}\),
+            and \(g_3 = 140\sum\limits_{\lambda \in \Lambda \setminus \{0\}} \lambda^{-6}\).
+        </p>
+
+        <h2>Jacobi</h2>
+
+        <p>But maybe your lattice is simply an axis-aligned grid of rectangles.
+            In this case, it may be simpler to work with <dfn>Jacobi's elliptic functions</dfn>, instead of ℘.</p>
+
+        <p>Jacobi's functions feel a lot like trigonometry.
+            You have functions like \(\operatorname{sn}(x)\) and \(\operatorname{cn}(x)\),
+            satisfying equations like \(\operatorname{sn}^2 + \operatorname{cn}^2 = 1\).</p>
+
+        <p>But there are six common trig functions. For Jacobi's functions, there are <em>twelve</em>.</p>
+
+        <p>It's not so bad, though. Just as the trig functions have plenty of redundancy
+            (\(\operatorname{sec}\) is just \(\frac{1}{\sin}\)), so do Jacobi's functions.
+            In fact, Jacobi's functions are probably <em>better</em> designed; they form a very clean pattern.
+        </p>
+
+        <p>The symbols are just every pair of letters taken from \(\{\mathrm{s},\mathrm{c},\mathrm{d},\mathrm{n}\}\).
+            So you have functions like \(\operatorname{sn}(x)\) or \(\operatorname{cd}(x)\).
+            Furthermore, products like \(\operatorname{cd} \operatorname{dn}\) simplify to \(\operatorname{cn}\),
+            and functions like \(\operatorname{ss}\) simplify to \(1\).
+        </p>
+
+        <p>So you can get away with just \(\operatorname{sn}\), \(\operatorname{cn}\), and \(\operatorname{dn}\).
+            Everything else is a shorthand, like \(\operatorname{cd}\) for
+            \(\frac{\operatorname{cn}}{\operatorname{dn}}\).
+            This is a lot like doing trigonometry with just \(\sin\) and \(\cos\),
+            by rewriting \(\tan\) as \(\frac{\sin}{\cos}\).</p>
+
+        <p>Just as ℘ was parameterized by either a lattice or a pair of invariants,
+            Jacobi's functions are parameterized by a single number, \(m\).
+            Or by its square root, \(k = \sqrt{m}\). So we typically write
+            \(\operatorname{sn}(x,m)\) or \(\operatorname{sn}(x;k)\).</p>
+
+        <h2>Other functions</h2>
+
+        <p>There are various other relevant functions, which I won't go into here.</p>
+
+        <ul>
+            <li>Elliptic Integrals: Show up as inverses to Jacobi's elliptic functions, or in computing their period.
+            </li>
+            <li>Jacobi Amplitude: A function satisfying
+                \(\sin(\operatorname{am}(x)) = \operatorname{sn}(x)\),
+                \(\cos(\operatorname{am}(x)) = \operatorname{cn}(x)\), and
+                \(\frac{d}{dx}\operatorname{am}(x) = \operatorname{dn}(x)\),
+            </li>
+            <li>Jacobi epsilon, Weierstrass sigma and zeta, et cetera et cetera.
+                Don't worry about them; they mostly show up when you integrate other elliptic functions.
+            </li>
+        </ul>
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>
