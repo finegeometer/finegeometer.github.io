@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../style.css" rel="stylesheet" />
+    <title>Thoughts on Semisimplicial Types</title>
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a class="active" href="/thoughts.html">Thoughts</a></li>
+                    <li><a href="/reference.html">General Reference</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Thoughts on Semisimplicial Types</h1>
+
+        <p>(This post assumes prior knowledge of the problem of semisimplicial types in homotopy type theory.)</p>
+
+        <p><a href="https://homotopytypetheory.org/2014/03/03/hott-should-eat-itself/">This blog post</a>
+            describes an attempt to implement homotopy type theory in itself, all the way from
+            untyped syntax. It failed for the same reasons as most approaches to semisimplicial types; dependence on an
+            infinite regress of more and more complicated conditions.</p>
+
+        <p>I think the focus on <em>untyped</em> syntax may be a red herring.</p>
+
+        <p>Suppose we had a reasonable <em>typed</em> syntax for homotopy type theory. Then, we would be able to:</p>
+        <ul>
+            <li>Interpret it in \(\mathrm{Type}\).</li>
+            <li>Interpret it in the arrow category, \((A : \mathrm{Type}) \times (B : \mathrm{Type}) \times (A \to B)\).
+            </li>
+            <li>By internalizing the above construction, transform <em>any</em> interpretation
+                into the corresponding arrow category.</li>
+            <li>Iterate this, and take a limit.</li>
+        </ul>
+        <p>The same applies if we could correctly define the concept of a model of HoTT, even if we couldn't construct
+            the initial model.</p>
+
+        <p>The result is a coherent infinite cube of sets and functions. It's not semisimplicial types, exactly, but it
+            has similarly complex coherence structure. And I know I've run into issues trying to implement this
+            structure directly.</p>
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>
