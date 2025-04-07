@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/style.css" rel="stylesheet" />
     <title>4D Rendering: Slicing Method</title>
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
 </head>
 
 <body>
@@ -28,7 +38,97 @@
         <h1>Thoughts on 4D Rendering: Slicing Method</h1>
         <i><a href="../4d-rendering.html">Up</a></i>
 
-        <p>TODO</p>
+        <h2>Design</h2>
+
+        <p>Let's say you want to render an \(n\)-dimensional scene, one 3D slice at a time.</p>
+
+        <p>In 3D rendering, we typically represent the world as a mesh of triangles.
+            So the obvious thing to do is replace this with a mesh of \((n-1)\)-simplices.
+            But I think this is a mistake.
+        </p>
+
+        <p>Why? Polygon count. To make a square, you need two triangles, which isn't bad.
+            But for a cube, you need <em>five</em> tetrahedra.
+            For a hypercube, you need <em>sixteen</em> simplices. Et cetera.
+        </p>
+
+        <p>Instead, let's represent it as a mesh of arbitrary convex faces, with data about which faces connect to
+            which. Each face simply stores the equation of the hyperplane it lies in.</p>
+
+        <h2>Math</h2>
+
+        <p>Before starting on the math, recall the idea of an <em>affine transformation</em>.
+            Basically a linear transformation, plus a translation. A map
+            \(\mathbb{R}^m \xrightarrow{\text{affine}} \mathbb{R}^n\) is represented as an \(n \times (m+1)\) matrix;
+            we apply it to a vector in \(v \in R^m\) by computing \(M\begin{bmatrix}v\\1\end{bmatrix}\).
+        </p>
+
+        <h2>High-level Algorithm</h2>
+
+        <p>Our mesh will consist of the following data:</p>
+        <ul>
+            <li>A collection of facets. Each stores its containing hyperplane,
+                as an affine transformation \(h_f : \mathbb{R}^n \to \mathbb{R}\).
+                We take the convention that \(h_f \lt 0\) is the inside, and \(h_f \gt 0\) is the outside.
+            </li>
+            <li>A collection of ridges (places where the facets meet),
+                each associated with an unordered pair of facets.
+            </li>
+            <li>The above should describe the surfaces of a collection of <em>convex</em> polytopes.</li>
+        </ul>
+
+        <p>We want to cut this down to a 3D subspace,
+            given by an affine transformation \(i : \mathbb{R}^3 \to \mathbb{R}^n\).</p>
+
+        <p>By composing with \(i\), each facet's hyperplane restricts to a map \(p_f : \mathbb{R}^3 \to \mathbb{R}\),
+            whose kernel describes a plane in \(\mathbb{R}^3\).
+        </p>
+
+        <p>Focusing on one facet, \(f\), find an affine map \(j : \mathbb{R}^2 \to \mathbb{R}^3\)
+            whose <em>image</em> is this plane. (Sadly, there's no particularly nice way to do this,
+            so just pick something that works.)</p>
+
+        <p>For each neighboring facet, \(f'\), we have an affine map \(p_{f'} \circ j : \mathbb{R}^2 \to \mathbb{R}\),
+            which describes a line in the plane. And the intersection of all the half-spaces \(p_{f'} \circ j \lt 0\)
+            describes the facet itself.
+        </p>
+
+        <p>There's a classic algorithm to triangulate the intersection of half-spaces in a plane. Do that.
+            Then apply \(j\) to the resulting vertices, to place the result back into 3D space.
+        </p>
+
+        <p>Combining the results from all facets, you now have a triangle mesh,
+            which you can hand to the standard graphics pipeline.</p>
+
+        <h2>Data Layout</h2>
+
+        <p>This algorithm ought to be relatively GPU-friendly.</p>
+
+        <p>Lay the data out as follows:</p>
+        <ul>
+            <li>Array of facets. Each facet contains \(n+1\) floats, describing the hyperplane, and an index into the
+                array of ridges.</li>
+            <li>Array of ridges. Each ridge appears twice, one for each ordering of its facets.
+                The array is sorted so that all the ridges with common first facet are together.
+                Each ridge stores its second facet.
+            </li>
+        </ul>
+
+        <p>When you run the algorithm:</p>
+        <ul>
+            <li>The \(p_f\)s form an array of <code>vec4</code>s.</li>
+            <li>The \(j\)s form an array of <code>mat3</code>s.</li>
+            <li>The half-space intersection algorithm is a bit less friendly,
+                but you can still handle the facets in parallel.
+                Execution of the algorithm essentially proceeds by detecting and throwing away redundant faces,
+                so memory use is easily bounded.
+            </li>
+            <li>The resulting triangle array will have holes in it. But these are easily removed with a scan operation,
+                which has a relatively fast parallel algorithm.
+            </li>
+            <li>Then it's just a matter of making sure the vertex array has the right format for OpenGL to accept it.
+            </li>
+        </ul>
     </main>
 
     <footer>
