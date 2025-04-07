@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/style.css" rel="stylesheet" />
+    <title>4D Rendering</title>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a class="active" href="/thoughts.html">Thoughts</a></li>
+                    <li><a href="/reference.html">General Reference</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Thoughts on 4D Rendering</h1>
+
+        <i>Related Articles: <a href="isotropic-rendering.html">Non-Euclidean Rendering</a></i>
+
+        <p>Say you want to make a four-dimensional game.
+            Surprisingly, there's really nothing difficult about implementing the actual <em>mechanics</em> of the game.
+            By and large, the math is the same no matter how many dimensions you add.
+            The only real issue there is that the cross product turns out to be a low-dimensional hack,
+            so you need to figure out what's really happening in formulas that use it.
+        </p>
+
+        <p>The big problem with any 4D game, though, is both simple and obvious.
+            The computer may understand what's going on, but can the player?
+            How does the computer communicate what the world looks like, in an understandable way?
+        </p>
+
+        <p>The answer may depend on the type of game you're making. For instance, if the world is discrete,
+            as in <a href="https://www.5dchesswithmultiversetimetravel.com/">5D Chess</a>,
+            you have a lot of options. But if space is continuous, I know of just two methods,
+            which I call <em>projection</em> and <em>slicing</em>.
+        </p>
+
+        <p><dfn>Projection</dfn> is when you take the ideas behind ordinary, 3D rendering, and add a dimension.
+            You think about what a four-dimensional being would actually perceive, and display that.
+        </p>
+
+        <p>The issue is that the eye a four-dimensional being has a three-dimensional retina.
+            So this method tells you to display the shape on a <em>three-dimensional screen</em>.
+            Since our screens aren't typically three-dimensional, we need a second step
+            to display that three-dimensional screen on your two dimensional screen.
+        </p>
+
+        <p> This approach is commonly used when
+            <a href="https://en.wikipedia.org/wiki/Tesseract#/media/File:8-cell-simple.gif">displaying mathematical
+                objects></a>. It can also be seen in <a href="https://www.urticator.net/maze/">this maze game</a>.
+        </p>
+
+        <p><dfn>Slicing</dfn> is when you display only a 3D subset, or "slice", of the world to the user at any one
+            time. If you want to see something outside the slice, you need to explicitly turn and look.
+            This is the approach taken by <a href="https://store.steampowered.com/app/2147950/4D_Golf/">4D Golf</a>,
+            and the eternally-in-development <a href="https://miegakure.com/">Miegakure</a>.
+        </p>
+
+        <p>Both approaches have pros and cons. Slicing is more intuitive, easier to implement, and leaves the screen
+            less cluttered. But projection allows you to see the whole four-dimensional world at once.
+            When playing the maze game linked above, it was a real revelation when I first saw four
+            mutually-perpendicular passageways at the same time.</p>
+
+        <p>More information:</p>
+        <ul>
+            <li><a href="4d-rendering/projection.html">Projection</a></li>
+            <li><a href="4d-rendering/slicing.html">Slicing</a></li>
+        </ul>
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>

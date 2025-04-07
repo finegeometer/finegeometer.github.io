@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/style.css" rel="stylesheet" />
+    <title>Non-Euclidean Rendering</title>
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a class="active" href="/thoughts.html">Thoughts</a></li>
+                    <li><a href="/reference.html">General Reference</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>Thoughts on Non-Euclidean Rendering</h1>
+
+        <i>Related Articles: <a href="4d-rendering.html">4D Rendering</a></i>
+
+        <p>By non-Euclidean geometry, I don't mean portals.
+            I mean a world in which space fundamentally works differently.
+            A world like the one in <a href="https://store.steampowered.com/app/1256230/Hyperbolica/">Hyperbolica</a>,
+            or <a href="https://www.roguetemple.com/z/hyper/">HyperRogue</a>.
+        </p>
+
+        <p>Out of all possible non-Euclidean geometries, two stand out as the simplest. Spherical and hyperbolic.
+            In hyperbolic geometry, there's too much space around you, and it's easy to get lost.
+            In spherical, it's the opposite — there's less space around you.
+            Go too far, and the whole universe closes back in on itself.
+        </p>
+
+        <p>Conveniently, the standard graphics pipeline works <em>just as well</em>
+            for these geometries as it does for Euclidean geometry. Let's see how.</p>
+
+        <h2>Projective Geometry</h2>
+
+        <p>There's a useful concept called <dfn>projective geometry</dfn>.
+            It's geometry without distance or angle. All we have is points, lines, and planes.</p>
+
+        <p>Why do we care? Because we can add distance back, after the fact.
+            Depending how we do it, we can get any of the three geometries.</p>
+
+        <p>And think about what the graphics pipeline needs.
+            It takes each point in a mesh, connects it to the camera, and takes the intersection with the screen.
+            Then it connects them to make triangles.
+        </p>
+
+        <p>None of that needs distance. None of that needs angle. The most it needs is to know what's in front of what.
+        </p>
+
+        <p>So it's fair to say that the graphics pipeline doesn't actually use Euclidean geometry. It uses
+            <em>projective</em> geometry.
+        </p>
+
+        <h3>The Math</h3>
+
+        <p>The mathematical setup is a bit weird.
+            We represent a point in three-dimensional projective space with <em>four</em> coordinates,
+            one of them being redundant. A point might be written as \([x:y:z:w]\),
+            but that's the same point as \([2x:2y:2z:2w]\).
+        </p>
+
+        <p>The projective equivalent of rotations and translations, called a projective transformation,
+            is just represented by any \(4 \times 4\) invertible matrix.
+        </p>
+
+        <p>(If you're remembering OpenGL's 4-vectors and 4×4 matrices, that's exactly right.)</p>
+
+        <h2>Reintroducing Distance</h2>
+
+        <p>Projective geometry doesn't have a concept of distance or angle.
+            If we add one, we can get back Euclidean geometry, or spherical or hyperbolic, or several others.
+        </p>
+
+        <p>A useful way to view this added distance is that it limits which projective transformations are allowed.
+            We only keep the transformations that preserve distance.
+        </p>
+
+        <h3>Euclidean</h3>
+
+        <p>When using Euclidean geometry, we typically write points as \((x,y,z)\).
+            We view this as the projective point \([x:y:z:1]\).
+        </p>
+
+        <p>The legal transformations are those of the form \(\begin{bmatrix}A&v\\0&1\end{bmatrix}\),
+            where \(A\) is a 3×3 orthogonal matrix, and \(v\) is a vector.
+            This represents rotating by \(A\), then translating by \(v\).
+        </p>
+
+        <h3>Spherical</h3>
+
+        <p>When using spherical geometry, we typically write a point as a tuple \((x,y,z,w)\)
+            that satisfies \(x^2+y^2+z^2+w^2 = 1\). (That is, a point on the unit hyper<em>sphere</em>.)
+            Of course, we view this as the projective point \([x:y:z:w]\).
+        </p>
+
+        <p>The legal transformations are the orthogonal matrices.</p>
+
+        <h3>Hyperbolic</h3>
+
+        <p>The legal transformations are the matrices \(A\) satisfying
+            \(\begin{bmatrix}1\\ &1\\ &&1\\ &&&-1\end{bmatrix} A^T \begin{bmatrix}1\\ &1\\ &&1\\ &&&-1\end{bmatrix} =
+            A^{-1}\).</p>
+
+        <h2>I Need to Write More</h2>
+
+        <p>There's plenty more to say. But I think this is <em>barely</em> enough information to implement a toy
+            non-Euclidean renderer, and I'm too tired to write more right now.
+            The key is that the OpenGL part is essentially unchanged.
+            You just have to replace the player's position and orientation:
+            instead of the Euclidean \(\begin{bmatrix}A&v\\0&1\end{bmatrix}\),
+            it's one of these other types of transformation.</p>
+
+        Examples of what's still needed:
+        <ul>
+            <li>Lighting requires distance and/or area-of-sphere formulas.</li>
+            <li>Lighting requires vector and angle calculations.</li>
+            <li>There are better ways of storing position and orientation than a matrix.
+                <ul>
+                    <li>Euclidean: vector + quaternion</li>
+                    <li>Spherical: two quaternions</li>
+                    <li>Hyperbolic: 2×2 matrix of complex numbers</li>
+                </ul>
+            </li>
+            <li>Mention Minkowski, deSitter, and Anti-deSitter geometries?</li>
+        </ul>
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>
