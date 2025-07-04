@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/style.css" rel="stylesheet" />
+    <title>Quantum Star-Rings</title>
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {macros: {'\\wand': '\\mathrel{-\\mkern-6mu*}'}});"></script>
+</head>
+
+<body>
+    <header>
+        <div>
+            <a href="index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Things I Made</a></li>
+                    <li><a href="/not-mine.html">Things Others Made</a></li>
+                    <li><a class="active" href="/thoughts.html">Thoughts</a></li>
+                    <li><a href="/reference.html">General Reference</a></li>
+                    <li><a href="/about.html">About finegeometer</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <h1>The Topos of Star-Rings is Quantum</h1>
+
+        <p> I've noticed that the classifying topos of star-rings behaves in a "quantum" fashion.
+        </p>
+
+        <p>
+            I mean this in a precise sense. I will describe a simple question in the internal logic,
+            whose solution <em>quantitatively</em> reproduces behavior seen in the quantum harmonic oscillator.
+        </p>
+
+        <h2>Topos</h2>
+
+        <p>
+            Allow me to outline the salient features of this topos.
+        </p>
+
+        <ul>
+            <li> It contains a generic star-ring, \(C\). This has interesting subsets:
+                \(R = {x : C | x = x^*}\), the set of "reals",
+                and \(R^{\geq 0}\), the set of "positive numbers",
+                consisting of finite sums of elements of the form \(x x^*\).
+            </li>
+            <li> It is a <em>monoidal topos</em>. For any type \(X\), there are adjoint functors
+                \(X * -\) and \(X \wand -\) from the topos to itself.
+                The monoidal structure captures the concept of commutativity:
+                \(C * C = \{(a,b) : C \times C \mid xy = yx\}\).
+            </li>
+            <li> It is a presheaf topos. Objects are functors from finitely-presented star-rings to sets;
+                morphisms are natural transformations.
+            </li>
+        </ul>
+
+        <h2>Setup</h2>
+
+        <p>
+            We will focus on the following object.
+            \[A = \{a \in C | a a^* - a^* a = 1\}\]
+            How does it behave?
+        </p>
+
+        <p>
+            Well, it has no elements in the global context.
+            The relevant classifying topos is a presheaf topos, in which the interpretation of \(A\)
+            is the functor \(R \mapsto \{a \in R \mid a a^* - a^* a = 1\}\).
+            This has no global sections, since that set is empty for some values of \(R\).
+        </p>
+
+        <p>
+            But even though we can't pin down <em>elements</em> of \(A\),
+            we can describe plenty of <em>probability distributions</em> over it.
+            Linear maps \((A \wand C) \wand C\), which map real functions to reals,
+            positive functions to positive numbers, and the constant \(1\) to \(1\).
+        </p>
+
+        <p>
+            Note that the construction of probability distributions is functorial.
+            If \(f : X \wand Y\), we get a map \(f : \mathrm{Prob}(X) \wand \mathrm{Prob}(Y)\).
+            So if we have a probability distribution on \(A\),
+            we can ask for the probability distribution of its real part, or its squared magnitude.
+        </p>
+
+        <p>
+            So I pose the following question.
+        </p>
+
+        <p>
+            Find an element of \(\mathrm{Prob}(A)\), defined in the global context,
+            that in some reasonable sense minimizes squared magnitude.
+            Mapping into \(\mathrm{Prob}(R)\) by taking the first coordinate,
+            what does the distribution look like?
+        </p>
+
+        <h2>Global Elements</h2>
+
+        <p>
+            Let's start by understanding global elements.
+        </p>
+
+        <p>
+            The interpretation of \(C\) in the classifying topos is the forgetful functor,
+            from finitely-presented star-rings to sets.
+            A global element of this presheaf is given by an element of the initial star-ring, \(\mathbb{Z}\).
+            So every globally-defined number is an integer.
+        </p>
+
+        <p>
+            What about probability distributions?
+        </p>
+
+        <p>
+            Consider first the set \((R \wand C) \wand C\).
+            Its global elements correspond to elements of \(C\) in context \(R \wand C\).
+            And every function \(R \wand C\) is given uniquely as a polynomial in one variable.
+            So a global element of \((R \wand C) \wand C\) interprets as a natural transformation,
+            assigning to each finitely-presented star-ring \(R\) a function \(R[x] \to R\).
+        </p>
+
+        <p>
+            When our map \((R \wand C) \wand C\) is linear,
+            the same will be true of the functions making up the natural transformation.
+            Such functions are uniquely determined by their values at the monomials.
+            So the natural transformation might as well consist of functions
+            \(\mathbb{N} \to R\) instead. But such things are simply infinite lists of global elements of \(R\).
+        </p>
+
+        <p>
+            In short, the linear maps \((R \wand C) \wand C\) available in global context
+            are those of the form \((a \mapsto \sum_n c_n a^n) \mapsto \sum_n c_n k_n\),
+            where the \(k_n\) are fixed integers.
+            The global elements of \(\mathrm{Prob}(R)\) are therefore a subset of these.
+        </p>
+
+        <p>
+            By similar logic, every element of \(\mathrm{Prob}(A)\) has the form
+            \((a \mapsto \sum_{m,n} c_{m,n} (a^*)^m a^n) \mapsto \sum_{m,n} c_{m,n} k_{m,n}\),
+            for fixed integer values of \(k_{m,n}\).
+        </p>
+
+        <h2>Solution</h2>
+
+        <p>
+            With that understood, let's tackle the question.
+        </p>
+
+        <p>
+            Let \(E : \mathrm{Prob}(A)\) be an arbitrary probability distribution,
+            defined in the global context. By the above discussion, it must take the form
+            \(E(a \mapsto \sum_{m,n} c_{m,n} (a^*)^m a^n) = \sum_{m,n} c_{m,n} k_{m,n}\),
+            for some fixed integers \(k_{m,n}\).
+        </p>
+
+        <p>
+            The right notion of "minimizing expected magnitude" seems to be
+            to minimize \(E((a^* a)^n)\) for all \(n \in \mathbb{N}\).
+            They will always be positive, and \(E(1)\) will always equal one,
+            but we are able to push them down to those bounds.
+        </p>
+
+        <p>
+            This constraint, that \(E((a^* a)^n) = 0\) for all \(n \geq 1\),
+            is equivalent the statement that \(k_{n,n} = 0\) for all \(n \neq 0\).
+            Given this, we observe that \(k_{m,m} + k_{n,n} \pm 2k_{m,n}\)
+            is always positive. This implies \(k_{m,n} = 0\) unless \(m=n=0\).
+            So there's only one possible solution.
+        </p>
+
+        <p>
+            And it is indeed a solution.
+            \[\begin{align*}
+            &E\left(\left(\sum_{m,n} c_{m,n} (a^*)^ma^n\right)^* \left(\sum_{m,n} c_{m,n} (a^*)^ma^n\right)\right)
+            \\ &= \sum_{m,n,m',n'} E((a^*)^n a^m c_{m,n}^* c_{m',n'} (a^*)^{m'} a^{n'})
+            \\ &= \sum_{m} E((a^*)^0 a^m c_{m,0}^* c_{m,0} (a^*)^m a^0)
+            \\ &= \sum_{m} E((c_{m,0} (a^*)^m)^* (c_{m,0} (a^*)^m))
+            \\ & \text{is positive}
+            \end{align*}\]
+        </p>
+
+        <p>
+            So we have found the distribution. It is written most simply as
+            \(E(a \mapsto \sum_{m,n} \sum_{m,n} c_{m,n} (a^*)^m a^n) = c_{0,0}\).
+        </p>
+
+        <p>
+            Now, what is the distribution of the real part?
+            We actually can't answer that: the real part is only defined if \(2\) is invertible!
+            So let's compute the distribution of twice the real part.
+        </p>
+
+        <p>
+            \[\begin{align*}
+            E' &: (R \wand C) \wand C
+            \\ E' &= f \mapsto E(f \circ 2\Re)
+            \\ &= f \mapsto E(a \mapsto f(a + a^*))
+            \\ &= \left(x \mapsto \sum_n c_n x^n\right) \mapsto \sum_n c_n E(a \mapsto (a+a^*)^n)
+            \end{align*}\]
+        </p>
+
+        <p>
+            We need the constant term of \((a+a^*)^n\),
+            when it is reexpressed with the \(a^*\)s preceding the \(a\)s.
+            This equals the number of ways of putting an \(a\) or an \(a^*\) in each of \(n\) slots,
+            then matching each \(a\) to a later \(a^*\).
+            This is simply the number of matchings of \(n\) items,
+            which is \((n-1)!!\) when \(n\) is even,
+            and zero when \(n\) is odd.
+        </p>
+
+        <p>
+            We conclude:
+            \[E'\left(x \mapsto \sum_n c_n x^n\right) = \sum_n (2n-1)!! c_{2n}\]
+        </p>
+
+        <p>
+            One final touch. Notice that \(\int_{-\infty}^\infty
+            \frac{e^{-x^2}}{\sqrt{2\pi}} \sum_n c_n x^n = \sum_n (2n-1)!! c_{2n}\).
+            So our solution seems to be describing a standard normal distribution.
+        </p>
+
+        <h2>The Quantum Connection</h2>
+
+        <p>
+            What does all this have to do with quantum mechanics?
+        </p>
+
+        <p>
+            Our set \(A\) essentially captures the state space of the quantum harmonic oscillator,
+            expressed in terms of the ladder operators. There are no global elements,
+            corresponding to the fact that we can't simultaneously determine position and momentum.
+            Probability distributions over \(A\) act like mixed states of the quantum system.
+        </p>
+
+        <p>
+            In our problem, we minimized the expected Hamiltonian,
+            then computed the probability distribution of \(a + a^\dagger = \sqrt{2}x\).
+            This yielded a standard normal distribution for \(\sqrt{2}x\).
+            And indeed, traditional quantum mechanical theory says that distribution
+            should be \(\frac{1}{\sqrt{2}}\psi_0^2\left(\frac{x}{\sqrt{2}}\right) =
+            \frac{1}{\sqrt{2\pi}} e^{-x^2/2}\), which is also a standard normal.
+        </p>
+
+        <p>
+            In other words, we have reproduced the ground state of the quantum harmonic oscillator.
+            I expect to be able to reproduce more of quantum mechanics in this framework,
+            and I'm particularly curious to see what happens in systems with an infinite number of degrees of freedom.
+        </p>
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+    </footer>
+</body>
+
+</html>
