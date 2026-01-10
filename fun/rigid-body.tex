@@ -521,4 +521,272 @@ We drop the trivial rows and columns, then compute the characteristic polynomial
 
 I have not yet found a clean-enough way to determine when the roots are all imaginary.
 
+
+% We want to know when all roots are purely imaginary. That is, when all roots of
+% \(\lambda^4 - ((\alpha\beta + \gamma\delta)\omega_1^2 - (\alpha\gamma + \beta\delta) \omega_0^2)\lambda^2 + \alpha\beta\gamma\delta (\omega_1^2 - \omega_0^2)^2\)
+% are purely real.
+
+% The Wikipedia page about quartic functions gives a procedure for computing the nature of the roots.
+% For a quartic \(x^4 + ax^2 + b\), the part we care about simplifies to the following.
+% \begin{itemize}
+%     \item If \(b \geq 0\) and \(a < 0\) and \(4b \leq a^2\), all roots are real.
+%     \item If \(a = b = 0\), all roots are real.
+%     \item Else there are complex roots.
+% \end{itemize}
+
+% So, let's check! Since we have assumed the generic case,
+% where the object is asymmetric and the rotation speed is different in each plane,
+% we do not have \(\alpha\beta\gamma\delta (\omega_1^2 - \omega_0^2)^2 = 0\).
+% So the second case does not apply.
+
+% What about the first case?
+% \begin{itemize}
+%     \item \(\alpha\beta\gamma\delta (\omega_1^2 - \omega_0^2)^2 \geq 0\)
+%     when the cycle \(a_0 \to a_1 \to a_3 \to a_2 \to a_0\) consists of two increases and two decreases.
+%     \item \begin{align*}
+%         &- ((\alpha\beta + \gamma\delta)\omega_1^2 - (\alpha\gamma + \beta\delta) \omega_0^2) < 0
+%         \\ &\iff (\alpha\beta + \gamma\delta)\omega_1^2 > (\alpha\gamma + \beta\delta) \omega_0^2
+%         \\ &\iff (\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2} + \tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3})\omega_1^2 > (\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_3 - a_1}{a_1 + a_3} + \tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_2}{a_2 + a_3}) \omega_0^2
+%         \\ &\iff ((a_1-a_0)(a_2-a_0)(a_3+a_1)(a_3+a_2) + (a_1+a_0)(a_2+a_0)(a_3-a_1)(a_3-a_2))\omega_1^2
+%         \\ &\qquad > ((a_1-a_0)(a_2+a_0)(a_3-a_1)(a_3+a_2) + (a_1+a_0)(a_2-a_0)(a_3+a_1)(a_3-a_2))\omega_0^2
+%         \\ &\iff ((a_0-a_1)(a_0-a_2)(a_3+a_1)(a_3+a_2) + (a_0+a_1)(a_0+a_2)(a_3-a_1)(a_3-a_2))\omega_1^2
+%         \\ &\qquad > -((a_0-a_1)(a_0+a_2)(a_3-a_1)(a_3+a_2) + (a_0+a_1)(a_0-a_2)(a_3+a_1)(a_3-a_2))\omega_0^2
+%         \\ &\iff (a_0^2a_3^2 + a_1^2a_2^2 + (a_0^2 + a_3^2)a_1a_2 - (a_1^2 + a_2^2)a_0a_3 - 2a_0a_1a_2a_3)\omega_1^2
+%         \\ &\qquad > -(a_0^2a_3^2 + a_1^2a_2^2 - (a_0^2 + a_3^2)a_1a_2 + (a_1^2 + a_2^2)a_0a_3 - 2a_0a_1a_2a_3)\omega_0^2
+%         \\ &\iff ((a_0a_3 + a_1a_2)^2 + (a_0 + a_3)^2a_1a_2 - (a_1 + a_2)^2a_0a_3)\omega_1^2
+%         \\ &\qquad > -((a_0a_3 + a_1a_2)^2 - (a_0 + a_3)^2a_1a_2 + (a_1 + a_2)^2a_0a_3)\omega_0^2
+%         \\ &\iff (a_0a_3 + a_1a_2)^2(\omega_1^2 + \omega_0^2) > ((a_0 + a_3)^2a_1a_2 - (a_1 + a_2)^2a_0a_3)(\omega_0^2 - \omega_1^2)
+%     \end{align*}
+%     \item \(\)
+% \end{itemize}
+
+% This is too messy.
+
+% % Now, the discriminant of a quartic \(x^4 + ax^2 + b\) is \(16(a - 4b)^2a^2b\), which is positive when \(b\) is.
+% % That means if \(b\) is positive, either all roots are real or none are, while if \(b\) is negative, some roots are real and some aren't.
+
+
+% % This is a quadratic in \(\lambda^2\). Quadratic formula!
+
+% % The discriminant is:
+% % \begin{align*}
+% %     &((\alpha\beta + \gamma\delta)\omega_1^2 - (\alpha\gamma + \beta\delta) \omega_0^2)^2 - 4\alpha\beta\gamma\delta (\omega_1^2 - \omega_0^2)^2
+% %     \\\\ &= ((\alpha\gamma + \beta\delta)^2 - 4\alpha\beta\gamma\delta)\omega_0^4
+% %     \\ &- 2((\alpha\beta + \gamma\delta)(\alpha\gamma + \beta\delta) - 4\alpha\beta\gamma\delta)\omega_0^2\omega_1^2
+% %     \\ &+ ((\alpha\beta + \gamma\delta)^2 - 4\alpha\beta\gamma\delta)\omega_1^4
+% %     % \\\\ &= (\alpha\gamma - \beta\delta)^2\omega_0^4
+% %     % \\ &- 2(\alpha\delta(\beta - \gamma)^2 + \beta\gamma(\alpha - \delta)^2)\omega_0^2\omega_1^2
+% %     % \\ &+ (\alpha\beta - \gamma\delta)^2\omega_1^4
+% %     % \\\\ &= \tfrac{1}{4}(-(\alpha+\delta)(\beta-\gamma) + (\alpha-\delta)(\beta+\gamma))^2\omega_0^4
+% %     % \\ &- \tfrac{1}{2}(((\alpha+\delta)^2 - (\alpha-\delta)^2)(\beta - \gamma)^2 + ((\beta+\gamma)^2 - (\beta-\gamma)^2)(\alpha - \delta)^2)\omega_0^2\omega_1^2
+% %     % \\ &+ \tfrac{1}{4}((\alpha+\delta)(\beta-\gamma) + (\alpha-\delta)(\beta+\gamma))^2\omega_1^4
+% %     \\\\ &= (\alpha\gamma - \beta\delta)^2\omega_0^4
+% %     \\ &- 2((\alpha\beta - \gamma\delta)(\alpha\gamma - \beta\delta) + 2\alpha\beta^2\delta + 2\alpha\gamma^2\delta - 4\alpha\beta\gamma\delta)\omega_0^2\omega_1^2
+% %     \\ &+ (\alpha\beta - \gamma\delta)^2\omega_1^4
+% %     \\\\ &= ((\alpha\gamma - \beta\delta)\omega_0^2 + (\alpha\beta - \gamma\delta)\omega_1^2)^2 - 4\alpha\delta(\beta - \gamma)^2\omega_0^2\omega_1^2
+% % \end{align*}
+
+% % So:
+% % \[\lambda^2 = \frac{-(\alpha\beta + \gamma\delta)\omega_1^2 + (\alpha\gamma + \beta\delta) \omega_0^2 \pm \sqrt{(\alpha\gamma - \beta\delta)^2\omega_0^4 - 2(\alpha\delta(\beta - \gamma)^2 + \beta\gamma(\alpha - \delta)^2)\omega_0^2\omega_1^2 + (\alpha\beta - \gamma\delta)^2\omega_1^4}}{2}\]
+
+
+
+
+
+
+% % Letting \(x_\pm = \alpha \pm \delta\) and \(y_\pm = \beta \pm \gamma\):
+% % \begin{align*}
+% %     \dots &= \tfrac{1}{4}(-x_+ y_- + x_- y_+)^2\omega_0^4
+% %     \\ &- \tfrac{1}{2}((x_+^2 - x_-^2) y_-^2 + (y_+^2 - y_-^2) x_-^2)\omega_0^2\omega_1^2
+% %     \\ &+ \tfrac{1}{4}(x_+ y_- + x_- y_+)^2\omega_1^4
+% %     \\\\ &= \tfrac{1}{4}(x_+^2 y_-^2 - 2x_+x_-y_+y_- + x_-^2 y_+^2)\omega_0^4
+% %     \\ &- \tfrac{1}{2}(x_+^2 y_-^2 - 2x_-^2y_-^2 + x_-^2y_+^2)\omega_0^2\omega_1^2
+% %     \\ &+ \tfrac{1}{4}(x_+^2 y_-^2 + 2x_+x_-y_+y_- + x_-^2 y_+^2)\omega_1^4
+% %     \\\\ &= \tfrac{1}{4}(x_+^2 y_-^2 + x_-^2 y_+^2)(\omega_1^2 - \omega_0^2)^2
+% %     \\ &+ \tfrac{1}{2}(x_+ x_- y_+ y_-)(\omega_1^2 + \omega_0^2)(\omega_1^2 - \omega_0^2)
+% %     \\ &+ x_-^2 y_-^2 \omega_0^2 \omega_1^2
+% %     \\\\ &= x_+^2 y_+^2 \tfrac{1}{4}(y_{-/+}^2 + x_{-/+}^2)(\omega_1^2 - \omega_0^2)^2
+% %     \\ &+ x_+^2 y_+^2 \tfrac{1}{2}(x_{-/+} y_{-/+})(\omega_1^2 + \omega_0^2)(\omega_1^2 - \omega_0^2)
+% %     \\ &+ x_+^2 y_+^2 x_{-/+}^2 y_{-/+}^2 \omega_0^2 \omega_1^2
+% % \end{align*} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% % \begin{align*}
+% %     &\det \begin{bmatrix}
+% %         -\lambda & \tfrac{a_0-a_1}{a_0+a_1}\omega_1 & \tfrac{a_0-a_1}{a_0+a_1}\omega_0 & \\
+% %         \tfrac{a_2-a_0}{a_0+a_2}\omega_1 & -\lambda & & \tfrac{a_0-a_2}{a_0+a_2}\omega_0 \\
+% %         \tfrac{a_1-a_3}{a_1+a_3}\omega_0 & & -\lambda & \tfrac{a_3-a_1}{a_1+a_3}\omega_1 \\
+% %         & \tfrac{a_2-a_3}{a_1+a_3}\omega_0 & \tfrac{a_2-a_3}{a_1+a_3}\omega_1 & -\lambda \\
+% %     \end{bmatrix}
+% %     \\ &= \lambda^4 - \tfrac{a_2-a_3}{a_1+a_3}\tfrac{a_3-a_1}{a_1+a_3} \lambda^2\omega_1^2 - \tfrac{a_2-a_3}{a_1+a_3}\tfrac{a_0-a_2}{a_0+a_2} \lambda^2\omega_0^2
+% %     \\ &- \tfrac{a_2-a_0}{a_0+a_2}\tfrac{a_0-a_1}{a_0+a_1}\lambda^2\omega_1^2 + \tfrac{a_2-a_0}{a_0+a_2}\tfrac{a_0-a_1}{a_0+a_1}\tfrac{a_2-a_3}{a_1+a_3}\tfrac{a_3-a_1}{a_1+a_3} \omega_1^4 - \tfrac{a_2-a_0}{a_0+a_2}\tfrac{a_2-a_3}{a_1+a_3}\tfrac{a_0-a_1}{a_0+a_1}\tfrac{a_3-a_1}{a_1+a_3}\omega_0^2\omega_1^2
+% %     \\ &- \tfrac{a_1-a_3}{a_1+a_3}\tfrac{a_0-a_1}{a_0+a_1}\tfrac{a_2-a_3}{a_1+a_3}\tfrac{a_0-a_2}{a_0+a_2}\omega_0^2\omega_1^2 - \tfrac{a_1-a_3}{a_1+a_3}\tfrac{a_0-a_1}{a_0+a_1}\omega_0^2\lambda^2 + \tfrac{a_1-a_3}{a_1+a_3}\tfrac{a_2-a_3}{a_1+a_3}\tfrac{a_0-a_1}{a_0+a_1}\tfrac{a_0-a_2}{a_0+a_2}\omega_0^4
+% %     \\ &= \lambda^4
+% %     \\ &+ ((\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2} + \tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3})\omega_1^2 - (\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_3 - a_1}{a_1 + a_3} + \tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_2}{a_2 + a_3}) \omega_0^2)\lambda^2
+% %     \\ &+ \tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3} (\omega_1^2 - \omega_0^2)^2
+% % \end{align*}
+
+% % This is a quadratic in \(\lambda^2\). Quadratic formula!
+
+% % The discriminant is:
+% % \begin{align*}
+% %     &((\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2} + \tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3})\omega_1^2 - (\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_3 - a_1}{a_1 + a_3} + \tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_2}{a_2 + a_3}) \omega_0^2)^2 - 4\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3} (\omega_1^2 - \omega_0^2)^2
+% %     \\ &= ((\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_3 - a_1}{a_1 + a_3} + \tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_2}{a_2 + a_3})^2 - 4\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3})\omega_0^4
+% %     \\ &- 2((\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2} + \tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3})(\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_3 - a_1}{a_1 + a_3} + \tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_2}{a_2 + a_3}) - 4\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3})\omega_0^2\omega_1^2
+% %     \\ &+ ((\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2} + \tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3})^2 - 4\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3})\omega_1^4
+% %     \\ &= (\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_3 - a_1}{a_1 + a_3} - \tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_2}{a_2 + a_3})^2\omega_0^4
+% %     \\ &- 2((\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2} + \tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3})(\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_3 - a_1}{a_1 + a_3} + \tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_2}{a_2 + a_3}) - 4\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2}\tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3})\omega_0^2\omega_1^2
+% %     \\ &+ (\tfrac{a_1 - a_0}{a_0 + a_1}\tfrac{a_2 - a_0}{a_0 + a_2} - \tfrac{a_3 - a_1}{a_1 + a_3}\tfrac{a_3 - a_2}{a_2 + a_3})^2\omega_1^4
+% % \end{align*}
+
+
+
+
+
+
+
+
+
+
+% % \[\dot\Omega_1 = \begin{bmatrix}
+% %     \frac{a_1-a_0}{a_0+a_1} \\ &\frac{a_2-a_0}{a_0+a_2} \\ \\ \\ &&&&\frac{a_3-a_1}{a_1+a_3} \\ &&&&&\frac{a_3-a_2}{a_2+a_3}
+% % \end{bmatrix}\begin{bmatrix}
+% %      & -\omega_1 &  &  & -\omega_0 &  \\
+% %     \omega_1 &  &  &  &  & -\omega_0 \\
+% %      &  &  &  &  &  \\
+% %      &  &  &  &  &  \\
+% %     -\omega_0 &  &  &  &  & \omega_1 \\
+% %      & -\omega_0 &  &  & -\omega_1 &  \\
+% % \end{bmatrix}\Omega_1\]
+
+% % That matrix product is negative definite iff the following is.
+% % \[\begin{bmatrix}
+% %     \mathrm{sgn}\frac{a_1-a_0}{a_0+a_1} \\ &\mathrm{sgn}\frac{a_2-a_0}{a_0+a_2} \\ &&\mathrm{sgn}\frac{a_3-a_1}{a_1+a_3} \\ &&&\mathrm{sgn}\frac{a_3-a_2}{a_2+a_3}
+% % \end{bmatrix}\begin{bmatrix}
+% %     & -\omega_1 & -\omega_0 & \\
+% %     \omega_1 & & & -\omega_0 \\
+% %     -\omega_0 & & & \omega_1 \\
+% %     & -\omega_0 & -\omega_1 & \\
+% % \end{bmatrix}\]
+
+% % Simplifying:
+% % \[\begin{bmatrix}
+% %     \mathrm{sgn}(a_1-a_0) \\ &\mathrm{sgn}(a_2-a_0) \\ &&\mathrm{sgn}(a_3-a_1) \\ &&&\mathrm{sgn}(a_3-a_2)
+% % \end{bmatrix}\begin{bmatrix}
+% %     & -\omega_1 & -\omega_0 & \\
+% %     \omega_1 & & & -\omega_0 \\
+% %     -\omega_0 & & & \omega_1 \\
+% %     & -\omega_0 & -\omega_1 & \\
+% % \end{bmatrix}\]
+
+% % So we compute the eigenvalues of the following.
+% % \[\begin{bmatrix}
+% %     & \textcolor{red}{\mp}\omega_1 & \textcolor{red}{\mp}\omega_0 & \\
+% %     \textcolor{olive}{\pm}\omega_1 & & & \textcolor{olive}{\mp}\omega_0 \\
+% %     \textcolor{teal}{\mp}\omega_0 & & & \textcolor{teal}{\pm}\omega_1 \\
+% %     & \textcolor{blue}{\mp}\omega_0 & \textcolor{blue}{\mp}\omega_1 & \\
+% % \end{bmatrix}\]
+
+% % \begin{align*}
+% %     &\det \begin{bmatrix}
+% %         -\lambda & \textcolor{red}{\mp}\omega_1 & \textcolor{red}{\mp}\omega_0 & \\
+% %         \textcolor{olive}{\pm}\omega_1 & -\lambda & & \textcolor{olive}{\mp}\omega_0 \\
+% %         \textcolor{teal}{\mp}\omega_0 & & -\lambda & \textcolor{teal}{\pm}\omega_1 \\
+% %         & \textcolor{blue}{\mp}\omega_0 & \textcolor{blue}{\mp}\omega_1 & -\lambda \\
+% %     \end{bmatrix}
+% %     \\ &= \lambda^4 - \textcolor{blue}{\mp}\textcolor{teal}{\pm} \lambda^2\omega_1^2 - \textcolor{blue}{\mp}\textcolor{olive}{\mp} \lambda^2\omega_0^2
+% %     \\ &- \textcolor{olive}{\pm}\textcolor{red}{\mp}\lambda^2\omega_1^2 + \textcolor{olive}{\pm}\textcolor{red}{\mp}\textcolor{blue}{\mp}\textcolor{teal}{\pm} \omega_1^4 - \textcolor{olive}{\pm}\textcolor{blue}{\mp}\textcolor{red}{\mp}\textcolor{teal}{\pm}\omega_0^2\omega_1^2
+% %     \\ &- \textcolor{teal}{\mp}\textcolor{red}{\mp}\textcolor{blue}{\mp}\textcolor{olive}{\mp}\omega_0^2\omega_1^2 - \textcolor{teal}{\mp}\textcolor{red}{\mp}\omega_0^2\lambda^2 + \textcolor{teal}{\mp}\textcolor{blue}{\mp}\textcolor{red}{\mp}\textcolor{olive}{\mp}\omega_0^4
+% %     \\ &= \lambda^4 + ((\textcolor{red}{\pm}\textcolor{olive}{\pm} + \textcolor{teal}{\pm}\textcolor{blue}{\pm})\omega_1^2 - (\textcolor{red}{\pm}\textcolor{teal}{\pm} + \textcolor{olive}{\pm}\textcolor{blue}{\pm}) \omega_0^2)\lambda^2 \textcolor{red}{\pm}\textcolor{olive}{\pm}\textcolor{teal}{\pm}\textcolor{blue}{\pm} (\omega_1^2 - \omega_0^2)^2
+% % \end{align*}
+
+% % Depending on signs, this is either:
+% % \begin{itemize}
+% %     \item \(\lambda^4 + 2(\omega_1^2 - \omega_0^2)\lambda^2 + (\omega_1^2 - \omega_0^2)^2\)
+% %     \item \(\lambda^4 - (\omega_1^2 - \omega_0^2)^2\)
+% %     \item \(\lambda^4 + 2(\omega_1^2 + \omega_0^2)\lambda^2 + (\omega_1^2 - \omega_0^2)^2\)
+% %     \item \(\lambda^4 - 2(\omega_1^2 + \omega_0^2)\lambda^2 + (\omega_1^2 - \omega_0^2)^2\)
+% %     \item \(\lambda^4 + 2(\omega_0^2 - \omega_1^2)\lambda^2 + (\omega_1^2 - \omega_0^2)^2\)
+% % \end{itemize}
+
+% % The roots are:
+% % \begin{itemize}
+% %     \item Imaginary if \(\omega_0 \leq \omega_1\), real else
+% %     \item Mix of real and imaginary
+% %     \item Guaranteed real
+% %     \item Guaranteed imaginary
+% %     \item Real if \(\omega_0 \leq \omega_1\), imag else
+% % \end{itemize}
+
+% % That is, assuming \(\omega_0 \leq \omega_1\):
+% % \begin{itemize}
+% %     \item Stable
+% %     \item Unstable
+% %     \item Unstable
+% %     \item Stable (It turns out that this case cannot occur.)
+% %     \item Unstable
+% % \end{itemize}
+
+% % \pagebreak
+
+% % \begin{tabular}{cccc|cccc|c}
+% %     \\ 0&1&2&3 & +&+&+&+ & Stable
+% %     \\ 0&1&3&2 & +&+&+&- & Unstable
+% %     \\ 0&2&1&3 & +&+&+&+ & Stable
+% %     \\ 0&2&3&1 & +&+&-&+ & Unstable
+% %     \\ 0&3&1&2 & +&+&-&- & Unstable
+% %     \\ 0&3&2&1 & +&+&-&- & Unstable
+% %     \\ 1&0&2&3 & -&+&+&+ & Unstable
+% %     \\ 1&0&3&2 & -&+&+&- & Unstable
+% %     \\ 1&2&0&3 & -&-&+&+ & Unstable
+% %     \\ 1&2&3&0 & -&-&+&+ & Unstable
+% %     \\ 1&3&0&2 & -&+&+&- & Unstable
+% %     \\ 1&3&2&0 & -&-&+&- & Unstable
+% %     \\ 2&0&1&3 & +&-&+&+ & Unstable
+% %     \\ 2&0&3&1 & +&-&-&+ & Unstable
+% %     \\ 2&1&0&3 & -&-&+&+ & Unstable
+% %     \\ 2&1&3&0 & -&-&+&+ & Unstable
+% %     \\ 2&3&0&1 & +&-&-&+ & Unstable
+% %     \\ 2&3&1&0 & -&-&-&+ & Unstable
+% %     \\ 3&0&1&2 & +&+&-&- & Unstable
+% %     \\ 3&0&2&1 & +&+&-&- & Unstable
+% %     \\ 3&1&0&2 & -&+&-&- & Unstable
+% %     \\ 3&1&2&0 & -&-&-&- & Stable
+% %     \\ 3&2&0&1 & +&-&-&- & Unstable
+% %     \\ 3&2&1&0 & -&-&-&- & Stable
+% % \end{tabular}
+
+% % In conclusion, a double rotation, slower in the \(0,3\)-plane and faster in the \(1,2\) plane,
+% % is stable iff the \(0\) and \(3\) axes are the most and least compressed directions.
+
+% % TODO:
+% % \begin{itemize}
+% %     \item Fix writeup.
+% %     \item Figure out what this means for the \(n\)-dimensional case.
+% %     \item In particular, figure out where I forgot to handle the odd-dimensional case.
+% % \end{itemize}
+
+
+
+
 \end{document}

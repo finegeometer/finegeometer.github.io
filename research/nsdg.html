@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Place of Ideas</title>
+    <link href="/style.css" rel="stylesheet" />
+    <!-- KaTeX -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+        crossorigin="anonymous">
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {macros: {'\\wand': '\\mathrel{-\\mkern-6mu*}', '\\star': '*'}});"></script>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="/index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a class="active" href="/research/index.html">Research</a></li>
+                    <li><a href="/projects/index.html">Projects</a></li>
+                    <li><a href="/fun/index.html">Just for Fun</a></li>
+                    <li><a href="/reference/index.html">Reference</a></li>
+                    <li><a href="/useful/index.html">Useful Links</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+<h1>Noncommutative Synthetic Differential Geometry</h1>
+<p>If <a href="/reference/sdg.html">synthetic differential geometry</a> is based on toposes related to commutative rings,
+what happens if we instead use noncommutative rings? How does "noncommutative synthetic differential geometry" behave?</p>
+<p>There are many potential models for noncommutative synthetic differential geometry, just as there are in the commutative case.
+Some simple ones are the classifying toposes for rings, local rings, or \(\star\)-algebras.
+There should also be more complicated examples, analogous to the well-adapted toposes in synthetic differential geometry,
+but it's not obvious how these should be defined, or what they're adapted <em>to</em>.</p>
+<p>I will not take any particular model as "correct". I would rather get a sense for what's likely to hold across models, to the extent possible.</p>
+<h2>Basics</h2>
+<h3>Monoidal Connectives</h3>
+<p>Models of noncommutative SDG tend to be <em>monoidal toposes</em>.
+In addition to the standard \((A \times -) \dashv (A \to -)\) adjunction, we have a second \((A \star -)\dashv(A \wand -)\) adjunction,
+where \(A \star B \subseteq A \times B\). In the classifying topos for rings, \(\star\) is given by Day convolution over the tensor product of rings.</p>
+<p>A suitable type theory for expressing these connectives is provided by <a href="https://ulrichschoepp.de/Docs/th.pdf">Ulrich Schöpp's PhD thesis</a>.
+As I discuss <a href="/research/monoidal.html">here</a>, checking that the theory can be applied to a classifying topos
+reduces to picking out a relation in the underlying theory, and checking some simple properties.
+In our case, the relation is commutativity: \(a \sim b \iff ab = ba\).
+As a consequence, we have that \(R \star R = \{(a,b) \in R \times R \mid ab = ba\}\), the set of <em>commuting pairs</em> in \(R\).</p>
+<p>In general, the monoidal connectives are all about commutativity.
+Intuitively, \(A \star B\) is the set of pairs \((a,b)\) for which everything in \(a\) commutes with everything in \(b\).
+\(A \wand B\) is the set of functions whose input is required to commute with the function itself!</p>
+<p>For example, in "algebraic" models, both \(R \to R\) and \(R \wand R\) act as sets of polynomials.
+The difference is that for \(R \wand R\), the variable is assumed to commute with the coefficients,
+while in \(R \to R\), it isn't. The functions \(x \mapsto ax + b\) and \(x \mapsto xa + b\)
+are equal as elements of \(R \wand R\), but distinct in \(R \to R\).</p>
+<h3>Choice of Connective</h3>
+<p>As we've seen, we have two notions of product, and two notions of function.
+How do we choose between them?</p>
+<p>It helps that the distinction is meaningless in global context.
+We can freely convert between \(\vdash p : A \times B\) and \(\vdash p : A \star B\),
+or between \(\vdash f : A \to B\) and \(\vdash f : A \wand B\).</p>
+<p>So in a global definition, we need not worry about the outermost connective. Inner connectives require more care.</p>
+<p>Consider the analogue of the Kock-Lawvere axiom. Writing \(D = \{d\in R\mid d^2 = 0\}\),
+the following map should be invertible.
+\[(a,b) \mapsto (d \mapsto a + bd) : (R \times R) \to (D \wand R)\]
+The map in question, and its axiomatized inverse, are globally-defined.
+So it doesn't matter whether we say \((R \times R) \to (D \wand R)\)
+or \((R \times R) \wand (D \wand R)\).
+But the inner connectives are crucial; it won't work if we use \(R \star R\) or \(D \to R\).</p>
+<p>As a more complicated example, the most useful notion of ring seems to be one which is required to be commutative,
+but where multiplication is only defined on \(\star\)-pairs of inputs, rather than \(\times\)-pairs.
+\(R\) itself is such a ring, because \(R \star R\) is exactly the subset of \(R \times R\) on which multiplication commutes.
+And if \(R\) admits a "complex conjugation", the subset of "reals" is a commutative ring in this sense, but isn't even a ring in the ordinary sense;
+multiplication on \(\times\)-pairs of reals doesn't land back in the reals.</p>
+<!-- A final warning: \\((A + B) \\wand C\\) is isomorphic to \\((A \\wand C) \\times (B \\wand C)\\).
+That \\(\\times\\) keeps catching me off-guard; I keep thinking it should be a \\(\star\\), and it's not.
+As a corollary, \\(2 \\wand A\\) is \\(A \\times A\\), not \\(A \\star A\\). -->
+<h3>Synthetic Axioms</h3>
+<p>In ordinary synthetic algebraic geometry, whenever \(A\) is a finitely-presented commutative \(R\)-algebra,
+then \(\hom_{R-\text{alg}}(A,R) \to R\) is isomorphic to \(A\). In synthetic <em>differential</em> geometry,
+something similar holds, but for a smaller class of \(R\)-algebras.</p>
+<p>By <a href="https://rawgit.com/iblech/internal-methods/master/paper-qcoh.pdf">Blechschmidt's Generalized Nullstellensatz</a>,
+this generalizes greatly, including to the "algebraic" models of noncommutative synthetic differential geometry.
+We have the exact same principle: if \(A\) is a finitely-presented \(R\)-algebra,
+then \(\hom_{R-\text{alg}}(A,R) \to R\) is isomorphic to \(A\).</p>
+<p>But this isn't the whole story. This principle tells us how to understand types of the form \(X \to R\),
+but it's equally important to understand types of the form \(X \wand R\). For example,
+\(\{d\in R\mid d^2 = 0\} \wand R\) should consist exactly of the linear functions \(d \mapsto a + bd\).
+While I've checked this particular example directly, in the classifying topos of rings, there ought to be a more general principle at play.</p>
+<h3>As a Topos</h3>
+<p>How does noncommutative synthetic differential geometry fit into the wider landscape of topos logics?</p>
+<p>Consider the most basic model: the classifying topos for rings. Compare it to the classifying topos of <em>commutative</em> rings, which models ordinary synthetic differential geometry.
+Naturally, we have a geometric morphism \(\mathbf{Set}[\mathbf{CRing}] \to \mathbf{Set}[\mathbf{Ring}]\),
+given by modeling the generic ring as the generic commutative ring. This has a left adjoint, modeling the generic commutative ring as a quotient of the generic ring.
+This adjunction of geometric morphisms expands into an adjoint triple
+\(\mathbf{Set}[\mathbf{CRing}] \mathrel{\substack{\overset{\times}{\leftarrow} \\ \hookrightarrow \\ \leftarrow}} \mathbf{Set}[\mathbf{Ring}]\),
+exhibiting \(\mathbf{Set}[\mathbf{Ring}]\) as a totally connected topos over \(\mathbf{Set}[\mathbf{CRing}]\).</p>
+<h2>Star-rings and Quantum Mechanics</h2>
+<p>A key motivation for noncommutative synthetic differential geometry is its connection to quantum mechanics.</p>
+<h3>Basics</h3>
+<p>Assume that \(R\) has a complex conjugation; it's not just a ring, but a \(\star\)-ring.
+We'll rename it to \(C\), since it behaves more like the complex numbers than the reals,
+and let \(R\) refer to the real subset, \(\{x \in C \mid x^\star = x\}\).
+We might as well also define \(I = \{x \in C \mid x^\star = -x\}\), for the imaginary numbers.</p>
+<p>If \(-1\) has a square root, we have \(R \cong I\), nonuniquely.
+If \(2\) is invertible, we have \(C \cong R \times I\).</p>
+<p>Both \(C\) and \(R\) are commutative rings if we require multiplication to take \(\star\)-pairs of inputs.
+If we don't, \(C\) is a noncommutative ring, and \(R\) isn't even a ring.
+In fact, the commutator of two real numbers is <em>imaginary</em>.
+\[a,b\in R \implies [ a , b ]^\star = (ab-ba)^\star = b^\star a^\star - a^\star b^\star = ba - ab = -[ a,b ] \implies [ a,b ] \in I\]</p>
+<p>Presumably, we also want a set \(R^{\geq 0}\) of positive numbers.
+I haven't thought deeply about this, but analogy to C*-algebras suggests
+that positive numbers should be sums of terms of the form \(x^\star x\).</p>
+<h3>Physics</h3>
+<p>Set up a harmonic oscillator in standard fashion.
+\[\begin{align*}
+x, p &amp;: R \wand R
+\\ H &amp;= \frac{p^2}{2m} + \frac{m \omega^2 x^2}{2}
+\\ \dot{x} &amp;= \frac{\partial H}{\partial p} = \frac{p}{m}
+\\ \dot{p} &amp;= -\frac{\partial H}{\partial x} = -m \omega^2 x
+\end{align*}\]</p>
+<p>Taking a cue from quantum mechanics, we simplify with a change of coordinates, equating \(R \times R\) with \(C\).
+\[\begin{align*}
+a &amp;= \sqrt{\frac{m\omega}{2}}x + i\sqrt{\frac{1}{2m\omega}}p
+\\ H &amp;= \omega \frac{a a^\star + a^\star a}{2}
+\\ \dot{a} &amp;= -i\omega a
+\\ a &amp;= \exp(-i\omega t)
+\end{align*}\]</p>
+<p>That's all standard. What's new is that our "numbers" are noncommutative.
+It's not hard to check that the commutator \([ a,a^\star ]\) is conserved,
+so our phase space foliates into subspaces \(C_\hbar = \{a \in C \mid [a,a^\star] = \hbar\}\),
+as \(\hbar\) ranges over \(R\).</p>
+<p>The choice of \(\hbar\) as a name is intended to be suggestive.
+\(C_0\) is the classical phase space; every other \(C_\hbar\) is quantum.</p>
+<p>For example, none of these spaces are empty, yet \(C_0\) is the only one with elements definable in global context.
+After all, only in a classical system can position and momentum simultaneously take definite values.</p>
+<p>What about indefinite values? Define \(\mathrm{Prob}(X) = \{f : (X \wand R^{\geq 0}) \overset{\text{linear}}{\wand} R^{\geq 0} \mid f(1) = 1\}\).
+On a classical space like \(C_0\), this describes probability distributions. On quantum \(C_\hbar\), it describes mixed states.</p>
+<p>And indeed, I will show that if we minimize the expected Hamiltonian \(\mathrm{Prob}(C_1)\), and pass to the corresponding position distribution,
+the result is exactly the Gaussian you would expect from the ground state.</p>
+<h3>Proof</h3>
+<p>I would like to be able to prove this entirely within the internal logic.
+What I am able to do, at the current time, is to minimize over <em>globally defined</em> elements of \(C_1 \wand C\),
+when modeled in the classifying topos for \(\star\)-algebras over the complex numbers, in a classical metatheory.</p>
+<p>Let's begin.</p>
+<p>By the synthetic axioms, maps \(C_1 \wand C\) are exactly polynomials, \(\sum_{m,n} c_{m,n} (a^\star)^m a^n\).
+Elements of \(\mathrm{Prob}(C_1)\), therefore, are characterized by their action on the monomials \((a^\star)^m a^n\).</p>
+<p>Consider a globally-defined \(E \in \mathrm{Prob}(C_1)\).
+To minimize \(H\), we can minimize \(\frac{H}{\omega} - \frac{1}{2} = a^\star a\).
+Since the expectation of a positive function is required to be a positive number, we must have \(E(a^\star a) \geq 0\).
+I claim this can be uniquely achieved.</p>
+<h4>Uniqueness</h4>
+<p>I claim that if \(E \in \mathrm{Prob}(C_1)\) with \(E(a^\star a) = 0\),
+then \(E((a^\star)^m a^n) = \begin{cases} 1 &amp; m=n=0 \\ 0 &amp; \text{else} \end{cases}\).</p>
+<p>Induct on \(\max(m,n)\). The base case, \(m=n=0\), follows immediately from the definition of \(\mathrm{Prob}(C_1)\).</p>
+<p>For the inductive step, we consider first the case \(m = n\). If \(n = 1\), the result holds by assumption, so let \(n \geq 2\).</p>
+<p>For arbitrary \(t \in R\), compute:
+\[\begin{align*}
+0 &amp;\leq E(((a^\star a+1)a^{n-1})^\star((a^\star a+t)a^{n-1}))
+\\ &amp;= E((a^\star)^{n-1} (a^\star a+t)^2 a^{n-1})
+\\ &amp;= E((a^\star)^{n-1} ((a^\star)^2 a^2 + (2t+1) a^\star a + t^2) a^{n-1})
+\\ &amp;= E((a^\star)^{n+1} a^{n+1}) + (2t+1) E((a^\star)^n a^n) + t^2 E((a^\star)^{n-1} a^{n-1})
+\\ &amp;= E((a^\star)^{n+1} a^{n+1}) + (2t+1) E((a^\star)^n a^n)
+\end{align*}\]</p>
+<p>Recall that \(E((a^\star)^{n+1} a^{n+1})\) and \(E((a^\star)^n a^n)\) are globally-defined elements of \(R\),
+so they're modeled as real numbers. If \(E((a^\star)^n a^n)\) is modeled by anything but zero, we get a contradiction by making \(t\) very positive or very negative.
+So \(E((a^\star)^n a^n) = 0\).</p>
+<p>Now consider the case where \(m &lt; n\).
+For arbitrary \(t \in C\), compute:
+\[\begin{align*}
+0 &amp;\leq E((a^m + ta^n)^\star(a^m + ta^n))
+\\ &amp;= E((a^\star)^m a^m) + t E((a^\star)^m a^n) + t^\star E((a^\star)^n a^m) + t^2 E((a^\star)^n a^n)
+\\ &amp;\leq 1 + t E((a^\star)^m a^n) + t^\star E((a^\star)^n a^m)
+\end{align*}\]</p>
+<p>The expressions \(E((a^\star)^m a^n)\) and \(E((a^\star)^n a^m)\) are globally-defined elements of \(C\), so they're modeled as complex numbers.
+By taking various values of \(t\) in the above equation, and observing that \(E((a^m + ta^n)^\star(a^m + ta^n))\) is real,
+we obtain enough information to prove that \(E((a^\star)^m a^n)\) and \(E((a^\star)^n a^m)\) are zero. This concludes the induction.</p>
+<h4>Existence</h4>
+<p>It remains to show that \(E((a^\star)^m a^n) = \begin{cases} 1 &amp; m=n=0 \\ 0 &amp; \text{else} \end{cases}\) is in fact an element of \(\mathrm{Prob}(C_1)\).
+The difficult condition is to show that \(E\) maps positive functions to positive numbers.
+How can we use the fact that \(f : C_1 \wand R^{\geq 0}\) only returns positive outputs, if we can't produce inputs to test it on?</p>
+<p>I'm not sure. So for now, I work around the problem, by operating entirely within the model.
+This allows us to upgrade our knowledge that a function <em>returns</em> positive values to the knowledge that it is positive <em>as a polynomial</em>.</p>
+<p>In the classifying topos for complex \(\star\)-algebras,
+\(C\) is interpreted as the forgetful functor from finitely presented \(\star\)-algebras over the complex numbers to sets.
+\(C_1\) and \(R^{\geq 0}\) are subspaces, interpreting as the functors \(A \mapsto \{a \in A \mid [a,a^\star] = 1\}\) and \(A \mapsto \{a \in A \mid a \text{ is positive}\}\), respectively.</p>
+<p>We compute:
+\[\begin{align*}
+&amp; \llbracket C_1 \wand R^{\geq 0} \rrbracket
+\\ &amp;= B \mapsto \int_{A} \llbracket C_1 \rrbracket(A) \to \llbracket R^{\geq 0} \rrbracket(B \otimes A)
+\\ &amp;= B \mapsto \int_{A} \{a \in A \mid [a , a^\star] = 1\} \to \{t \in B \otimes A \mid t \text{ is positive}\}
+\end{align*}\]</p>
+<p>\(E\) defines a natural transformation from this to \(\llbracket C \rrbracket\).
+\[E_B(f) = (\mathrm{id}_ B \otimes \text{extract constant component})(f_{\mathbb{C}[ a ]/([a , a^\star] = 1)}(a))\]</p>
+<p>We are to show that this always outputs a positive element of \(B\). In other words:</p>
+<blockquote>
+<p>In an arbitrary star-algebra \(B\), consider an arbitrary positive element of the polynomial algebra \(B[ a ]/([a , a^\star] = 1)\).
+When expanded as a polynomial so that the \(a^\star\)s in each term precede the \(a\)s, must the constant term be positive?</p>
+</blockquote>
+<p>The answer is yes. Given any polynomial \(f\), directly expanding the constant component of \(f^\star f\) yields a sum consisting entirely of positive terms.</p>
+<h4>Results</h4>
+<p>We have found the unique global element of \(\mathrm{Prob}(C_1)\) of minimal expected Hamiltonian.
+We now extract the position distribution.</p>
+<p>Recall:
+\[a = \sqrt{\frac{m\omega}{2}}x + i\sqrt{\frac{1}{2m\omega}}p \in C\]
+\[\sqrt{\frac{1}{2m\omega}}(a + a^\star) = x\]</p>
+<p>We lift this map \(C_1 \to R\) to a map \(\mathrm{Prob}(C_1) \to \mathrm{Prob}(R)\), and apply it to \(E\).
+\[f \mapsto E\left(a \mapsto f\left(\sqrt{\frac{1}{2m\omega}}(a + a^\star)\right)\right) \in \mathrm{Prob}(R)\]</p>
+<p>To fully determine this map, it suffices to evaluate at the powers of \(x\).
+\[\begin{align*}
+x^n &amp;\mapsto E\left(a \mapsto \left(\sqrt{\frac{1}{2m\omega}}(a + a^\star)\right)^n\right)
+\\ &amp;= (2m\omega)^{-n/2} E\left(a \mapsto (a + a^\star)^n\right)
+\end{align*}\]</p>
+<p>We need the constant term of \((a+a^\star)^n\),
+when it is reexpressed with the \(a^\star\)s preceding the \(a\)s.
+But this can be rephrased as a combinatorial problem!
+It equals the number of ways of putting an \(a\) or an \(a^\star\) in each of \(n\) slots,
+then matching each \(a\) to a later \(a^\star\).
+This is simply the number of matchings of \(n\) items,
+which is \((n-1)!!\) when \(n\) is even,
+and zero when \(n\) is odd.</p>
+<p>We conclude:
+\[\begin{align*}
+x^{2n} &amp;\mapsto (2m\omega)^{-n} (2n-1)!! \\
+x^{2n + 1} &amp;\mapsto 0
+\end{align*}\]</p>
+<p>What function does this distribution describe? The Gaussian \(\sqrt{\frac{m\omega}{\pi}} e^{-m\omega x^2}\).
+\[\begin{align*}
+\int_{-\infty}^\infty \sqrt{\frac{m\omega}{\pi}} e^{-m\omega x^2} x^{2n} &amp;= (2m\omega)^{-n} (2n-1)!! \\
+\int_{-\infty}^\infty \sqrt{\frac{m\omega}{\pi}} e^{-m\omega x^2} x^{2n+1} &amp;= 0
+\end{align*}\]</p>
+<p>This Gaussian is exactly the correct expression for the amplitude of the quantum harmonic oscillator in its ground state, in units where \(\hbar = 1\).</p>
+<h3>Conclusion</h3>
+<p>I have shown that noncommutative synthetic differential geometry supports non-classical phase spaces, over which physics is naturally quantum. But the argument, as it stands, is unsatisfying.
+It requires me to drop into the model, rather than working synthetically, and it's longer than it ought to be. I am hopeful that these flaws can be repaired, once more of the theory of noncommutative synthetic differential geometry has been developed.</p>
+<p>I would also like to develop more of quantum theory within this framework. How do we discuss pure states, or spectra? I've solved for the ground state, but how would I ask for the excited states?</p>
+<p>I'm especially curious what noncommutative synthetic differential geometry has to say about quantum <em>field</em> theory.
+Ordinary synthetic differential geometry treats infinite-dimensional spaces differently from classical geometry;
+the same should be true in the noncommutative case.</p>
+
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+        <a href="/all-pages.html" style="padding-left: 1em;">All Pages</a>
+    </footer>
+</body>
+</html>

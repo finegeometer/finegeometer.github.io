@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Place of Ideas</title>
+    <link href="/style.css" rel="stylesheet" />
+    <!-- KaTeX -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+        crossorigin="anonymous">
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {macros: {'\\wand': '\\mathrel{-\\mkern-6mu*}', '\\star': '*'}});"></script>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="/index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a class="active" href="/research/index.html">Research</a></li>
+                    <li><a href="/projects/index.html">Projects</a></li>
+                    <li><a href="/fun/index.html">Just for Fun</a></li>
+                    <li><a href="/reference/index.html">Reference</a></li>
+                    <li><a href="/useful/index.html">Useful Links</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+<h1>Thoughts on the Coherence Problem</h1>
+<p>The <em>coherence problem</em> is one of the most frustrating aspects of homotopy type theory.
+Our types can have higher homotopical structure in arbitrary dimension,
+but to control that structure can require a seemingly inexpressible infinite tower of coherence conditions.
+An important example of this problem is the definition of \(\infty,1\)-category,
+in which the coherence conditions are associahedra of endlessly growing dimension.</p>
+<p>As of 2025, it is an open problem to determine whether or not these towers of coherences are expressible in standard homotopy type theory.
+The most effective solution has been to work around the problem, designing related type theories which do suffice to express these coherences.
+But these type theories are always more complicated than HoTT, so it's not a fully satisfying answer.</p>
+<p>I've thrown a few attempts at the problem myself, and learned some things in the process. Here are my thoughts.</p>
+<h2>An Intermediate Problem</h2>
+<p>Typical examples of the coherence problem are semisimplicial types or \(\infty,1\)-categories.
+These are the hardest examples; solving them would solve the full problem.
+They're "coherence-hard", to stretch the terminology.</p>
+<p>But what are the easiest examples? What's the <em>simplest</em> thing that doesn't seem to be possible?</p>
+<p>Functors from \(\omega_1\) to sets.</p>
+<p>Functors \(\omega \to \mathbf{Set}\) are easy.
+\[(A : \mathbb{N} \to \mathbf{Set}) \times ((n : \mathbb{N}) \to A n \to A(n+1))\]
+Functors from countable ordinals can be defined in terms of functors from \(\omega\), at least given enough choice.
+But when we reach the first uncountable ordinal, we seem to be out of luck.</p>
+<p>So, if we're trying to prove the coherence problem is <em>unsolvable</em>, this would be a good place to look for a counterexample.</p>
+<p>The appearance of \(\omega_1\) sparks an idea.
+If types are like spaces, and equations are like paths, what would the "long line" type be like?
+Could we somehow build a model that gets "confused" about the nature of this space once we add semisimplicial types,
+thereby proving HoTT doesn't support them?</p>
+<h2>Type Theory in Type Theory</h2>
+<p>As <a href="https://homotopytypetheory.org/2014/03/03/hott-should-eat-itself/">this blog post</a> describes,
+one way to attack the coherence problem would to implement homotopy type theory in itself,
+along with its standard model.</p>
+<p>The blog post makes a big deal of requiring <em>untyped</em> syntax as input. I think this is a red herring.</p>
+<p>Suppose we had a reasonable <em>typed</em> syntax for homotopy type theory. Then, we would be able to:</p>
+<ul>
+<li>Interpret it in \(\mathrm{Type}\).</li>
+<li>Interpret it in the arrow category, \((A : \mathrm{Type}) \times (B : \mathrm{Type}) \times (A \to B)\).</li>
+<li>By internalizing the above construction, transform an interpretation into <em>any</em> category into an interpretation into the corresponding arrow category.</li>
+<li>Iterate transfinitely.</li>
+</ul>
+<p>The result is a type of coherent infinite cubes of sets and functions.
+This has a complicated coherence structure which I don't have a way to produce otherwise.</p>
+<p>The blog post discusses untyped syntax. But even typed syntax leads to complicated coherence structures,
+so the untyped-to-typed translation is less important than the post makes it out to be.</p>
+<p>One other point worthy of note: it's absolutely possible to implement <em>nonstandard</em> models of HoTT in HoTT.
+If the metatheory has induction-recursion, and the inner theory doesn't have HITs, it's actually pretty easy.
+This does not solve the coherence problem, but it gave me false hope for a while.</p>
+
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+        <a href="/all-pages.html" style="padding-left: 1em;">All Pages</a>
+    </footer>
+</body>
+</html>

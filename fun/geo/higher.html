@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Place of Ideas</title>
+    <link href="/style.css" rel="stylesheet" />
+    <!-- KaTeX -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+        crossorigin="anonymous">
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {macros: {'\\wand': '\\mathrel{-\\mkern-6mu*}', '\\star': '*'}});"></script>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="/index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/research/index.html">Research</a></li>
+                    <li><a href="/projects/index.html">Projects</a></li>
+                    <li><a class="active" href="/fun/index.html">Just for Fun</a></li>
+                    <li><a href="/reference/index.html">Reference</a></li>
+                    <li><a href="/useful/index.html">Useful Links</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+<h1>Games in Higher Dimensions</h1>
+<h2>Rendering</h2>
+<p>If you want to make a four-dimensional game, the biggest difficulty is to make it understandable. The computer may understand what's going on, but can the player? How does the computer communicate what the world looks like, in an understandable way?</p>
+<p>The answer may depend on the type of game you're making. For instance, if the world is discrete, as in <a href="https://www.5dchesswithmultiversetimetravel.com/">5D Chess</a>, you have a lot of options. But if space is continuous, I know of just two methods, which I call <em>projection</em> and <em>slicing</em>.</p>
+<h3>Projection</h3>
+<p>Projection is when you take the ideas behind ordinary, 3D rendering, and add a dimension. You think about what a four-dimensional being would actually perceive, and display that.</p>
+<p>The issue is that the eye a four-dimensional being has a three-dimensional retina. So this method tells you to display the shape on a three-dimensional screen. Since our screens aren't typically three-dimensional, we need a second step to display that three-dimensional screen on your two dimensional screen.</p>
+<p>This approach is commonly used when <a href="https://upload.wikimedia.org/wikipedia/commons/5/55/8-cell-simple.gif">displaying mathematical objects</a>. It can also be seen in <a href="https://www.urticator.net/maze/">this maze game</a>.</p>
+<p>For a long time, this was my preferred approach. It's the natural extension of 3D rendering, and it's the only way I know to see a whole 4D world at once. After learning to interpret the <a href="https://www.urticator.net/maze/">maze game</a>, it was a real revelation when I first saw four mutually-perpendicular passageways at the same time.</p>
+<p>But it's fraught with difficulties.</p>
+<p>Implementation-wise, rendering to a cube of voxels is a thousand times more costly than rendering to a grid of pixels, which seems unviable for a real-time game.
+The alternative is to handle clipping <em>analytically</em>, using polyhedron boolean operations. But in my experience, even the <em>polygon</em> version is amazingly difficult to get right.
+Every library I could find either crashed, hung, or otherwise malfunctioned --- apparently 4D rendering counts as a stress-test of these libraries!.</p>
+<p>These difficulties disappear in the setting of <a href="https://en.wikipedia.org/wiki/Isometric_video_game_graphics">isometric graphics</a>, so that might be worth exploring.
+Here's a <a href="https://github.com/finegeometer/isometric-4d-prototype">prototype</a>.</p>
+<p>Design-wise, it's simply hard to render the 3D screen in an understandable way.</p>
+<ul>
+<li>We need to display <em>every</em> part of the 3D screen, even those that are behind other interesting parts. This means pervasive transparency.</li>
+<li>It's not 2D surfaces that are associated with colors, but 3D volumes. Coloring the 2D surfaces of the 3D volumes doesn't look right --- I tried --- so we need a fog effect.</li>
+</ul>
+<p>And if we want <em>more</em> than four dimensions, the projection method becomes completely intractable. You could project from a 5D world to a 4D screen, but displaying that 4D screen to the user would be a nightmare.</p>
+<p>Ultimately, it's probably <em>possible</em> to projection rendering work. But is all of this really worth it, just to put the whole 4D world in view at once?</p>
+<h3>Slicing</h3>
+<p>If not, there's a better approach. At any one time, show only a 3D subset of the world, plus a few hints about what's going on in the fourth dimension.
+Most likely, you allow the user to change <em>which</em> 3D slice they're viewing, so they can still see the whole world if they stop and look around.</p>
+<p>This is the approach taken by <a href="https://store.steampowered.com/app/2147950/4D_Golf/">4D Golf</a>, and the eternally-in-development <a href="https://miegakure.com/">Miegakure</a>.</p>
+<p>Here's a hypercube, sliced diagonally.</p>
+<p><video width="100%" controls><source src="slicing.mp4"></video></p>
+<p>This approach is far easier, both for the programmer and user. Implementation-wise, we simply slice the 4D mesh to create a 3D mesh, and pass the result to the standard graphics pipeline.
+This should be done entirely on the GPU, which is a bit tricky, but <a href="https://github.com/finegeometer/higher-render">doable</a>.
+From the user's perspective, they know how to interpret 3D scenes, so they simply need to synthesize the various 3D slices into an understanding of the full 4D space.
+And if you want five or more dimensions, slicing still works.</p>
+<p>The cost is that you only see a small portion of the world at any one time. You won't see things in the ana or kata directions unless you explicitly turn and look. This could be a problem if the game has enemies which chase you.</p>
+<p>But ultimately, it's worth it. I found <a href="https://store.steampowered.com/app/2147950/4D_Golf/">4D Golf</a> to be <em>startlingly</em> understandable, more so than I thought was possible for a 4D game. That alone convinced me that slicing is the better choice.</p>
+<h3>Mesh</h3>
+<p>In ordinary 3D rendering, we represent shapes using meshes, constructed from triangles or possibly other polygons.
+Similarly, in \(n\)D rendering, our mesh should be made from \(n-1\)-dimensional simplices or polytopes.</p>
+<p>There are two natural ways to represent such things.</p>
+<p>The first is to specify each polytope by listing its vertices. This is what we do in three dimensions, so it's the obvious thing to do in four.</p>
+<p>The second is to specify each polytope by listing its <em>faces</em>, and the hyperplane in which it's embedded.</p>
+<p>Why would you do this? Because it's easy to slice.</p>
+<p>In the slicing method for rendering, you need to intersect every polytope in the mesh with the 3D view space, every frame.
+If your polytope is represented by its vertices, this isn't easy --- it's reasonably doable in four dimensions, but gets harder in five.
+By contrast, if your polytope is represented by its faces, a simple multiplication with the view matrix generates a face-representation of the sliced polygon.</p>
+<p>On top of that, the face representation uses less memory in common cases. A cube has eight vertices, but six faces. For a tesseract, it's sixteen verses eight. For a 5-cube, thirty-two verses ten.
+This effect reverses if your mesh has more octahedra than cubes, but that seems unlikely. It also goes away if you insist on using simplices, which is why I've described the mesh as being made of more general polytopes.</p>
+<h2>Math</h2>
+<p>Let's move away from rendering, towards the internals of the game.</p>
+<p>Most of the math won't be any different than it would be in a 3D game. You still add vectors component-by-component; it's just that there are more components.
+But there are a few things that change, such as the concepts of angle and angular momentum.</p>
+<p>For angular momentum, the formulas involve cross products, so they're specific to 3D.
+The problem is simple. Angular momentum <em>shouldn't</em> be a vector; it should be a <em>bivector</em>.
+Its components shouldn't be \(x\), \(y\), and \(z\), but \(xy\), \(xz\), and \(yz\).</p>
+<p>In two dimensions, angular momentum has just one component: the \(xy\) component.
+In four dimensions, it should have six: \(\{xy,xz,xw,yz,yw,zw\}\). In five dimensions, ten components. And so on.</p>
+<p>To understand angular momentum in higher dimensions, reinterpret 3D angular momentum by replacing
+\(a \hat{x} + b \hat{y} + c \hat{z}\) with \(a (\widehat{yz}) - b (\widehat{xz}) + c (\widehat{xy})\),
+and see what happens to the formulas. Then things will generalize cleanly to higher dimensions.</p>
+<p>As for rotation, quaternions are specific to three dimensions, but similar tricks apply in four or more.
+In four dimensions, a rotation can be represented as a <em>pair</em> of quaternions ---
+we act on a vector \(v\) by reinterpreting it as a quaternion and computing \(q_1 v q_2\).
+In five dimensions, it should be possible to use a \(2 \times 2\) matrix of quaternions, but I don't understand the details.
+In six or more dimensions, similar tricks <em>do</em> exist, but it's better to just use rotation matrices.</p>
+
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+        <a href="/all-pages.html" style="padding-left: 1em;">All Pages</a>
+    </footer>
+</body>
+</html>

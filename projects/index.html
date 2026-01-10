@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Place of Ideas</title>
+    <link href="/style.css" rel="stylesheet" />
+    <!-- KaTeX -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+        crossorigin="anonymous">
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {macros: {'\\wand': '\\mathrel{-\\mkern-6mu*}', '\\star': '*'}});"></script>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="/index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/research/index.html">Research</a></li>
+                    <li><a class="active" href="/projects/index.html">Projects</a></li>
+                    <li><a href="/fun/index.html">Just for Fun</a></li>
+                    <li><a href="/reference/index.html">Reference</a></li>
+                    <li><a href="/useful/index.html">Useful Links</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+<h1>Projects</h1>
+<h2>Completed or Significant Progress</h2>
+<h3><a href="https://finegeometer.github.io/curved-spacetime/">Curved Spacetime Visualization</a></h3>
+<p>You've probably heard that Einstein said gravity comes from the curvature of spacetime. But what does that actually mean?</p>
+<h3><a href="https://finegeometer.github.io/proof-game/">Proof Game</a></h3>
+<p>Can mathematical proof be made into a puzzle game? I gave it my best shot.</p>
+<h3><a href="https://github.com/finegeometer/dragster-lower-bound">Attempt to Prove Speedrunning Lower Bound</a></h3>
+<p>When speedrunning Dragster, for the Atari 2600, it is believed that the optimal time is 5.57 seconds. Can this be proven, formally, in a proof assistant?</p>
+<p>So far, I have written a formal specification of the behavior of the Atari 2600. I have used that specification to formally state the claim that Dragster cannot be beaten in less than 5.57 seconds. I have translated that claim into a statement in the <a href="https://iris-project.org/">Iris separation logic</a>. And I have written documentation for all of this.</p>
+<h2>Idea Stage</h2>
+<h3>Graphing Calculator with Quantifiers</h3>
+<p>I'd like to make a graphing calculator, analogous to Desmos, that supports quantifiers.
+For instance, you could ask for a graph of \(\exists t, (t-x)^2 + (t^3-y)^2 \leq 0.1^2\),
+and it would plot the region within distance 0.1 of the cubic \(y = x^3\).</p>
+<p>If we limit the calculator to work with polynomials, this is possible, using the algorithm of quantifier elimination by cylindrical algebraic decomposition.
+This limitation is necessary; if we allow trig functions, the problem is undecidable. If we add exponentials, decidability is unknown. (<a href="https://en.wikipedia.org/wiki/Decidability_of_first-order_theories_of_the_real_numbers">Source</a>)</p>
+<p>Unfortunately, quantifier elimination is complicated and slow. It may be necessary to use an existing implementation, rather than implementing it myself, and I am unsure whether any existing implementations can be run inside a web application.</p>
+
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+        <a href="/all-pages.html" style="padding-left: 1em;">All Pages</a>
+    </footer>
+</body>
+</html>

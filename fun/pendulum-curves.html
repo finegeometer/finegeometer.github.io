@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Place of Ideas</title>
+    <link href="/style.css" rel="stylesheet" />
+    <!-- KaTeX -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+        crossorigin="anonymous">
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {macros: {'\\wand': '\\mathrel{-\\mkern-6mu*}', '\\star': '*'}});"></script>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="/index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/research/index.html">Research</a></li>
+                    <li><a href="/projects/index.html">Projects</a></li>
+                    <li><a class="active" href="/fun/index.html">Just for Fun</a></li>
+                    <li><a href="/reference/index.html">Reference</a></li>
+                    <li><a href="/useful/index.html">Useful Links</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+<h1>Thoughts on Pretty Curves</h1>
+<p>You have a starting position and direction, and an ending position and direction.
+You want to connect them with a nice curve. How do you do it?</p>
+<p>In practice, you probably use a Bezier curve, because the available tools make it easy.
+And it's a decent choice. But can we do better? Out of all possible curves, what's the best choice?</p>
+<hr />
+<p>What does "best" mean, anyway? It's subjective. But intuitively, the path shouldn't curve more than it has to.</p>
+<p>It's common to measure "badness" by the mean squared error.
+Since we're considering too much curvature to be bad, let's define "best" to mean the path of minimum mean-squared curvature.</p>
+<p>Let's express this mathematically. For simplicity, let's require the curve to have a fixed length, \(\ell\).
+(We can always search for the best \(\ell\) later.)
+Then we can describe our curve by stating, for each position \(t \in [0,\ell]\) along the curve,
+which angle \(\theta\) the curve is pointing at that position.</p>
+<p>\[\theta : [0,\ell] \to \mathbb{R}\]</p>
+<p>We have a few constraints. First, the starting and ending direction must be correct.
+This fixes the values of \(\theta(0)\) and \(\theta(\ell)\).
+But we also need the starting and ending <em>positions</em> to be correct.
+We can start the curve wherever we want, but then the \(x\) and \(y\) displacements
+to the end of the curve are given by \(\int_0^\ell \cos(\theta(t)) dt\) and \(\int_0^\ell \sin(\theta(t)) dt\).</p>
+<hr />
+<p>In summary, we have the following problem.</p>
+<p>Find:
+\[\theta : [0,\ell] \to \mathbb{R}\]
+Minimizing:
+\[\int_0^\ell (\dot{\theta}(t))^2 dt\]
+For fixed values of:
+\[\theta(0)\]
+\[\theta(\ell)\]
+\[\int_0^\ell \cos(\theta(t)) dt\]
+\[\int_0^\ell \sin(\theta(t)) dt\]</p>
+<hr />
+<p>Let's solve.</p>
+<p>We can solve this with techniques familiar to Lagrangian Mechanics.
+First, we can remove the integral constraints, by replacing the expression to be minimized with
+\(\int_0^\ell (\dot{\theta}(t))^2 dt - \lambda_1 \int_0^\ell \cos(\theta(t)) dt - \lambda_2 \int_0^\ell \sin(\theta(t)) dt\)
+for an arbitrary fixed \(\lambda_1\) and \(\lambda_2\).
+Rewriting that, we're minimizing
+\(\int_0^\ell \left((\dot{\theta}(t))^2 - \lambda_1 \cos(\theta(t)) - \lambda_2 \sin(\theta(t))\right) dt\).</p>
+<p>But this minimization problem is familiar. It's just the principle of least action, for a system with
+Lagrangian \(\mathcal{L} = (\dot{\theta}(t))^2 - \lambda_1\cos(\theta(t)) - \lambda_2\sin(\theta(t))\).
+And that <em>Lagrangian</em> is familiar! It simply describes a pendulum, of mass two,
+under a constant gravitational acceleration \((-\lambda_1 / 2, -\lambda_2 / 2)\).</p>
+<p>So the solution is simple. To minimize mean-squared curvature, we should pick \(\theta(t)\)
+to be a function that also describes the behavior of a pendulum under some constant gravitational field.
+The path is then given by \(x(t) = x_0 + \int_0^t \cos(\theta(t)) dt\), \(y(t) = y_0 + \int_0^t \sin(\theta(t)) dt\).</p>
+<hr />
+<p>If we know about <a href="/reference/elliptic_overview.html">elliptic functions</a>, we can go further.</p>
+<p>The pendulum equations are solved by setting \(\theta\) to twice the Jacobi amplitude of \(t\).
+\[\begin{align*}
+\theta &amp;= 2\mathrm{am}
+\\ \dot\theta &amp;= 2\mathrm{dn}
+\\ \ddot\theta &amp;= -2k^2\mathrm{sn}\mathrm{cn}
+\\ &amp;= -2k^2\sin(\mathrm{am})\cos(\mathrm{am})
+\\ &amp;= -k^2\sin(2\mathrm{am})
+\\ &amp;= -k^2\sin(\theta)
+\end{align*}\]</p>
+<p>The general solution is simply a shifted and time-scaled version of this.</p>
+<p>So, taking \(\theta = 2\mathrm{am}\):
+\[\begin{align*}
+\sin\theta &amp;= \sin(2\mathrm{am})
+\\ &amp;= 2\sin(\mathrm{am})\cos(\mathrm{am})
+\\ &amp;= 2\mathrm{sn}\mathrm{cn}
+\\ \cos\theta &amp;= \cos(2\mathrm{am})
+\\ &amp;= \cos^2(\mathrm{am}) - \sin^2(\mathrm{am})
+\\ &amp;= \mathrm{cn}^2 - \mathrm{sn}^2
+\end{align*}\]</p>
+<p>Our path is given by integrating \(\cos\theta\) and \(\sin\theta\).
+\[\begin{align*}
+y &amp;= \int 2\mathrm{sn}\mathrm{cn} dt
+\\ &amp;= -\tfrac{2}{m}\mathrm{dn}
+\\ x &amp;= \int (\mathrm{cn}^2 - \mathrm{sn}^2) dt
+\\ &amp;= \int (1 - 2\mathrm{sn}^2) dt
+\\ &amp;= \int (1 - \tfrac{2}{m}(1 - \mathrm{dn}^2)) dt
+\\ &amp;= t - \tfrac{2}{m}(t - \mathcal{E})
+\\ &amp;= \tfrac{2}{m}\mathcal{E} + (1 - \tfrac{2}{m})t
+\end{align*}\]</p>
+<p>In conclusion, the general path of locally-mininal mean-squared curvature is a shifted, rotated, and scaled copy of the following.
+\[\begin{bmatrix}
+\tfrac{2}{m}\mathcal{E}(t,m) + (1 - \tfrac{2}{m})t \\
+-\tfrac{2}{m}\mathrm{dn}(t,m)
+\end{bmatrix}\]</p>
+<p>Or, scaling that:
+\[\begin{bmatrix} \mathcal{E}(t,m) + (\tfrac{m}{2} - 1)t \\ -\mathrm{dn}(t,m)\end{bmatrix}\]</p>
+<p>When \(m &gt; 1\), it might be better to use this equivalent form of the solution.</p>
+<p>\[\begin{bmatrix}
+\frac{(m^2+1)\mathcal{E}(kt, 1/m) - t}{2km} \\
+-\mathrm{cn}(kt, 1/m)
+\end{bmatrix}\]</p>
+<hr />
+<p>Let's graph this! I'll use <a href="https://www.sagemath.org/">SageMath</a>,
+since it has builtin elliptic functions.</p>
+<pre><code class="language-python">def path(m,t):
+    if m &gt; 1:
+        return (((m^2+1) * elliptic_eu(sqrt(m)*t,1/m) - t)/(2*m*sqrt(m)), -jacobi('cn',sqrt(m)*t,1/m))
+    else:
+        return (elliptic_eu(t,m) + (m/2 - 1) * t, -jacobi('dn',t,m))
+
+t = var('t')
+
+for m in [0.8,0.9,0.95,1,1.05,1.1085,1.15,1.2,1.4,2,5]:
+    parametric_plot(path(m,t), (t, -20, 20), axes=false).show(xmin=-2, xmax=2)
+</code></pre>
+<img src="pendulum-curves-images/path0.8.png" alt="A path that nearly wanders in circles." />
+<img src="pendulum-curves-images/path0.9.png"
+    alt="A path that loops in circles, but makes notable forward progress." />
+<img src="pendulum-curves-images/path0.95.png"
+    alt="A path that occasionally loops around, always in the same direction." />
+<img src="pendulum-curves-images/path1.0.png"
+    alt="A path with a single loop in it, but otherwise close to straight." />
+<img src="pendulum-curves-images/path1.05.png"
+    alt="A path that occasionally loops around, in alternating directions." />
+<img src="pendulum-curves-images/path1.1085.png" alt="A figure-eight path, connecting back to itself." />
+<img src="pendulum-curves-images/path1.15.png"
+    alt="A path that winds strongly back and forth, crossing over itself." />
+<img src="pendulum-curves-images/path1.2.png"
+    alt="A path that winds strongly back and forth, nearly crossing itself." />
+<img src="pendulum-curves-images/path1.4.png"
+    alt="A path that winds back and forth, repeatedly making 180 degree turns." />
+<img src="pendulum-curves-images/path2.0.png" alt="A path that winds back and forth." />
+<img src="pendulum-curves-images/path5.0.png"
+    alt="A path that gently winds back and forth. Only one bend is visible." />
+<p>Pretty!</p>
+<p>Each of these curves is <em>locally</em> of minimal mean-squared curvature.
+<em>Globally</em>, they have plenty of curvature, but they're still beautiful.</p>
+
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+        <a href="/all-pages.html" style="padding-left: 1em;">All Pages</a>
+    </footer>
+</body>
+</html>

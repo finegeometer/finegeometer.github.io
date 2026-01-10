@@ -1,162 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Place of Ideas</title>
     <link href="/style.css" rel="stylesheet" />
-    <style type="text/css" media="screen">
-        :root {
-            --bg-unchecked: #c0c0c0;
-            --bg-checked: #40c040;
-            --border-unchecked: #808080;
-            --border-checked: #008000;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-unchecked: #404040;
-                --bg-checked: #40c040;
-                --border-unchecked: #000000;
-                --border-checked: #000000;
-            }
-        }
-
-
-        #no-js:checked~* .content:not(.no-js),
-        #phone:checked~* .content:not(.phone),
-        #explainer:checked~* .content:not(.explainer) {
-            display: none;
-        }
-
-        input[type="checkbox"] {
-            display: none;
-        }
-
-        input[type="checkbox"]+label {
-            background-color: var(--bg-unchecked);
-            border: 2px solid var(--border-unchecked);
-            padding: 0.5em;
-            border-radius: 1em;
-        }
-
-        input[type="checkbox"]:checked+label {
-            background-color: var(--bg-checked);
-            border: 2px solid var(--border-checked);
-            padding: 0.5em;
-            border-radius: 1em;
-        }
-
-        label {
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-    </style>
+    <!-- KaTeX -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+        crossorigin="anonymous">
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {macros: {'\\wand': '\\mathrel{-\\mkern-6mu*}', '\\star': '*'}});"></script>
 </head>
-
 <body>
     <header>
         <div>
-            <a href="index.html">A Place of Ideas</a>
+            <a href="/index.html">A Place of Ideas</a>
             <nav>
                 <ul>
-                    <li><a class="active" href="/index.html">Things I Made</a></li>
-                    <li><a href="/not-mine.html">Things Others Made</a></li>
-                    <li><a href="/thoughts.html">Thoughts</a></li>
-                    <li><a href="/reference.html">General Reference</a></li>
-                    <li><a href="/about.html">About finegeometer</a></li>
+                    <li><a href="/research/index.html">Research</a></li>
+                    <li><a href="/projects/index.html">Projects</a></li>
+                    <li><a href="/fun/index.html">Just for Fun</a></li>
+                    <li><a href="/reference/index.html">Reference</a></li>
+                    <li><a href="/useful/index.html">Useful Links</a></li>
+
                 </ul>
             </nav>
         </div>
     </header>
-
     <main>
-        <h1>Things I Made</h1>
-
-        <input id="no-js" type="checkbox" />
-        <label for="no-js">JS Optional</label>
-        <input id="explainer" type="checkbox" />
-        <label for="explainer">Explainer</label>
-        <input id="phone" type="checkbox" />
-        <label for="phone">Works on Phone</label>
-
-        <h2>My Best Work</h2>
-
-        <ul>
-            <li class="content explainer">
-                <a href="https://finegeometer.github.io/curved-spacetime/">Curved Spacetime Visualization</a>
-                <ul>
-                    <li>You've probably heard that Einstein said gravity comes from the curvature of spacetime. But what
-                        does that actually <em>mean</em>?</li>
-                </ul>
-            <li class="content">
-                <a href="https://finegeometer.github.io/proof-game/">Proof Game</a>
-                <ul>
-                    <li>Can mathematical proof be made into a puzzle game? I gave it my best shot.</li>
-                </ul>
-            <li class="content no-js phone">
-                <a href="https://github.com/finegeometer/dragster-lower-bound">Attempt to Prove Speedrunning Lower
-                    Bound</a>
-                <ul>
-                    <li>
-                        <p>When speedrunning Dragster, for the Atari 2600, it is believed that the optimal time is 5.57
-                            seconds. Can this be proven, formally, in a proof assistant?</p>
-
-                        <p>So far, I have written a formal specification of the behavior of the Atari 2600. I have used
-                            that specification to formally state the <em>claim</em> that Dragster cannot be beaten in
-                            less than 5.57 seconds. I have translated that claim into a statement in the <a
-                                href="https://iris-project.org/">Iris separation logic</a>. And I have written
-                            documentation for all of this.</p>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-
-        <h2>Quick Explainers</h2>
-
-        <ul>
-            <li class="content explainer no-js phone"><a href="relativistic-ship.html">The Problem with Relativistic
-                    Travel</a></li>
-            <li class="content explainer no-js"><a href="lagrangian.html">Lagrangian Mechanics</a></li>
-        </ul>
-
-
-        <h2>Other Stuff</h2>
-
-        <ul>
-            <li class="content">
-                <a href="https://finegeometer.github.io/knotted-portal/">Knotted Portal</a>
-                <ul>
-                    <li>A portal, whose portal frame passes through the portal!</li>
-                </ul>
-            </li>
-            <li class="content">
-                <a href="https://github.com/finegeometer/cubic-surface">Grapher for Cubic Surfaces</a>
-                <ul>
-                    <li>Infinite render distance.</li>
-                </ul>
-            </li>
-            <li class="content">
-                <a href="https://github.com/finegeometer/cubic-curve">Cubic Curve through Nine Points</a>
-            </li>
-        </ul>
-
-        <h2>Things that didn't work out.</h2>
-
-        <ul>
-            <li><a href="/4d-retrospective.html">4D Perspective Rendering</a></li>
-        </ul>
+<h1>About Me</h1>
+<p>I'm <code>finegeometer</code>. I enjoy mathematics and related subjects, such as theoretical physics and computer science.
+I appreciate simplicity, and enjoy finding <em>just</em> the right way to formulate things to make them as clean as possible.</p>
+<p>This has led me to <em>synthetic mathematics</em>, in the sense of synthetic differential geometry or homotopy type theory.
+The addition of nonclassical axioms to type theory which capture mathematical concepts in a more direct way than the standard theory,
+such that we can connect back to the original approach by interpreting the type theory into a well-chosen topos.</p>
+<h2><a href="research/index.html">Things I've Researched</a></h2>
+<h2><a href="projects/index.html">Things I've Made</a></h2>
+<h2><a href="fun/index.html">Fun with Math</a></h2>
 
     </main>
 
     <footer>
         <a href="https://github.com/finegeometer">Github</a>
+        <a href="/all-pages.html" style="padding-left: 1em;">All Pages</a>
     </footer>
 </body>
-
 </html>

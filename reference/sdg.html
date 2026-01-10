@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Place of Ideas</title>
+    <link href="/style.css" rel="stylesheet" />
+    <!-- KaTeX -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+        crossorigin="anonymous">
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+        integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+        crossorigin="anonymous"></script>
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {macros: {'\\wand': '\\mathrel{-\\mkern-6mu*}', '\\star': '*'}});"></script>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="/index.html">A Place of Ideas</a>
+            <nav>
+                <ul>
+                    <li><a href="/research/index.html">Research</a></li>
+                    <li><a href="/projects/index.html">Projects</a></li>
+                    <li><a href="/fun/index.html">Just for Fun</a></li>
+                    <li><a class="active" href="/reference/index.html">Reference</a></li>
+                    <li><a href="/useful/index.html">Useful Links</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+<h1>Synthetic Differential Geometry</h1>
+<p>Synthetic differential geometry, and synthetic algebraic geometry,
+study the internal language of toposes similar in spirit to the classifying topos of commutative rings.
+Working internally, we have an axiomatically-defined ring \(R\) of "numbers", such that functions \(R \to R\) are "smooth".</p>
+<p>Specifically, we typically have \((\hom_{R-\text{alg}}(A, R) \to R) \cong A\), as \(A\) ranges over some collection of \(R\)-algebras.
+Taking \(A = R[ x ]/(x^2)\), we find that functions from the "infinitesimal segment" \(\{d \in R \mid d^2 = 0\}\) to \(R\)
+are uniquely of the form \(f(d) = f(0) + \alpha d\), allowing us to define derivatives as \(f'(0) = \alpha\).</p>
+<p>If we allow \(A = \mathbb{Z}[ x ]\), we find that every function \(R \to \R\) is a polynomial, giving us synthetic <em>algebraic</em> geometry.
+If we don't, we're free to have more general smooth functions; that's synthetic <em>differential</em> geometry.</p>
+<p>Synthetic differential geometry is discussed in more detail in
+<a href="https://users-math.au.dk/kock/sdg99.pdf">Synthetic Differential Geometry</a> and
+<a href="https://tildeweb.au.dk/au76680/SGM-final.pdf">Synthetic Geometry of Manifolds</a>,
+by Anders Kock. Synthetic algebraic geometry is discussed in
+<a href="https://rawgit.com/iblech/internal-methods/master/notes.pdf">Ingo Blechschmidt's PhD thesis</a>.</p>
+<hr />
+<p>I've been exploring what happens if we work with toposes related to noncommutative rings instead of commutative rings.
+<a href="/research/nsdg.html">See here for details</a>.</p>
+
+    </main>
+
+    <footer>
+        <a href="https://github.com/finegeometer">Github</a>
+        <a href="/all-pages.html" style="padding-left: 1em;">All Pages</a>
+    </footer>
+</body>
+</html>

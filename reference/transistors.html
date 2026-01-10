@@ -1,65 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transistors</title>
+    <title>A Place of Ideas</title>
     <link href="/style.css" rel="stylesheet" />
-
     <!-- KaTeX -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
-        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+        integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+        crossorigin="anonymous">
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
         integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
         crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
-        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous"
-        onload="renderMathInElement(document.body);"></script>
+    <script defer
+        src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+        integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+        crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {macros: {'\\wand': '\\mathrel{-\\mkern-6mu*}', '\\star': '*'}});"></script>
 </head>
-
 <body>
     <header>
         <div>
-            <a href="index.html">A Place of Ideas</a>
+            <a href="/index.html">A Place of Ideas</a>
             <nav>
                 <ul>
-                    <li><a href="/index.html">Things I Made</a></li>
-                    <li><a href="/not-mine.html">Things Others Made</a></li>
-                    <li><a href="/thoughts.html">Thoughts</a></li>
-                    <li><a class="active" href="/reference.html">General Reference</a></li>
-                    <li><a href="/about.html">About finegeometer</a></li>
+                    <li><a href="/research/index.html">Research</a></li>
+                    <li><a href="/projects/index.html">Projects</a></li>
+                    <li><a href="/fun/index.html">Just for Fun</a></li>
+                    <li><a class="active" href="/reference/index.html">Reference</a></li>
+                    <li><a href="/useful/index.html">Useful Links</a></li>
+
                 </ul>
             </nav>
         </div>
     </header>
-
     <main>
-        <h1>Reference: Transistors</h1>
+<h1>Reference: Transistors</h1>
+<p>Consider an ideal MOSFET, with threshhold voltage \(\tau\), gate voltage \(g\), and terminal voltages \(v_1\) and \(v_2\).
+Then the current <em>out</em> of terminal 1 is proportional to the following.
+\[\max(0,g-v_1-\tau)^2 - \max(0,g-v_2-\tau)^2\]</p>
+<details><summary>Source</summary>
+<p>For a source, see <a href="https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electronics/Introduction_to_Physical_Electronics_(Wilson)/03%3A_FETs/3.04%3A_MOS_Transistor">this book</a>.
+But the book expresses it in a more complicated form.</p>
+<p>The book implicitly assumes \(g-v_1-\tau\) is nonnegative.
+Equation 3.5.4 describes what happens when \(g-v_2-\tau\) is also nonnegative,
+while Equation 3.5.8 describes what happens when it isn't.
+For the cases where \(g-v_1-\tau\) is negative, we can still deduce the behavior;
+if \(g-v_2-\tau\) is also negative, the transistor is simply deactivated;
+if not, then we use the fact that the transistor is symmetric.
+With some algebra, we confirm that the book's equations match mine in all four cases.</p>
+</details>
 
-        <p>Consider an ideal MOSFET, with threshhold voltage \(\tau\), gate voltage \(g\), and terminal voltages \(v_1\)
-            and \(v_2\). Then the current <em>out</em> of terminal 1 is proportional to the following.</p>
-        <p>\[\max(0,g-v_1-\tau)^2 - \max(0,g-v_2-\tau)^2\]</p>
-
-        <details>
-            <summary>Source</summary>
-
-            <p>For a source, see <a
-                    href="https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electronics/Introduction_to_Physical_Electronics_(Wilson)/03%3A_FETs/3.04%3A_MOS_Transistor">this
-                    book</a>. But the book expresses it in a more complicated form.</p>
-
-            <p>The book implicitly assumes \(g-v_1-\tau\) is nonnegative. Equation 3.5.4 describes what happens when
-                \(g-v_2-\tau\) is also nonnegative, while Equation 3.5.8 describes what happens when it isn't. For the
-                cases where \(g-v_1-\tau\) is negative, we can still deduce the behavior; if \(g-v_2-\tau\) is also
-                negative, the transistor is simply deactivated; if not, then we use the fact that the transistor is
-                symmetric. With some algebra, we confirm that the book's equations match mine in all four cases.</p>
-
-        </details>
     </main>
 
     <footer>
         <a href="https://github.com/finegeometer">Github</a>
+        <a href="/all-pages.html" style="padding-left: 1em;">All Pages</a>
     </footer>
 </body>
-
 </html>
